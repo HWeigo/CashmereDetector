@@ -38,6 +38,8 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *pushButton_autoDetect;
     QPushButton *pushButton_pick;
+    QPushButton *pushButton_reset;
+    QPushButton *pushButton_saveCurr;
     QSpacerItem *verticalSpacer_2;
     QTextBrowser *textBrowser;
     QPushButton *pushButton_clear;
@@ -77,6 +79,16 @@ public:
         pushButton_pick->setObjectName(QStringLiteral("pushButton_pick"));
 
         verticalLayout->addWidget(pushButton_pick);
+
+        pushButton_reset = new QPushButton(verticalLayoutWidget);
+        pushButton_reset->setObjectName(QStringLiteral("pushButton_reset"));
+
+        verticalLayout->addWidget(pushButton_reset);
+
+        pushButton_saveCurr = new QPushButton(verticalLayoutWidget);
+        pushButton_saveCurr->setObjectName(QStringLiteral("pushButton_saveCurr"));
+
+        verticalLayout->addWidget(pushButton_saveCurr);
 
         verticalSpacer_2 = new QSpacerItem(20, 200, QSizePolicy::Minimum, QSizePolicy::Fixed);
 
@@ -123,6 +135,8 @@ public:
         resetAction->setText(QApplication::translate("CashmereDetectorClass", "Reset", Q_NULLPTR));
         pushButton_autoDetect->setText(QApplication::translate("CashmereDetectorClass", "Auto Detect", Q_NULLPTR));
         pushButton_pick->setText(QApplication::translate("CashmereDetectorClass", "Manual Pick", Q_NULLPTR));
+        pushButton_reset->setText(QApplication::translate("CashmereDetectorClass", "Reset Current Image", Q_NULLPTR));
+        pushButton_saveCurr->setText(QApplication::translate("CashmereDetectorClass", "Save Current Iamge", Q_NULLPTR));
         textBrowser->setHtml(QApplication::translate("CashmereDetectorClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"

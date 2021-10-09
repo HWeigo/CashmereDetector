@@ -36,11 +36,13 @@ public:
 	BaseDetector(string filePath, Ui::CashmereDetectorClass ui);
 	~BaseDetector();
 
-	void ShowImg();
+	void ShowCurrImg();
 	//void ShowImage_QLable();
 	void LoadImg(string filepath);
-	void Reset(Mat newImg);
-	void Reset(string filePath);
-	void StartPickMode();
+	void LoadImg(Mat newImg);
+	void ResetCurrImg();
+	Mat GetCurrImg();
+	Mat& GetCurrImgRef();
+	void SaveCurrImg(string filepath = "./output/curr.jpg");
 };
 

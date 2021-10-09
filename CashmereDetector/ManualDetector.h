@@ -11,6 +11,9 @@ public:
 	ManualDetector(Ui::CashmereDetectorClass ui) : BaseDetector(ui) {};
 	ManualDetector(string filePath, Ui::CashmereDetectorClass ui) : BaseDetector(filePath, ui) {};
 
+
+	void StartPickMode();
+
 	~ManualDetector();
 };
 

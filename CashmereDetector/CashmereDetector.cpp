@@ -10,9 +10,20 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 
 	connect(ui.pushButton_clear, SIGNAL(clicked()), ui.textBrowser, SLOT(clear()));
 
-	detector = new BaseDetector(ui);
+	detector = new ManualDetector(ui);
 
 	ui.resetAction->setEnabled(false);
+
+	// Set timer
+	fTimer = new QTimer(this);
+	fTimer->stop();
+	fTimer->setInterval(10); // unit: ms
+	connect(fTimer, SIGNAL(timeout()), this, SLOT(on_timer_timeout()));
+
+}
+
+void CashmereDetector::on_timer_timeout() {
+	detector->ShowCurrImg();
 }
 
 void CashmereDetector::on_openFileAction_triggered(bool checked)
@@ -34,22 +45,25 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 	cout << filePath << endl;
 
 	detector->LoadImg(filePath);
-	detector->ShowImg();
+	detector->ShowCurrImg();
 
 	PushMessage("open file");
+	fTimer->start();
 	ui.resetAction->setEnabled(true);
 
 }
 
-void CashmereDetector::on_resetAction_triggered(bool checked) {
-	/* TODO: to be add */
-	//delete detector;
-	//detector = nullptr;
+void CashmereDetector::on_pushButton_reset_clicked() {
+	detector->ResetCurrImg();
 }
 
 void CashmereDetector::on_pushButton_pick_clicked() {
 	PushMessage("pick mode");
 	detector->StartPickMode();
+}
+
+void CashmereDetector::on_pushButton_saveCurr_clicked() {
+	detector->SaveCurrImg();
 }
 
 void CashmereDetector::PushMessage(string msg)
