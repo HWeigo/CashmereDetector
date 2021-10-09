@@ -40,6 +40,7 @@ public:
 	//void ShowImage_QLable();
 	void LoadImg(string filepath);
 	void LoadImg(Mat newImg);
+	void LoadCurrImg(Mat newImg);
 	void ResetCurrImg();
 	Mat GetCurrImg();
 	Mat& GetCurrImgRef();

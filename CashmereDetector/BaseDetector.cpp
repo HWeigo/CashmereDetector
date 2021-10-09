@@ -57,6 +57,11 @@ void BaseDetector::LoadImg(Mat newImg) {
 	newImg.copyTo(currImg_);
 }
 
+void BaseDetector::LoadCurrImg(Mat newImg) {
+	currImg_.release();
+	newImg.copyTo(currImg_);
+}
+
 
 void BaseDetector::ResetCurrImg() {
 	oriImg_.copyTo(currImg_);
@@ -74,6 +79,8 @@ Mat& BaseDetector::GetCurrImgRef() {
 }
 
 void BaseDetector::SaveCurrImg(string filepath) {
+	imwrite("./output/ori.jpg", oriImg_);
+
 	imwrite(filepath, currImg_);
 }
 

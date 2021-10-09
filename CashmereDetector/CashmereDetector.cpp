@@ -13,7 +13,7 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 	detector = new ManualDetector(ui);
 
 	ui.resetAction->setEnabled(false);
-
+	ui.pushButton_autoDetect->setEnabled(false);
 	// Set timer
 	fTimer = new QTimer(this);
 	fTimer->stop();
@@ -24,6 +24,19 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 
 void CashmereDetector::on_timer_timeout() {
 	detector->ShowCurrImg();
+	
+	double length = detector->CalcMeanLength();
+	if (detector->GetLengthNum() == 0) {
+		ui.label_mean->setText("-");
+		ui.label_length->setText("-");
+	}
+	else {
+		ui.label_mean->setText(QString::number(detector->GetMeanLength()));
+		ui.label_length->setText(QString::number(detector->GetCurrLength()));
+	}
+
+
+
 }
 
 void CashmereDetector::on_openFileAction_triggered(bool checked)
@@ -54,13 +67,17 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 }
 
 void CashmereDetector::on_pushButton_reset_clicked() {
-	if (detector == nullptr)
+	if (detector->GetCurrImgRef().empty())
 		return;
+	if (isPickModeOn) {
+		detector->ResetManualDetector();
+		return;
+	}
 	detector->ResetCurrImg();
 }
 
 void CashmereDetector::on_pushButton_pick_clicked() {
-	if (detector == nullptr)
+	if (detector->GetCurrImgRef().empty())
 		return;
 
 	if (!isPickModeOn) {
@@ -76,7 +93,7 @@ void CashmereDetector::on_pushButton_pick_clicked() {
 }
 
 void CashmereDetector::on_pushButton_saveCurr_clicked() {
-	if (detector == nullptr)
+	if (detector->GetCurrImgRef().empty())
 		return;
 	detector->SaveCurrImg();
 }

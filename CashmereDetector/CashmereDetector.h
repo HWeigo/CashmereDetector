@@ -48,7 +48,7 @@ public slots:
 
 private:
     Ui::CashmereDetectorClass ui;
-	ManualDetector *detector;
+	ManualDetector *detector = nullptr;
 
 	QTimer *fTimer; // Qt timer
 
