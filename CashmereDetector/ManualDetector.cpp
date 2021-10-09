@@ -8,7 +8,7 @@ ManualDetector::~ManualDetector()
 bool drawRectangle = false;//不可避免地还是要定义几个全局变量，伤心
 Point leftClickPoint = Point(-1, -1);
 Point mousePoint = Point(-1, -1);
-void on_mouse(int event, int x, int y, int flags, void *ustc)
+void ManualDetector::on_mouse(int event, int x, int y, int flags, void *ustc)
 //event鼠标事件代号，x,y鼠标坐标，flags拖拽和键盘操作的代号    
 {
 	//Mat& image = *(cv::Mat*) ustc;//这样就可以传递Mat信息了，很机智
@@ -44,5 +44,9 @@ void on_mouse(int event, int x, int y, int flags, void *ustc)
 }
 
 void ManualDetector::StartPickMode() {
-	setMouseCallback("img", on_mouse, (void*)&GetCurrImgRef());
+	setMouseCallback("img", ManualDetector::on_mouse, (void*)&GetCurrImgRef());
+}
+
+void ManualDetector::EndPickMode() {
+	setMouseCallback("img", NULL, NULL);
 }

@@ -54,15 +54,30 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 }
 
 void CashmereDetector::on_pushButton_reset_clicked() {
+	if (detector == nullptr)
+		return;
 	detector->ResetCurrImg();
 }
 
 void CashmereDetector::on_pushButton_pick_clicked() {
-	PushMessage("pick mode");
-	detector->StartPickMode();
+	if (detector == nullptr)
+		return;
+
+	if (!isPickModeOn) {
+		PushMessage("pick mode on");
+		detector->StartPickMode();
+	}
+	else {
+		PushMessage("pick mode off");
+		detector->EndPickMode();
+	}
+
+	isPickModeOn = !isPickModeOn;
 }
 
 void CashmereDetector::on_pushButton_saveCurr_clicked() {
+	if (detector == nullptr)
+		return;
 	detector->SaveCurrImg();
 }
 

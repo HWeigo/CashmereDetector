@@ -51,4 +51,6 @@ private:
 	ManualDetector *detector;
 
 	QTimer *fTimer; // Qt timer
+
+	bool isPickModeOn = false;
 };
