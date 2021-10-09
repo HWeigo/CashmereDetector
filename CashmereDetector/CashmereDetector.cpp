@@ -8,6 +8,10 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 {
     ui.setupUi(this);
 
+	connect(ui.pushButton_clear, SIGNAL(clicked()), ui.textBrowser, SLOT(clear()));
+
+	detector = new BaseDetector(ui);
+
 	ui.resetAction->setEnabled(false);
 }
 
@@ -28,24 +32,17 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 
 
 	cout << filePath << endl;
-	//if (detector != nullptr) {
-	//	delete detector;
-	//	detector = nullptr;
-	//}
 
-	if (detector == nullptr) {
-		detector = new BaseDetector(filePath, ui);
-		detector->ShowImage_QWidget();
-	}
-	else {
-		detector->Reset(filePath);
-	}
+	detector->LoadImg(filePath);
+	detector->ShowImg();
+
 	PushMessage("open file");
 	ui.resetAction->setEnabled(true);
 
 }
 
 void CashmereDetector::on_resetAction_triggered(bool checked) {
+	/* TODO: to be add */
 	//delete detector;
 	//detector = nullptr;
 }

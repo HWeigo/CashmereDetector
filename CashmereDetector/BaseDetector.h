@@ -29,13 +29,16 @@ private:
 	Ui::CashmereDetectorClass ui_;
 	string winName = "img";
 	HWND parent;
+	bool isFirstShow = true;
 
 public:
+	BaseDetector(Ui::CashmereDetectorClass ui);
 	BaseDetector(string filePath, Ui::CashmereDetectorClass ui);
 	~BaseDetector();
 
-	void ShowImage_QWidget();
+	void ShowImg();
 	//void ShowImage_QLable();
+	void LoadImg(string filepath);
 	void Reset(Mat newImg);
 	void Reset(string filePath);
 	void StartPickMode();

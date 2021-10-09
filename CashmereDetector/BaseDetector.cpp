@@ -2,17 +2,14 @@
 
 
 
-BaseDetector::BaseDetector(string filePath, Ui::CashmereDetectorClass ui)
+BaseDetector::BaseDetector(string filePath, Ui::CashmereDetectorClass ui) : ui_(ui)
 {
-	oriImg_ = imread(filePath);
-	if (oriImg_.empty()) {
-		cerr << "[ERROR] cannot open file" << endl;
-	}
-	oriImg_.copyTo(currImg_);
+	LoadImg(filePath);
+}
 
-	ui_ = ui;
-
-	
+BaseDetector::BaseDetector(Ui::CashmereDetectorClass ui) : ui_(ui) {
+	oriImg_.release();
+	currImg_.release();
 }
 
 
@@ -20,26 +17,30 @@ BaseDetector::~BaseDetector()
 {
 }
 
-void BaseDetector::ShowImage_QWidget() {
-	//string winName = "img";
+void BaseDetector::ShowImg() {
+	if (currImg_.empty()) {
+		cout << "[ERROR] image is empty" << endl;
+		return;
+	}
+
 	cv::namedWindow(winName, cv::WINDOW_AUTOSIZE);
 	cv::resizeWindow(winName, cv::Size(ui_.widget->width(), ui_.widget->height()));
 	resize(currImg_, currImg_, Size(ui_.widget->width(), ui_.widget->height()));
 	cv::imshow(winName, currImg_);
 
-	//再Qt控件上显示cv::nameWindow窗口
-	HWND hwnd = (HWND)cvGetWindowHandle(winName.c_str());
-	//HWND paraent = GetParent(hwnd);//得到nameWindow窗口的父句柄
-	parent = GetParent(hwnd);
-	SetParent(hwnd, (HWND)ui_.widget->winId());//设置ui控件的句柄是父句柄
+	// Qt控件上显示cv::nameWindow窗口
+	if (isFirstShow) {
+		HWND hwnd = (HWND)cvGetWindowHandle(winName.c_str());
+		parent = GetParent(hwnd);
+		SetParent(hwnd, (HWND)ui_.widget->winId());//设置ui控件的句柄是父句柄
+		isFirstShow = false;
+	}
 
 	ShowWindow(parent, SW_HIDE);//隐藏掉nameWindow窗口
 }
 
-
-
-void BaseDetector::Reset(string filePath) {
-	Mat newImg = imread(filePath);
+void BaseDetector::LoadImg(string filepath) {
+	Mat newImg = imread(filepath);
 	if (newImg.empty()) {
 		cerr << "[ERROR] cannot open file" << endl;
 	}
@@ -47,20 +48,20 @@ void BaseDetector::Reset(string filePath) {
 	currImg_.release();
 	newImg.copyTo(oriImg_);
 	newImg.copyTo(currImg_);
+}
 
-	cv::namedWindow(winName, cv::WINDOW_AUTOSIZE);
-	cv::resizeWindow(winName, cv::Size(ui_.widget->width(), ui_.widget->height()));
-	resize(currImg_, currImg_, Size(ui_.widget->width(), ui_.widget->height()));
-	cv::imshow(winName, currImg_);
 
-	ShowWindow(parent, SW_HIDE);//隐藏掉nameWindow窗口
+void BaseDetector::Reset(string filePath) {
+	LoadImg(filePath);
+	ShowImg();
 }
 
 void BaseDetector::Reset(Mat newImg) {
 	oriImg_ = newImg;
 	currImg_ = newImg;
-	ShowImage_QWidget();
+	ShowImg();
 }
+
 
 bool drawRectangle = false;//不可避免地还是要定义几个全局变量，伤心
 Point leftClickPoint = Point(-1, -1);

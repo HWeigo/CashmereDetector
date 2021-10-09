@@ -1,5 +1,3 @@
-﻿  moc CashmereDetector.h
-  CashmereDetector.cpp
-  main.cpp
-  moc_CashmereDetector.cpp
+﻿  BaseDetector.cpp
+  ManualDetector.cpp
   CashmereDetector.vcxproj -> D:\OneDrive@sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\x64\Release\CashmereDetector.exe

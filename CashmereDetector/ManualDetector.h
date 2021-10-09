@@ -1,10 +1,16 @@
 #pragma once
-class ManualDetector
+#include "BaseDetector.h"
+
+class ManualDetector : public BaseDetector
 {
 private:
+	double meanLength;
+	double stdLength;
 	
 public:
-	ManualDetector();
+	ManualDetector(Ui::CashmereDetectorClass ui) : BaseDetector(ui) {};
+	ManualDetector(string filePath, Ui::CashmereDetectorClass ui) : BaseDetector(filePath, ui) {};
+
 	~ManualDetector();
 };
 
