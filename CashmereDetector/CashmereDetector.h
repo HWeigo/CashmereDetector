@@ -26,6 +26,7 @@
 
 #include "BaseDetector.h"
 #include "ManualDetector.h"
+#include "AutoDetector.h"
 
 using namespace std;
 
@@ -42,13 +43,15 @@ public slots:
 	void on_openFileAction_triggered(bool checked);
 	//void on_resetAction_triggered();
 	void on_pushButton_pick_clicked();
+	void on_pushButton_autoDetect_clicked();
 	void on_pushButton_reset_clicked();
 	void on_pushButton_saveCurr_clicked();
 	void on_timer_timeout();
 
 private:
     Ui::CashmereDetectorClass ui;
-	ManualDetector *detector = nullptr;
+	ManualDetector *manuDetector = nullptr;
+	AutoDetector *autoDetector = nullptr;
 
 	QTimer *fTimer; // Qt timer
 

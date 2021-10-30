@@ -10,10 +10,11 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 
 	connect(ui.pushButton_clear, SIGNAL(clicked()), ui.textBrowser, SLOT(clear()));
 
-	detector = new ManualDetector(ui);
+	manuDetector = new ManualDetector(ui);
+	autoDetector = new AutoDetector(ui);
 
 	ui.resetAction->setEnabled(false);
-	ui.pushButton_autoDetect->setEnabled(false);
+	//ui.pushButton_autoDetect->setEnabled(false);
 	// Set timer
 	fTimer = new QTimer(this);
 	fTimer->stop();
@@ -23,16 +24,16 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 }
 
 void CashmereDetector::on_timer_timeout() {
-	detector->ShowCurrImg();
+	manuDetector->ShowCurrImg();
 	
-	double length = detector->CalcMeanLength();
-	if (detector->GetLengthNum() == 0) {
+	double length = manuDetector->CalcMeanLength();
+	if (manuDetector->GetLengthNum() == 0) {
 		ui.label_mean->setText("-");
 		ui.label_length->setText("-");
 	}
 	else {
-		ui.label_mean->setText(QString::number(detector->GetMeanLength()));
-		ui.label_length->setText(QString::number(detector->GetCurrLength()));
+		ui.label_mean->setText(QString::number(manuDetector->GetMeanLength()));
+		ui.label_length->setText(QString::number(manuDetector->GetCurrLength()));
 	}
 
 
@@ -57,45 +58,55 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 
 	cout << filePath << endl;
 
-	detector->LoadImg(filePath);
-	detector->ShowCurrImg();
+	manuDetector->LoadImg(filePath);
+	autoDetector->LoadImg(filePath);
+	manuDetector->ShowCurrImg();
 
 	PushMessage("open file");
-	fTimer->start();
+	//fTimer->start();
 	ui.resetAction->setEnabled(true);
 
 }
 
 void CashmereDetector::on_pushButton_reset_clicked() {
-	if (detector->GetCurrImgRef().empty())
+	if (manuDetector->GetCurrImgRef().empty())
 		return;
 	if (isPickModeOn) {
-		detector->ResetManualDetector();
+		manuDetector->ResetManualDetector();
 		return;
 	}
-	detector->ResetCurrImg();
+	manuDetector->ResetCurrImg();
 }
 
 void CashmereDetector::on_pushButton_pick_clicked() {
-	if (detector->GetCurrImgRef().empty())
+	if (manuDetector->GetCurrImgRef().empty())
 		return;
 
 	if (!isPickModeOn) {
 		PushMessage("pick mode on");
-		detector->StartPickMode();
+		manuDetector->StartPickMode();
 	}
 	else {
 		PushMessage("pick mode off");
-		detector->EndPickMode();
+		manuDetector->EndPickMode();
 	}
 
 	isPickModeOn = !isPickModeOn;
 }
 
-void CashmereDetector::on_pushButton_saveCurr_clicked() {
-	if (detector->GetCurrImgRef().empty())
+
+void CashmereDetector::on_pushButton_autoDetect_clicked() {
+	if (autoDetector->GetCurrImgRef().empty())
 		return;
-	detector->SaveCurrImg();
+
+	cout << "auto detect" << endl;
+	autoDetector->AutoDetect();
+}
+
+void CashmereDetector::on_pushButton_saveCurr_clicked() {
+	if (manuDetector->GetCurrImgRef().empty())
+		return;
+	manuDetector->SaveCurrImg();
 }
 
 void CashmereDetector::PushMessage(string msg)
