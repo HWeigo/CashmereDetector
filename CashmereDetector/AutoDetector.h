@@ -8,6 +8,7 @@ class AutoDetector : public BaseDetector
 {
 private:
 	HObject oriHImg_;
+	Mat regionImg_;
 	Mat edgeImg_;
 
 public:
@@ -18,6 +19,7 @@ public:
 	void AutoDetect();
 
 
-	void EdgeDetect();
+	void RegionDetect();
+	void SkeletonDetect();
 };
 

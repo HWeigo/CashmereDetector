@@ -91,106 +91,11 @@ AutoDetector::AutoDetector(Ui::CashmereDetectorClass ui) : BaseDetector(ui) {
 
 void AutoDetector::AutoDetect() {
 
-	EdgeDetect();
+	RegionDetect();
+	SkeletonDetect();
 }
 
-// Procedures 
-// Chapter: Develop
-// Short Description: Open a new graphics window that preserves the aspect ratio of the given image. 
-void dev_open_window_fit_image(HObject ho_Image, HTuple hv_Row, HTuple hv_Column,
-	HTuple hv_WidthLimit, HTuple hv_HeightLimit, HTuple *hv_WindowHandle)
-{
-
-	// Local iconic variables
-
-	// Local control variables
-	HTuple  hv_MinWidth, hv_MaxWidth, hv_MinHeight;
-	HTuple  hv_MaxHeight, hv_ResizeFactor, hv_ImageWidth, hv_ImageHeight;
-	HTuple  hv_TempWidth, hv_TempHeight, hv_WindowWidth, hv_WindowHeight;
-
-	//This procedure opens a new graphics window and adjusts the size
-	//such that it fits into the limits specified by WidthLimit
-	//and HeightLimit, but also maintains the correct image aspect ratio.
-	//
-	//If it is impossible to match the minimum and maximum extent requirements
-	//at the same time (f.e. if the image is very long but narrow),
-	//the maximum value gets a higher priority,
-	//
-	//Parse input tuple WidthLimit
-	if (0 != (HTuple((hv_WidthLimit.TupleLength()) == 0).TupleOr(hv_WidthLimit<0)))
-	{
-		hv_MinWidth = 500;
-		hv_MaxWidth = 800;
-	}
-	else if (0 != ((hv_WidthLimit.TupleLength()) == 1))
-	{
-		hv_MinWidth = 0;
-		hv_MaxWidth = hv_WidthLimit;
-	}
-	else
-	{
-		hv_MinWidth = ((const HTuple&)hv_WidthLimit)[0];
-		hv_MaxWidth = ((const HTuple&)hv_WidthLimit)[1];
-	}
-	//Parse input tuple HeightLimit
-	if (0 != (HTuple((hv_HeightLimit.TupleLength()) == 0).TupleOr(hv_HeightLimit<0)))
-	{
-		hv_MinHeight = 400;
-		hv_MaxHeight = 600;
-	}
-	else if (0 != ((hv_HeightLimit.TupleLength()) == 1))
-	{
-		hv_MinHeight = 0;
-		hv_MaxHeight = hv_HeightLimit;
-	}
-	else
-	{
-		hv_MinHeight = ((const HTuple&)hv_HeightLimit)[0];
-		hv_MaxHeight = ((const HTuple&)hv_HeightLimit)[1];
-	}
-	//
-	//Test, if window size has to be changed.
-	hv_ResizeFactor = 1;
-	GetImageSize(ho_Image, &hv_ImageWidth, &hv_ImageHeight);
-	//First, expand window to the minimum extents (if necessary).
-	if (0 != (HTuple(hv_MinWidth>hv_ImageWidth).TupleOr(hv_MinHeight>hv_ImageHeight)))
-	{
-		hv_ResizeFactor = (((hv_MinWidth.TupleReal()) / hv_ImageWidth).TupleConcat((hv_MinHeight.TupleReal()) / hv_ImageHeight)).TupleMax();
-	}
-	hv_TempWidth = hv_ImageWidth*hv_ResizeFactor;
-	hv_TempHeight = hv_ImageHeight*hv_ResizeFactor;
-	//Then, shrink window to maximum extents (if necessary).
-	if (0 != (HTuple(hv_MaxWidth<hv_TempWidth).TupleOr(hv_MaxHeight<hv_TempHeight)))
-	{
-		hv_ResizeFactor = hv_ResizeFactor*((((hv_MaxWidth.TupleReal()) / hv_TempWidth).TupleConcat((hv_MaxHeight.TupleReal()) / hv_TempHeight)).TupleMin());
-	}
-	hv_WindowWidth = hv_ImageWidth*hv_ResizeFactor;
-	hv_WindowHeight = hv_ImageHeight*hv_ResizeFactor;
-	//Resize window
-	SetWindowAttr("background_color", "black");
-	OpenWindow(hv_Row, hv_Column, hv_WindowWidth, hv_WindowHeight, 0, "visible", "", &(*hv_WindowHandle));
-	HDevWindowStack::Push((*hv_WindowHandle));
-	if (HDevWindowStack::IsOpen())
-		SetPart(HDevWindowStack::GetActive(), 0, 0, hv_ImageHeight - 1, hv_ImageWidth - 1);
-	return;
-}
-
-// Chapter: Develop
-// Short Description: Switch dev_update_pc, dev_update_var and dev_update_window to 'off'. 
-void dev_update_off()
-{
-
-	//This procedure sets different update settings to 'off'.
-	//This is useful to get the best performance and reduce overhead.
-	//
-	// dev_update_pc(...); only in hdevelop
-	// dev_update_var(...); only in hdevelop
-	// dev_update_window(...); only in hdevelop
-	return;
-}
-
-
-void AutoDetector::EdgeDetect() {
+void AutoDetector::RegionDetect() {
 
 	// Local iconic variables
 
@@ -212,9 +117,6 @@ void AutoDetector::EdgeDetect() {
 	   CloseWindow(HDevWindowStack::Pop());
 	 GetImageSize(ho_Image1, &hv_Width, &hv_Height); // DONT COMMENT THIS!!!!!!
 	 
-	 //dev_open_window_fit_image(ho_Image1, 0, 0, -1, -1, &hv_WindowHandle);
-	 //dev_update_off();
-
 
 	//blob分析挑选出测量区域（形状特征的选择）
 	
@@ -225,13 +127,8 @@ void AutoDetector::EdgeDetect() {
 	  Decompose3(ho_Image1, &ho_Image11, &ho_Image2, &ho_Image1);
 	}
 	GetGrayval(ho_Image1, 0, 0, &hv_Grayval);
-	
 	Threshold(ho_Image1, &ho_Region, 0, hv_Grayval-1);
-	
-	
 	Connection(ho_Region, &ho_ConnectedRegions);
-	
-	
 	FillUp(ho_ConnectedRegions, &ho_RegionFillUp);
 	
 	//形状选择
@@ -247,28 +144,114 @@ void AutoDetector::EdgeDetect() {
 	
 	CountObj(ho_SelectedRegions1, &hv_Number);
 	
-	if (0 != (hv_Number!=1))
-	{
-	  // stop(...); only in hdevelop
-	}
 	//显示结果
 	HObject ho_BinImage;
 	RegionToBin(ho_RegionClosing, &ho_BinImage, 255, 0, hv_Width, hv_Height);
 	WriteImage(ho_BinImage, "bmp", 0, 
-				  "D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereDetector/1.bmp");	
-	Mat temp;
-	HObject2Mat(ho_BinImage, temp);
-	imshow("temp", temp);
+				  "D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereDetector/region.bmp");	
+	HObject2Mat(ho_BinImage, regionImg_);
 
-	//if (HDevWindowStack::IsOpen())
-	//	DispObj(ho_Image1, HDevWindowStack::GetActive());
-	//if (HDevWindowStack::IsOpen())
-	//	DispObj(ho_Skeleton, HDevWindowStack::GetActive());
-	//if (HDevWindowStack::IsOpen())
-	//	DispObj(ho_Contours, HDevWindowStack::GetActive());
-
-	//system("pause");
 }
+
+/**
+ * Perform one thinning iteration.
+ * Normally you wouldn't call this function directly from your code.
+ */
+void thinningIteration(Mat& im, int iter)
+{
+    Mat marker = Mat::zeros(im.size(), CV_8UC1);
+
+    for (int i = 1; i < im.rows-1; i++)
+    {
+        for (int j = 1; j < im.cols-1; j++)
+        {
+            uchar p2 = im.at<uchar>(i-1, j);
+            uchar p3 = im.at<uchar>(i-1, j+1);
+            uchar p4 = im.at<uchar>(i, j+1);
+            uchar p5 = im.at<uchar>(i+1, j+1);
+            uchar p6 = im.at<uchar>(i+1, j);
+            uchar p7 = im.at<uchar>(i+1, j-1);
+            uchar p8 = im.at<uchar>(i, j-1);
+            uchar p9 = im.at<uchar>(i-1, j-1);
+
+            int A  = (p2 == 0 && p3 == 1) + (p3 == 0 && p4 == 1) +
+                     (p4 == 0 && p5 == 1) + (p5 == 0 && p6 == 1) +
+                     (p6 == 0 && p7 == 1) + (p7 == 0 && p8 == 1) +
+                     (p8 == 0 && p9 == 1) + (p9 == 0 && p2 == 1);
+            int B  = p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9;
+            int m1 = iter == 0 ? (p2 * p4 * p6) : (p2 * p4 * p8);
+            int m2 = iter == 0 ? (p4 * p6 * p8) : (p2 * p6 * p8);
+
+            if (A == 1 && (B >= 2 && B <= 6) && m1 == 0 && m2 == 0)
+                marker.at<uchar>(i,j) = 1;
+        }
+    }
+
+    im &= ~marker;
+}
+
+/**
+ * Function for thinning the given binary image
+ */
+void thinning(Mat& im)
+{
+    im /= 255;
+
+    Mat prev = Mat::zeros(im.size(), CV_8UC1);
+    Mat diff;
+	int cnt = 0;
+    do {
+        thinningIteration(im, 0);
+        thinningIteration(im, 1);
+        absdiff(im, prev, diff);
+        im.copyTo(prev);
+		++cnt;
+    }
+    while (countNonZero(diff) > 0);
+	cout << "iter num: " << cnt << endl;
+    im *= 255;
+}
+
+/**
+ * This is the function that acts as the input/output system of this header file.
+ */
+Mat skeletonization(Mat inputImage)
+{
+    if (inputImage.empty())
+    	cout<<"Inside skeletonization, Source empty"<<endl;
+
+	imshow("region", inputImage);
+	cout << inputImage.type() << endl;
+    Mat outputImage(inputImage);
+    //cvtColor(inputImage, outputImage, CV_BGR2GRAY);
+
+	//imshow("region", outputImage);
+ //   threshold(outputImage, outputImage, 0, 255, THRESH_BINARY+THRESH_OTSU);
+
+	//imshow("thres", outputImage);
+    thinning(outputImage);
+	imshow("output", outputImage);
+    return outputImage;
+}
+
+void AutoDetector::SkeletonDetect() {
+	//Mat temp = skeletonization(regionImg_);
+	Mat edgeImg;
+	Canny(regionImg_, edgeImg, 100, 100);
+	imshow("edge", edgeImg);
+	Mat element = getStructuringElement(MORPH_ELLIPSE, Size(3, 3)); 	
+	for (int i = 0; i < 14; ++i) {
+		string name = "dilate_" + to_string(i*5) + ".bmp";
+		
+		imwrite(name, edgeImg);
+		dilate(edgeImg, edgeImg, element, Point(-1, -1), 5);
+	}
+	//imshow("dilate", edgeImg);
+
+
+	//imshow("ske", temp);
+}
+
 
 AutoDetector::~AutoDetector()
 {

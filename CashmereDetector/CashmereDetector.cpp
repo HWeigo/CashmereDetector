@@ -63,7 +63,7 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 	manuDetector->ShowCurrImg();
 
 	PushMessage("open file");
-	//fTimer->start();
+	fTimer->start();
 	ui.resetAction->setEnabled(true);
 
 }
