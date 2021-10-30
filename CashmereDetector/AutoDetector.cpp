@@ -38,6 +38,53 @@ void HObject2Mat(const HObject &_Hobj, cv::Mat &outMat)
 	outMat = Image;
 }
 
+HalconCpp::HObject MatToHObject(const cv::Mat &image) {
+	HObject Hobj = HObject();
+	int hgt = image.rows;
+	int wid = image.cols;
+	int i;
+	//  CV_8UC3  
+	if (image.type() == CV_8UC3)
+	{
+		vector<cv::Mat> imgchannel;
+		split(image, imgchannel);
+		cv::Mat imgB = imgchannel[0];
+		cv::Mat imgG = imgchannel[1];
+		cv::Mat imgR = imgchannel[2];
+		uchar* dataR = new uchar[hgt*wid];
+		uchar* dataG = new uchar[hgt*wid];
+		uchar* dataB = new uchar[hgt*wid];
+		for (i = 0; i<hgt; i++)
+		{
+			memcpy(dataR + wid*i, imgR.data + imgR.step*i, wid);
+			memcpy(dataG + wid*i, imgG.data + imgG.step*i, wid);
+			memcpy(dataB + wid*i, imgB.data + imgB.step*i, wid);
+		}
+		GenImage3(&Hobj, "byte", wid, hgt, (Hlong)dataR, (Hlong)dataG, (Hlong)dataB);
+		delete[]dataR;
+		delete[]dataG;
+		delete[]dataB;
+		dataR = NULL;
+		dataG = NULL;
+		dataB = NULL;
+	}
+	//  CV_8UCU1  
+	else if (image.type() == CV_8UC1)
+	{
+		uchar* data = new uchar[hgt*wid];
+		for (i = 0; i<hgt; i++)
+			memcpy(data + wid*i, image.data + image.step*i, wid);
+		GenImage1(&Hobj, "byte", wid, hgt, (Hlong)data);
+		delete[] data;
+		data = NULL;
+	}
+	return Hobj;
+}
+
+HalconCpp::HImage MatToHImage(const cv::Mat &image) {
+	HalconCpp::HImage hImg(MatToHObject(image));
+	return hImg;
+}
 
 AutoDetector::AutoDetector(Ui::CashmereDetectorClass ui) : BaseDetector(ui) {
 }
@@ -157,17 +204,16 @@ void AutoDetector::EdgeDetect() {
 	HTuple  hv_Channels, hv_Grayval, hv_Area, hv_Row, hv_Column;
 	HTuple  hv_Number;
 
-	HImage ho_Image1;
-	ReadImage(&ho_Image1, 
-		"D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0001.jpg");
+	HObject ho_Image1;
+	ho_Image1 = MatToHObject(GetCurrImg());
 
 	//Image Acquisition 01: Do something
 	 if (HDevWindowStack::IsOpen())
 	   CloseWindow(HDevWindowStack::Pop());
 	 GetImageSize(ho_Image1, &hv_Width, &hv_Height); // DONT COMMENT THIS!!!!!!
-	 dev_open_window_fit_image(ho_Image1, 0, 0, -1, -1, &hv_WindowHandle);
-
-	 dev_update_off();
+	 
+	 //dev_open_window_fit_image(ho_Image1, 0, 0, -1, -1, &hv_WindowHandle);
+	 //dev_update_off();
 
 
 	//blob分析挑选出测量区域（形状特征的选择）
@@ -208,11 +254,12 @@ void AutoDetector::EdgeDetect() {
 	//显示结果
 	HObject ho_BinImage;
 	RegionToBin(ho_RegionClosing, &ho_BinImage, 255, 0, hv_Width, hv_Height);
-	WriteImage(ho_BinImage, "bmp", 0, //'C:/Users/sunzc/Desktop/羊毛测量/1.bmp'
+	WriteImage(ho_BinImage, "bmp", 0, 
 				  "D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereDetector/1.bmp");	
 	Mat temp;
 	HObject2Mat(ho_BinImage, temp);
 	imshow("temp", temp);
+
 	//if (HDevWindowStack::IsOpen())
 	//	DispObj(ho_Image1, HDevWindowStack::GetActive());
 	//if (HDevWindowStack::IsOpen())
