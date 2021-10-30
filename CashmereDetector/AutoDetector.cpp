@@ -236,22 +236,83 @@ Mat skeletonization(Mat inputImage)
 
 void AutoDetector::SkeletonDetect() {
 	//Mat temp = skeletonization(regionImg_);
-	Mat edgeImg;
-	Canny(regionImg_, edgeImg, 100, 100);
-	imshow("edge", edgeImg);
-	Mat element = getStructuringElement(MORPH_ELLIPSE, Size(3, 3)); 	
-	for (int i = 0; i < 14; ++i) {
-		string name = "dilate_" + to_string(i*5) + ".bmp";
-		
-		imwrite(name, edgeImg);
-		dilate(edgeImg, edgeImg, element, Point(-1, -1), 5);
+	//Canny(regionImg_, edgeImg_, 100, 100);
+	////imshow("edge", edgeImg_);
+	//Mat element = getStructuringElement(MORPH_ELLIPSE, Size(3, 3)); 	
+	//for (int i = 0; i < 14; ++i) {
+	//	string name = "dilate_" + to_string(i*5) + ".bmp";
+	//	
+	//	imwrite(name, edgeImg_);
+	//	dilate(edgeImg_, edgeImg_, element, Point(-1, -1), 5);
+	//}
+	//imshow("dilate", edgeImg_);
+
+
+	Canny(regionImg_, edgeImg_, 100, 100);
+	//imshow("edge", edgeImg_);
+	rows = edgeImg_.rows;
+	cols = edgeImg_.cols;
+	vector<Point> edgePoints;
+	cout << cols << " " << rows << endl;
+	Mat bfsMap(edgeImg_.size(), CV_8UC1);
+	for (int u = 0; u < cols; ++u) {
+		for (int v = 0; v < rows; ++v) {
+			if (edgeImg_.at<uchar>(v, u) == 255) {
+				bfsMap.at<uchar>(v, u) = 1;
+				edgePoints.emplace_back(Point(u, v));
+			}
+		}
 	}
-	//imshow("dilate", edgeImg);
 
+	//long uSum = 0, vSum = 0;
+	//int regionCnt = 0;
+	//for (int u = 0; u < cols; ++u) {
+	//	for (int v = 0; v < rows; ++v) {
+	//		if (regionImg_.at<uchar>(v, u) == 255) {
+	//			uSum += u;
+	//			vSum += v;
+	//			++regionCnt;
+	//		}
+	//	}
+	//}
+	//Point center(uSum / regionCnt, vSum / regionCnt);
+	//cout << edgePoints.size() << endl; 
+	//cout << "center: " << center.x << " " << center.y << endl;
 
-	//imshow("ske", temp);
+	Mat draw(edgeImg_.size(), CV_8UC3);
+	for (Point point : edgePoints) {
+		draw.at<Vec3b>(point.y, point.x)[2] = 255;
+	}
+	imshow("first", draw);
+	int layer = 2;
+	while (layer < 30) {
+		int currEdgeSize = edgePoints.size();
+		cout << currEdgeSize << endl;
+		vector<Point> tempEdgePoints;
+		for (Point point : edgePoints) {
+			FillNeighbor(bfsMap, point, layer*2, tempEdgePoints);
+		}
+		tempEdgePoints.swap(edgePoints);
+		++layer;
+	}
+
+	imshow("bfsMap", bfsMap);
+
 }
 
+void AutoDetector::FillNeighbor(Mat &img, Point point, int layer, vector<Point> &list) {
+	for (pair<int, int> dir : directions) {
+		int u = point.x + dir.first;
+		int v = point.y + dir.second;
+		if (u < 0 || u >= cols || v < 0 || v >= rows) {
+			continue;
+		} 
+		if (img.at<uchar>(v, u) == 0) {
+			img.at<uchar>(v, u) = layer;
+			list.emplace_back(Point(u, v));
+		}
+	}
+}
 
 AutoDetector::~AutoDetector()
 {
