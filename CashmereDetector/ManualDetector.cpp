@@ -56,7 +56,7 @@ double ManualDetector::CalcLength() {
 	double length;
 	length = powf((selectedPoints[0].x - selectedPoints[1].x), 2) + \
 		powf((selectedPoints[0].y - selectedPoints[1].y), 2);
-	length = sqrtf(length);
+	length = sqrtf(length) / factor;
 	++numLength;
 	sumLength += length;
 	currLength = length;

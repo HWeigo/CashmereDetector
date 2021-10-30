@@ -8,6 +8,7 @@
 class ManualDetector : public BaseDetector
 {
 private:
+	double factor = 0.6;
 	double currLength = -1;
 	double meanLength = -1;
 	double stdLength;

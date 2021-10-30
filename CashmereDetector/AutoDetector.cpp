@@ -90,9 +90,12 @@ AutoDetector::AutoDetector(Ui::CashmereDetectorClass ui) : BaseDetector(ui) {
 }
 
 void AutoDetector::AutoDetect() {
-
+	double timer_start = double(clock() / 1000.0);
 	RegionDetect();
+	double timer_mid = double(clock() / 1000.0);
 	SkeletonDetect();
+	double timer_end = double(clock() / 1000.0);
+	cout << "auto detect time use: " << timer_mid - timer_start << " " << timer_end - timer_mid << endl;
 }
 
 void AutoDetector::RegionDetect() {
@@ -147,8 +150,8 @@ void AutoDetector::RegionDetect() {
 	//ÏÔÊ¾½á¹û
 	HObject ho_BinImage;
 	RegionToBin(ho_RegionClosing, &ho_BinImage, 255, 0, hv_Width, hv_Height);
-	WriteImage(ho_BinImage, "bmp", 0, 
-				  "D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereDetector/region.bmp");	
+	//WriteImage(ho_BinImage, "bmp", 0, 
+	//			  "D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereDetector/region.bmp");	
 	HObject2Mat(ho_BinImage, regionImg_);
 
 }
@@ -157,7 +160,7 @@ void AutoDetector::RegionDetect() {
  * Perform one thinning iteration.
  * Normally you wouldn't call this function directly from your code.
  */
-void thinningIteration(Mat& im, int iter)
+void AutoDetector::thinningIteration(Mat& im, int iter)
 {
     Mat marker = Mat::zeros(im.size(), CV_8UC1);
 
@@ -193,7 +196,7 @@ void thinningIteration(Mat& im, int iter)
 /**
  * Function for thinning the given binary image
  */
-void thinning(Mat& im)
+void AutoDetector::thinning(Mat& im)
 {
     im /= 255;
 
@@ -205,7 +208,7 @@ void thinning(Mat& im)
         thinningIteration(im, 1);
         absdiff(im, prev, diff);
         im.copyTo(prev);
-		++cnt;
+		cnt += 2;
     }
     while (countNonZero(diff) > 0);
 	cout << "iter num: " << cnt << endl;
@@ -215,12 +218,11 @@ void thinning(Mat& im)
 /**
  * This is the function that acts as the input/output system of this header file.
  */
-Mat skeletonization(Mat inputImage)
+Mat AutoDetector::skeletonization(Mat inputImage)
 {
     if (inputImage.empty())
     	cout<<"Inside skeletonization, Source empty"<<endl;
 
-	imshow("region", inputImage);
 	cout << inputImage.type() << endl;
     Mat outputImage(inputImage);
     //cvtColor(inputImage, outputImage, CV_BGR2GRAY);
@@ -228,16 +230,23 @@ Mat skeletonization(Mat inputImage)
 	//imshow("region", outputImage);
  //   threshold(outputImage, outputImage, 0, 255, THRESH_BINARY+THRESH_OTSU);
 
-	//imshow("thres", outputImage);
+
     thinning(outputImage);
-	imshow("output", outputImage);
-    return outputImage;
+ 	//imshow("thres", outputImage);
+#if 1
+	imwrite("skeletonization.bmp", outputImage);
+#endif   
+	return outputImage;
 }
 
 void AutoDetector::SkeletonDetect() {
-	//Mat temp = skeletonization(regionImg_);
+	
+	skeletonImg_ = skeletonization(regionImg_);
+	
+	
+	// OpenCV dilate	
 	//Canny(regionImg_, edgeImg_, 100, 100);
-	////imshow("edge", edgeImg_);
+	//imshow("edge", edgeImg_);
 	//Mat element = getStructuringElement(MORPH_ELLIPSE, Size(3, 3)); 	
 	//for (int i = 0; i < 14; ++i) {
 	//	string name = "dilate_" + to_string(i*5) + ".bmp";
@@ -264,39 +273,40 @@ void AutoDetector::SkeletonDetect() {
 		}
 	}
 
-	//long uSum = 0, vSum = 0;
-	//int regionCnt = 0;
-	//for (int u = 0; u < cols; ++u) {
-	//	for (int v = 0; v < rows; ++v) {
-	//		if (regionImg_.at<uchar>(v, u) == 255) {
-	//			uSum += u;
-	//			vSum += v;
-	//			++regionCnt;
-	//		}
-	//	}
-	//}
-	//Point center(uSum / regionCnt, vSum / regionCnt);
-	//cout << edgePoints.size() << endl; 
-	//cout << "center: " << center.x << " " << center.y << endl;
-
 	Mat draw(edgeImg_.size(), CV_8UC3);
 	for (Point point : edgePoints) {
 		draw.at<Vec3b>(point.y, point.x)[2] = 255;
 	}
-	imshow("first", draw);
+	//imshow("first", draw);
 	int layer = 2;
-	while (layer < 30) {
+	int lastEdgeSize = edgePoints.size();
+	int toThrowCnt = 0;
+	while (!edgePoints.empty()) {
 		int currEdgeSize = edgePoints.size();
-		cout << currEdgeSize << endl;
+		double ratio = (double)currEdgeSize / (double)lastEdgeSize;
+		cout << "layer: " << layer << " point size: " << currEdgeSize << " ratio: " << ratio << endl;
+		lastEdgeSize = currEdgeSize;
 		vector<Point> tempEdgePoints;
 		for (Point point : edgePoints) {
-			FillNeighbor(bfsMap, point, layer*2, tempEdgePoints);
+			FillNeighbor(bfsMap, point, layer*3, tempEdgePoints);
 		}
 		tempEdgePoints.swap(edgePoints);
 		++layer;
-	}
 
-	imshow("bfsMap", bfsMap);
+		// Check if most of the edges have already shrink
+		if (ratio < 0.96) {
+#if  0
+			string name = "./throw_" + to_string(layer) + "_" + to_string(ratio * 100) + ".bmp";
+			imwrite(name, bfsMap);
+#endif
+			++toThrowCnt;
+			if (toThrowCnt >= 3)
+				break;
+		}
+	} 
+
+	//imshow("bfsMap", bfsMap);
+	cout << "thickness: " << layer*2 << endl;
 
 }
 
@@ -307,7 +317,7 @@ void AutoDetector::FillNeighbor(Mat &img, Point point, int layer, vector<Point> 
 		if (u < 0 || u >= cols || v < 0 || v >= rows) {
 			continue;
 		} 
-		if (img.at<uchar>(v, u) == 0) {
+		if (img.at<uchar>(v, u) == 0 && regionImg_.at<uchar>(v, u) != 0) {
 			img.at<uchar>(v, u) = layer;
 			list.emplace_back(Point(u, v));
 		}

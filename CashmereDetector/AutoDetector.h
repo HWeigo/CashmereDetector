@@ -10,10 +10,14 @@ private:
 	HObject oriHImg_;
 	Mat regionImg_;
 	Mat edgeImg_;
+	Mat skeletonImg_;
 	int cols;
 	int rows;
 
 	void FillNeighbor(Mat &img, Point point, int layer, vector<Point> &list);
+	void thinningIteration(Mat& im, int iter);
+	void thinning(Mat& im);
+	Mat skeletonization(Mat inputImage);
 	vector<pair<int, int>> directions{\
 	{ 0, 1 }, { 0,-1 }, { 1,0 }, { -1,0 }, \
 	{ 1, 1 }, { 1,-1 }, { -1,-1 }, { -1, 1 } };
