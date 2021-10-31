@@ -78,6 +78,14 @@ void ManualDetector::ResetManualDetector() {
 	ShowCurrImg();
 }
 
+void ManualDetector::LoadImg(string filepath) {
+	BaseDetector::LoadImg(filepath);
+	currLength = -1;
+	meanLength = -1;
+	numLength = 0;
+	sumLength = 0;
+}
+
 double ManualDetector::GetCurrLength() {
 	return currLength;
 }

@@ -11,8 +11,11 @@ private:
 	Mat regionImg_;
 	Mat edgeImg_;
 	Mat skeletonImg_;
-	int cols;
-	int rows;
+	vector<Point> skeletonPoints;
+
+	int cols_;
+	int rows_;
+	double length_;
 
 	void FillNeighbor(Mat &img, Point point, int layer, vector<Point> &list);
 	void thinningIteration(Mat& im, int iter);
@@ -28,8 +31,9 @@ public:
 	// Run auto-detect function
 	void AutoDetect();
 
-
 	void RegionDetect();
 	void SkeletonDetect();
+
+	double GetLength();
 };
 

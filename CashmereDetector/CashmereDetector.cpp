@@ -27,11 +27,10 @@ void CashmereDetector::on_timer_timeout() {
 	manuDetector->ShowCurrImg();
 	
 	double length = manuDetector->CalcMeanLength();
-	if (manuDetector->GetLengthNum() == 0) {
-		ui.label_mean->setText("-");
-		ui.label_length->setText("-");
-	}
-	else {
+	//ui.label_mean->setText("-");
+	//ui.label_length->setText("-");
+	
+	if (manuDetector->GetLengthNum() > 0 && isPickModeOn) {
 		ui.label_mean->setText(QString::number(manuDetector->GetMeanLength()));
 		ui.label_length->setText(QString::number(manuDetector->GetCurrLength()));
 	}
@@ -66,6 +65,9 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 	fTimer->start();
 	ui.resetAction->setEnabled(true);
 
+
+	ui.label_mean->setText("-");
+	ui.label_length->setText("-");
 }
 
 void CashmereDetector::on_pushButton_reset_clicked() {
@@ -99,8 +101,16 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 	if (autoDetector->GetCurrImgRef().empty())
 		return;
 
-	cout << "auto detect" << endl;
+	if (isPickModeOn) {
+		manuDetector->EndPickMode();
+		isPickModeOn = false;
+	}
 	autoDetector->AutoDetect();
+
+	ui.label_length->setText("-");
+	ui.label_mean->setText(QString::number(autoDetector->GetLength()));
+	
+	PushMessage("auto detect done");
 }
 
 void CashmereDetector::on_pushButton_saveCurr_clicked() {

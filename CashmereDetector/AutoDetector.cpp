@@ -93,6 +93,7 @@ void AutoDetector::AutoDetect() {
 	double timer_start = double(clock() / 1000.0);
 	RegionDetect();
 	double timer_mid = double(clock() / 1000.0);
+	skeletonPoints.swap(vector<Point>());
 	SkeletonDetect();
 	double timer_end = double(clock() / 1000.0);
 	cout << "auto detect time use: " << timer_mid - timer_start << " " << timer_end - timer_mid << endl;
@@ -156,10 +157,7 @@ void AutoDetector::RegionDetect() {
 
 }
 
-/**
- * Perform one thinning iteration.
- * Normally you wouldn't call this function directly from your code.
- */
+// Reference: https://github.com/krishraghuram/Zhang-Suen-Skeletonization/blob/master/skeletonization.hpp
 void AutoDetector::thinningIteration(Mat& im, int iter)
 {
     Mat marker = Mat::zeros(im.size(), CV_8UC1);
@@ -193,9 +191,6 @@ void AutoDetector::thinningIteration(Mat& im, int iter)
     im &= ~marker;
 }
 
-/**
- * Function for thinning the given binary image
- */
 void AutoDetector::thinning(Mat& im)
 {
     im /= 255;
@@ -215,9 +210,6 @@ void AutoDetector::thinning(Mat& im)
     im *= 255;
 }
 
-/**
- * This is the function that acts as the input/output system of this header file.
- */
 Mat AutoDetector::skeletonization(Mat inputImage)
 {
     if (inputImage.empty())
@@ -225,11 +217,6 @@ Mat AutoDetector::skeletonization(Mat inputImage)
 
 	cout << inputImage.type() << endl;
     Mat outputImage(inputImage);
-    //cvtColor(inputImage, outputImage, CV_BGR2GRAY);
-
-	//imshow("region", outputImage);
- //   threshold(outputImage, outputImage, 0, 255, THRESH_BINARY+THRESH_OTSU);
-
 
     thinning(outputImage);
  	//imshow("thres", outputImage);
@@ -239,9 +226,18 @@ Mat AutoDetector::skeletonization(Mat inputImage)
 	return outputImage;
 }
 
+
+//#define ZHANG_SUEN_SKELETONIZATION
+#define EDGE_DILATE
+
+//#define SKELETON_IMSHOW
 void AutoDetector::SkeletonDetect() {
-	
+
+#ifdef ZHANG_SUEN_SKELETONIZATION
 	skeletonImg_ = skeletonization(regionImg_);
+#endif // ZHANG_SUEN_SKELETONIZATION
+
+#ifdef EDGE_DILATE
 	
 	
 	// OpenCV dilate	
@@ -259,13 +255,13 @@ void AutoDetector::SkeletonDetect() {
 
 	Canny(regionImg_, edgeImg_, 100, 100);
 	//imshow("edge", edgeImg_);
-	rows = edgeImg_.rows;
-	cols = edgeImg_.cols;
+	rows_ = edgeImg_.rows;
+	cols_ = edgeImg_.cols;
 	vector<Point> edgePoints;
-	cout << cols << " " << rows << endl;
+	cout << cols_ << " " << rows_ << endl;
 	Mat bfsMap(edgeImg_.size(), CV_8UC1);
-	for (int u = 0; u < cols; ++u) {
-		for (int v = 0; v < rows; ++v) {
+	for (int u = 0; u < cols_; ++u) {
+		for (int v = 0; v < rows_; ++v) {
 			if (edgeImg_.at<uchar>(v, u) == 255) {
 				bfsMap.at<uchar>(v, u) = 1;
 				edgePoints.emplace_back(Point(u, v));
@@ -273,11 +269,13 @@ void AutoDetector::SkeletonDetect() {
 		}
 	}
 
-	Mat draw(edgeImg_.size(), CV_8UC3);
+#ifdef SKELETON_IMSHOW
+	Mat draw(GetCurrImg());
 	for (Point point : edgePoints) {
-		draw.at<Vec3b>(point.y, point.x)[2] = 255;
+		draw.at<Vec3b>(point.y, point.x)[1] = 255;
 	}
-	//imshow("first", draw);
+#endif // SKELETON_IMSHOW
+
 	int layer = 2;
 	int lastEdgeSize = edgePoints.size();
 	int toThrowCnt = 0;
@@ -295,7 +293,7 @@ void AutoDetector::SkeletonDetect() {
 
 		// Check if most of the edges have already shrink
 		if (ratio < 0.96) {
-#if  0
+#if  1
 			string name = "./throw_" + to_string(layer) + "_" + to_string(ratio * 100) + ".bmp";
 			imwrite(name, bfsMap);
 #endif
@@ -306,22 +304,44 @@ void AutoDetector::SkeletonDetect() {
 	} 
 
 	//imshow("bfsMap", bfsMap);
-	cout << "thickness: " << layer*2 << endl;
+	length_ = layer * 2;
 
+	cout << "thickness: " << length_ << endl;
+
+
+#ifdef SKELETON_IMSHOW
+	for (Point point : skeletonPoints) {
+		draw.at<Vec3b>(point.y, point.x)[2] = 255;
+	}
+	imshow("draw", draw);
+#endif //SKELETON_IMSHOW
+
+
+#endif // EDGE_DILATE
 }
 
 void AutoDetector::FillNeighbor(Mat &img, Point point, int layer, vector<Point> &list) {
+	int expandCnt = 0;
+	int x = point.x;
+	int y = point.y;
 	for (pair<int, int> dir : directions) {
-		int u = point.x + dir.first;
-		int v = point.y + dir.second;
-		if (u < 0 || u >= cols || v < 0 || v >= rows) {
+		int u = x + dir.first;
+		int v = y + dir.second;
+		if (u < 0 || u >= cols_ || v < 0 || v >= rows_) {
 			continue;
 		} 
 		if (img.at<uchar>(v, u) == 0 && regionImg_.at<uchar>(v, u) != 0) {
 			img.at<uchar>(v, u) = layer;
 			list.emplace_back(Point(u, v));
+			++expandCnt;
 		}
 	}
+	if (expandCnt == 0)
+		skeletonPoints.emplace_back(Point(x, y));
+}
+
+double AutoDetector::GetLength() {
+	return length_;
 }
 
 AutoDetector::~AutoDetector()

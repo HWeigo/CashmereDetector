@@ -44,6 +44,8 @@ public:
 	// Reset detector
 	void ResetManualDetector();
 
+	void LoadImg(string filepath);
+
 	double GetCurrLength();
 	double GetMeanLength();
 	int GetLengthNum();
