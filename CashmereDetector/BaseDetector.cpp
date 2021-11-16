@@ -1,6 +1,7 @@
 #include "BaseDetector.h"
 
-
+// This definitions in the cpp file, otherwise, once you include your header file into more than one C++ file
+bool BaseDetector::isFirstShow = true; 
 
 BaseDetector::BaseDetector(string filePath, Ui::CashmereDetectorClass ui) : ui_(ui)
 {
@@ -27,16 +28,16 @@ void BaseDetector::ShowCurrImg() {
 	cv::resizeWindow(winName, cv::Size(ui_.widget->width(), ui_.widget->height()));
 	resize(currImg_, currImg_, Size(ui_.widget->width(), ui_.widget->height()));
 	cv::imshow(winName, currImg_);
+	//cv::imshow("test", currImg_);
 
-	// Qt控件上显示cv::nameWindow窗口
+	//Qt控件上显示cv::nameWindow窗口
 	if (isFirstShow) {
 		HWND hwnd = (HWND)cvGetWindowHandle(winName.c_str());
 		parent = GetParent(hwnd);
 		SetParent(hwnd, (HWND)ui_.widget->winId());//设置ui控件的句柄是父句柄
+		ShowWindow(parent, SW_HIDE);//隐藏掉nameWindow窗口
 		isFirstShow = false;
 	}
-
-	ShowWindow(parent, SW_HIDE);//隐藏掉nameWindow窗口
 }
 
 void BaseDetector::LoadImg(string filepath) {

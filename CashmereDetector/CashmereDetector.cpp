@@ -12,6 +12,8 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 
 	manuDetector = new ManualDetector(ui);
 	autoDetector = new AutoDetector(ui);
+	areaDetector = new AreaDetector(ui);
+
 
 	ui.resetAction->setEnabled(false);
 	//ui.pushButton_autoDetect->setEnabled(false);
@@ -24,18 +26,21 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 }
 
 void CashmereDetector::on_timer_timeout() {
-	manuDetector->ShowCurrImg();
-	
-	double length = manuDetector->CalcMeanLength();
-	//ui.label_mean->setText("-");
-	//ui.label_length->setText("-");
-	
-	if (manuDetector->GetLengthNum() > 0 && isPickModeOn) {
-		ui.label_mean->setText(QString::number(manuDetector->GetMeanLength()));
-		ui.label_length->setText(QString::number(manuDetector->GetCurrLength()));
+	if (isPickModeOn) {
+		manuDetector->ShowCurrImg();
+		
+		double length = manuDetector->CalcMeanLength();
+		//ui.label_mean->setText("-");
+		//ui.label_length->setText("-");
+		
+		if (manuDetector->GetLengthNum() > 0 && isPickModeOn) {
+			ui.label_mean->setText(QString::number(manuDetector->GetMeanLength()));
+			ui.label_length->setText(QString::number(manuDetector->GetCurrLength()));
+		}
 	}
-
-
+	else {
+		//areaDetector->ShowCurrImg();
+	}
 
 }
 
@@ -59,7 +64,8 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 
 	manuDetector->LoadImg(filePath);
 	autoDetector->LoadImg(filePath);
-	manuDetector->ShowCurrImg();
+	areaDetector->LoadImg(filePath);
+	autoDetector->ShowCurrImg();
 
 	PushMessage("open file");
 	fTimer->start();

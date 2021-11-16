@@ -236,7 +236,7 @@ Mat AutoDetector::skeletonization(Mat inputImage)
 }
 
 
-#define ZHANG_SUEN_SKELETONIZATION
+//#define ZHANG_SUEN_SKELETONIZATION
 #define EDGE_DILATE
 
 //#define SKELETON_IMSHOW

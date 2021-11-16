@@ -29,12 +29,15 @@ private:
 	Ui::CashmereDetectorClass ui_;
 	string winName = "img";
 	HWND parent;
-	bool isFirstShow = true;
+
+protected:
 
 public:
 	BaseDetector(Ui::CashmereDetectorClass ui);
 	BaseDetector(string filePath, Ui::CashmereDetectorClass ui);
 	~BaseDetector();
+
+	static bool isFirstShow;
 
 	// Show currImg_ on ui
 	void ShowCurrImg();
@@ -60,4 +63,5 @@ public:
 	
 	//void ShowImage_QLable();
 };
+
 

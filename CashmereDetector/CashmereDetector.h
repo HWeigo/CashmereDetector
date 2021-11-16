@@ -27,6 +27,7 @@
 #include "BaseDetector.h"
 #include "ManualDetector.h"
 #include "AutoDetector.h"
+#include "AreaDetector.h"
 
 using namespace std;
 
@@ -53,6 +54,8 @@ private:
     Ui::CashmereDetectorClass ui;
 	ManualDetector *manuDetector = nullptr;
 	AutoDetector *autoDetector = nullptr;
+	AreaDetector *areaDetector = nullptr;
+	
 
 	QTimer *fTimer; // Qt timer
 

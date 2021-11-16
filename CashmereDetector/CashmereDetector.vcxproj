@@ -88,6 +88,7 @@
     <QtRcc Include="CashmereDetector.qrc" />
     <QtUic Include="CashmereDetector.ui" />
     <QtMoc Include="CashmereDetector.h" />
+    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\AreaDetector.cpp" />
     <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\AutoDetector.cpp" />
     <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\BaseDetector.cpp" />
     <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\ManualDetector.cpp" />
@@ -95,6 +96,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\AreaDetector.h" />
     <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\AutoDetector.h" />
     <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\BaseDetector.h" />
     <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\ManualDetector.h" />
