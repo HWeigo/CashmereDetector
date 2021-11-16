@@ -113,6 +113,12 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 	PushMessage("auto detect done");
 }
 
+void CashmereDetector::on_pushButton_scalesDetect_clicked() {
+	//Mat curr = autoDetector->GetCurrImg();
+	//imshow("t", curr);
+	autoDetector->ScalesDetect();
+}
+
 void CashmereDetector::on_pushButton_saveCurr_clicked() {
 	if (manuDetector->GetCurrImgRef().empty())
 		return;

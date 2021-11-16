@@ -96,13 +96,12 @@ void AutoDetector::AutoDetect() {
 	skeletonPoints.swap(vector<Point>());
 	SkeletonDetect();
 	double timer_end = double(clock() / 1000.0);
-	cout << "auto detect time use: " << timer_mid - timer_start << " " << timer_end - timer_mid << endl;
+	cout << "auto detect time use: " << timer_end - timer_start << " s" << endl;
 }
 
 void AutoDetector::RegionDetect() {
 
 	// Local iconic variables
-
 	HObject  ho_Image11, ho_Image2, ho_Region;
 	HObject  ho_ConnectedRegions, ho_RegionFillUp, ho_SelectedRegions2;
 	HObject  ho_SelectedRegions1, ho_RegionClosing, ho_Skeleton;
@@ -215,19 +214,29 @@ Mat AutoDetector::skeletonization(Mat inputImage)
     if (inputImage.empty())
     	cout<<"Inside skeletonization, Source empty"<<endl;
 
-	cout << inputImage.type() << endl;
+	//cout << inputImage.type() << endl;
     Mat outputImage(inputImage);
 
     thinning(outputImage);
  	//imshow("thres", outputImage);
 #if 1
 	imwrite("skeletonization.bmp", outputImage);
+	Mat draw = GetCurrImg();
+	for (int u = 0; u < inputImage.cols; ++u) {
+		for (int v = 0; v < inputImage.rows; ++v) {
+			if (outputImage.at<uchar>(v, u) == 255) {
+				draw.at<Vec3b>(v, u)[2] = 255;
+			}
+		}
+	}
+	imshow("d", draw);
+	imwrite("skeletonization.bmp", draw);
 #endif   
 	return outputImage;
 }
 
 
-//#define ZHANG_SUEN_SKELETONIZATION
+#define ZHANG_SUEN_SKELETONIZATION
 #define EDGE_DILATE
 
 //#define SKELETON_IMSHOW
@@ -238,9 +247,7 @@ void AutoDetector::SkeletonDetect() {
 #endif // ZHANG_SUEN_SKELETONIZATION
 
 #ifdef EDGE_DILATE
-	
-	
-	// OpenCV dilate	
+	// --- A simpele demo implementation based onf OpenCV dilate function ---	
 	//Canny(regionImg_, edgeImg_, 100, 100);
 	//imshow("edge", edgeImg_);
 	//Mat element = getStructuringElement(MORPH_ELLIPSE, Size(3, 3)); 	
@@ -251,7 +258,7 @@ void AutoDetector::SkeletonDetect() {
 	//	dilate(edgeImg_, edgeImg_, element, Point(-1, -1), 5);
 	//}
 	//imshow("dilate", edgeImg_);
-
+	// -----------------------------------------------------------------------
 
 	Canny(regionImg_, edgeImg_, 100, 100);
 	//imshow("edge", edgeImg_);
@@ -338,6 +345,90 @@ void AutoDetector::FillNeighbor(Mat &img, Point point, int layer, vector<Point> 
 	}
 	if (expandCnt == 0)
 		skeletonPoints.emplace_back(Point(x, y));
+}
+
+void AutoDetector::ScalesDetect() {
+	// Local iconic variables
+	HObject  ho_Image11, ho_Image2, ho_Image13;
+	HObject  ho_Region, ho_ConnectedRegions, ho_RegionFillUp;
+	HObject  ho_SelectedRegions2, ho_SelectedRegions1, ho_RegionClosing;
+	HObject  ho_Contours, ho_ImageEmphasize1, ho_RegionErosion;
+	HObject  ho_ImageReduced2, ho_ImageReduced, ho_ImageMean;
+	HObject  ho_Edges, ho_Image;
+
+	// Local control variables
+	HTuple  hv_Width, hv_Height, hv_WindowHandle;
+	HTuple  hv_Channels, hv_Grayval, hv_Area, hv_Row, hv_Column;
+	HTuple  hv_Number;
+
+	HObject ho_Image1;
+	ho_Image1 = MatToHObject(GetCurrImg());
+
+	//Image Acquisition 01: Do something
+	if (HDevWindowStack::IsOpen())
+	  CloseWindow(HDevWindowStack::Pop());
+	GetImageSize(ho_Image1, &hv_Width, &hv_Height); // DONT COMMENT THIS!!!!!!
+
+	CountChannels(ho_Image1, &hv_Channels);
+	if (0 != (hv_Channels==3))
+	{
+	  Decompose3(ho_Image1, &ho_Image11, &ho_Image2, &ho_Image13);
+	}
+	GetGrayval(ho_Image13, 0, 0, &hv_Grayval);
+
+	Threshold(ho_Image13, &ho_Region, 0, hv_Grayval-1);
+
+
+	Connection(ho_Region, &ho_ConnectedRegions);
+
+
+	FillUp(ho_ConnectedRegions, &ho_RegionFillUp);
+
+	//ÐÎ×´Ñ¡Ôñ
+	SelectShape(ho_RegionFillUp, &ho_SelectedRegions2, "circularity", "and", 0, 0.1676);
+	AreaCenter(ho_SelectedRegions2, &hv_Area, &hv_Row, &hv_Column);
+	SelectShape(ho_SelectedRegions2, &ho_SelectedRegions1, "area", "and", hv_Area.TupleMax(), 
+	    9999999);
+	ClosingCircle(ho_SelectedRegions1, &ho_RegionClosing, 35);
+
+	GenContourRegionXld(ho_RegionClosing, &ho_Contours, "border");
+	CountObj(ho_RegionClosing, &hv_Number);
+
+	if (0 != (hv_Number!=1))
+	{
+	  // stop(...); only in hdevelop
+	}
+	Emphasize(ho_Image1, &ho_ImageEmphasize1, hv_Width, hv_Height, 2);
+	ErosionCircle(ho_RegionClosing, &ho_RegionErosion, 1);
+
+	ReduceDomain(ho_Image1, ho_RegionErosion, &ho_ImageReduced2);
+	ReduceDomain(ho_ImageEmphasize1, ho_RegionErosion, &ho_ImageReduced);
+	MeanImage(ho_ImageReduced, &ho_ImageMean, 1, 1);
+
+	EdgesSubPix(ho_ImageMean, &ho_Edges, "canny", 3, 25, 35);
+
+	if (HDevWindowStack::IsOpen())
+	  DispObj(ho_Image1, HDevWindowStack::GetActive());
+	if (HDevWindowStack::IsOpen())
+	  DispObj(ho_Edges, HDevWindowStack::GetActive());
+	HObject  ho_Region1, ho_BinImage;
+	GenRegionContourXld(ho_Edges, &ho_Region1, "margin");
+	RegionToBin(ho_Region1, &ho_BinImage, 255, 0, hv_Width, hv_Height);
+
+	Mat temp;
+	HObject2Mat(ho_BinImage, temp);
+
+	cout << temp.size << endl;
+	cout << temp.type() << endl;
+	Mat draw = GetCurrImg();
+	for (int u = 0; u < draw.cols; ++u) {
+		for (int v = 0; v < draw.rows; ++v) {
+			if (temp.at<uchar>(v, u) == 255) {
+				draw.at<Vec3b>(v, u)[2] = 255;
+			}
+		}
+	}
+	imshow("draw", draw);
 }
 
 double AutoDetector::GetLength() {

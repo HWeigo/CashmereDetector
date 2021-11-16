@@ -24,6 +24,7 @@ private:
 	vector<pair<int, int>> directions{\
 	{ 0, 1 }, { 0,-1 }, { 1,0 }, { -1,0 }, \
 	{ 1, 1 }, { 1,-1 }, { -1,-1 }, { -1, 1 } };
+
 public:
 	AutoDetector(Ui::CashmereDetectorClass ui);
 	~AutoDetector();
@@ -35,5 +36,6 @@ public:
 	void SkeletonDetect();
 
 	double GetLength();
+	void ScalesDetect();
 };
 

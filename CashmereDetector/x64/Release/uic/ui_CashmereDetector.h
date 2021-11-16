@@ -44,13 +44,14 @@ public:
     QPushButton *pushButton_pick;
     QPushButton *pushButton_reset;
     QPushButton *pushButton_saveCurr;
-    QFrame *line;
     QGridLayout *gridLayout;
     QPushButton *pushButton_saveLength;
     QLabel *label_lengthText;
     QLabel *label_mean;
     QLabel *label_lengthText_2;
     QLabel *label_length;
+    QFrame *line;
+    QPushButton *pushButton_scalesDetect;
     QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer;
@@ -105,13 +106,6 @@ public:
 
         verticalLayout->addWidget(pushButton_saveCurr);
 
-        line = new QFrame(verticalLayoutWidget);
-        line->setObjectName(QStringLiteral("line"));
-        line->setFrameShape(QFrame::HLine);
-        line->setFrameShadow(QFrame::Sunken);
-
-        verticalLayout->addWidget(line);
-
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
@@ -145,6 +139,18 @@ public:
         gridLayout->setColumnStretch(2, 1);
 
         verticalLayout->addLayout(gridLayout);
+
+        line = new QFrame(verticalLayoutWidget);
+        line->setObjectName(QStringLiteral("line"));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
+
+        verticalLayout->addWidget(line);
+
+        pushButton_scalesDetect = new QPushButton(verticalLayoutWidget);
+        pushButton_scalesDetect->setObjectName(QStringLiteral("pushButton_scalesDetect"));
+
+        verticalLayout->addWidget(pushButton_scalesDetect);
 
         verticalSpacer_2 = new QSpacerItem(20, 200, QSizePolicy::Minimum, QSizePolicy::Fixed);
 
@@ -222,6 +228,7 @@ public:
         label_mean->setText(QString());
         label_lengthText_2->setText(QApplication::translate("CashmereDetectorClass", "length: ", Q_NULLPTR));
         label_length->setText(QString());
+        pushButton_scalesDetect->setText(QApplication::translate("CashmereDetectorClass", "Scales Detect", Q_NULLPTR));
         label_info->setText(QApplication::translate("CashmereDetectorClass", "Info", Q_NULLPTR));
         pushButton_clear->setText(QApplication::translate("CashmereDetectorClass", "Clear", Q_NULLPTR));
         textBrowser->setHtml(QApplication::translate("CashmereDetectorClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
