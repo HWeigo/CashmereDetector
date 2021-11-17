@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -55,11 +56,17 @@ public:
     QFrame *line;
     QWidget *widget_2;
     QVBoxLayout *verticalLayout_2;
+    QPushButton *pushButton_areaSelect;
     QLabel *label;
     QWidget *widget_3;
     QHBoxLayout *horizontalLayout;
     QSlider *slider_rotate;
     QSpinBox *spin_rotate;
+    QLabel *label_2;
+    QWidget *widget_4;
+    QHBoxLayout *horizontalLayout_3;
+    QSlider *slider_selectorSize;
+    QDoubleSpinBox *spin_selectorSize;
     QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer;
@@ -88,7 +95,7 @@ public:
         widget->setGeometry(QRect(370, 10, 960, 720));
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 704));
+        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 822));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(7);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -162,6 +169,11 @@ public:
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        pushButton_areaSelect = new QPushButton(widget_2);
+        pushButton_areaSelect->setObjectName(QStringLiteral("pushButton_areaSelect"));
+
+        verticalLayout_2->addWidget(pushButton_areaSelect);
+
         label = new QLabel(widget_2);
         label->setObjectName(QStringLiteral("label"));
 
@@ -175,7 +187,7 @@ public:
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         slider_rotate = new QSlider(widget_3);
         slider_rotate->setObjectName(QStringLiteral("slider_rotate"));
-        slider_rotate->setMaximum(360);
+        slider_rotate->setMaximum(180);
         slider_rotate->setOrientation(Qt::Horizontal);
         slider_rotate->setTickPosition(QSlider::TicksAbove);
 
@@ -183,12 +195,39 @@ public:
 
         spin_rotate = new QSpinBox(widget_3);
         spin_rotate->setObjectName(QStringLiteral("spin_rotate"));
-        spin_rotate->setMaximum(360);
+        spin_rotate->setMaximum(180);
 
         horizontalLayout->addWidget(spin_rotate);
 
 
         verticalLayout_2->addWidget(widget_3);
+
+        label_2 = new QLabel(widget_2);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        verticalLayout_2->addWidget(label_2);
+
+        widget_4 = new QWidget(widget_2);
+        widget_4->setObjectName(QStringLiteral("widget_4"));
+        horizontalLayout_3 = new QHBoxLayout(widget_4);
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        slider_selectorSize = new QSlider(widget_4);
+        slider_selectorSize->setObjectName(QStringLiteral("slider_selectorSize"));
+        slider_selectorSize->setValue(53);
+        slider_selectorSize->setOrientation(Qt::Horizontal);
+        slider_selectorSize->setTickPosition(QSlider::NoTicks);
+
+        horizontalLayout_3->addWidget(slider_selectorSize);
+
+        spin_selectorSize = new QDoubleSpinBox(widget_4);
+        spin_selectorSize->setObjectName(QStringLiteral("spin_selectorSize"));
+
+        horizontalLayout_3->addWidget(spin_selectorSize);
+
+
+        verticalLayout_2->addWidget(widget_4);
 
 
         verticalLayout->addWidget(widget_2);
@@ -234,7 +273,7 @@ public:
         CashmereDetectorClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CashmereDetectorClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1355, 23));
+        menuBar->setGeometry(QRect(0, 0, 1355, 26));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         CashmereDetectorClass->setMenuBar(menuBar);
@@ -269,14 +308,16 @@ public:
         label_mean->setText(QString());
         label_lengthText_2->setText(QApplication::translate("CashmereDetectorClass", "length: ", Q_NULLPTR));
         label_length->setText(QString());
+        pushButton_areaSelect->setText(QApplication::translate("CashmereDetectorClass", "Area Select", Q_NULLPTR));
         label->setText(QApplication::translate("CashmereDetectorClass", "- Rotation -", Q_NULLPTR));
+        label_2->setText(QApplication::translate("CashmereDetectorClass", "- Selector Size -", Q_NULLPTR));
         label_info->setText(QApplication::translate("CashmereDetectorClass", "Info", Q_NULLPTR));
         pushButton_clear->setText(QApplication::translate("CashmereDetectorClass", "Clear", Q_NULLPTR));
         textBrowser->setHtml(QApplication::translate("CashmereDetectorClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'SimSun'; font-size:11.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"><br /></p></body></html>", Q_NULLPTR));
+"</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("CashmereDetectorClass", "File", Q_NULLPTR));
     } // retranslateUi
 

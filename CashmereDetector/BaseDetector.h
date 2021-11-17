@@ -26,11 +26,16 @@ class BaseDetector
 private:
 	Mat oriImg_;
 	Mat currImg_;
+
 	Ui::CashmereDetectorClass ui_;
-	string winName = "img";
 	HWND parent;
 
 protected:
+	int dispImgWidth_;
+	int dispImgHeight_;
+	int imgWidth_;
+	int imgHeight_;
+	string winName = "img";
 
 public:
 	BaseDetector(Ui::CashmereDetectorClass ui);
@@ -51,6 +56,9 @@ public:
 
 	// Reset currImg_ with currImg_
 	void ResetCurrImg();
+
+	// Return oriImg_
+	Mat GetOriImg();
 
 	// Return currImg_
 	Mat GetCurrImg();

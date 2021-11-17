@@ -11,6 +11,8 @@ BaseDetector::BaseDetector(string filePath, Ui::CashmereDetectorClass ui) : ui_(
 BaseDetector::BaseDetector(Ui::CashmereDetectorClass ui) : ui_(ui) {
 	oriImg_.release();
 	currImg_.release();
+	dispImgWidth_ = ui_.widget->width();
+	dispImgHeight_ = ui_.widget->height();
 }
 
 
@@ -49,6 +51,9 @@ void BaseDetector::LoadImg(string filepath) {
 	currImg_.release();
 	newImg.copyTo(oriImg_);
 	newImg.copyTo(currImg_);
+
+	imgWidth_ = oriImg_.cols;
+	imgHeight_ = oriImg_.rows;
 }
 
 void BaseDetector::LoadImg(Mat newImg) {
@@ -67,6 +72,11 @@ void BaseDetector::LoadCurrImg(Mat newImg) {
 void BaseDetector::ResetCurrImg() {
 	oriImg_.copyTo(currImg_);
 	ShowCurrImg();
+}
+
+Mat BaseDetector::GetOriImg()
+{
+	return oriImg_;
 }
 
 

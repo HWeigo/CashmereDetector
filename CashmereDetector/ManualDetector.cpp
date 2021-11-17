@@ -40,11 +40,11 @@ void ManualDetector::on_mouse(int event, int x, int y, int flags, void *ustc)
 }
 
 void ManualDetector::StartPickMode() {
-	setMouseCallback("img", ManualDetector::on_mouse, (void*)this);
+	setMouseCallback(winName, ManualDetector::on_mouse, (void*)this);
 }
 
 void ManualDetector::EndPickMode() {
-	setMouseCallback("img", NULL, NULL);
+	setMouseCallback(winName, NULL, NULL);
 }
 
 vector<Point>& ManualDetector::GetSelectedPoints() {

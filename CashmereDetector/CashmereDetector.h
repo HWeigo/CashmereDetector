@@ -48,6 +48,8 @@ public slots:
 	void on_pushButton_reset_clicked();
 	void on_pushButton_saveCurr_clicked();
 	void on_pushButton_scalesDetect_clicked();
+	void on_pushButton_areaSelect_clicked();
+	void on_spin_rotate_valueChanged(int val);
 	void on_timer_timeout();
 
 private:
@@ -60,4 +62,5 @@ private:
 	QTimer *fTimer; // Qt timer
 
 	bool isPickModeOn = false;
+	bool isSelectModeOn = false;
 };

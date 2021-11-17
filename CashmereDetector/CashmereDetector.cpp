@@ -22,6 +22,8 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 	fTimer->stop();
 	fTimer->setInterval(10); // unit: ms
 	connect(fTimer, SIGNAL(timeout()), this, SLOT(on_timer_timeout()));
+	connect(ui.spin_rotate, SIGNAL(valueChanged(int)), ui.slider_rotate, SLOT(setValue(int)));
+	connect(ui.slider_rotate, SIGNAL(valueChanged(int)), ui.spin_rotate, SLOT(setValue(int)));
 
 }
 
@@ -39,7 +41,7 @@ void CashmereDetector::on_timer_timeout() {
 		}
 	}
 	else {
-		//areaDetector->ShowCurrImg();
+		areaDetector->ShowCurrImg();
 	}
 
 }
@@ -65,7 +67,7 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 	manuDetector->LoadImg(filePath);
 	autoDetector->LoadImg(filePath);
 	areaDetector->LoadImg(filePath);
-	autoDetector->ShowCurrImg();
+	areaDetector->ShowCurrImg();
 
 	PushMessage("open file");
 	fTimer->start();
@@ -123,6 +125,29 @@ void CashmereDetector::on_pushButton_scalesDetect_clicked() {
 	//Mat curr = autoDetector->GetCurrImg();
 	//imshow("t", curr);
 	autoDetector->ScalesDetect();
+}
+
+void CashmereDetector::on_pushButton_areaSelect_clicked()
+{
+	if (areaDetector->GetCurrImgRef().empty())
+		return;
+
+	if (!isSelectModeOn) {
+		PushMessage("select mode on");
+		areaDetector->StartSelectMode();
+	}
+	else {
+		PushMessage("select mode off");
+		areaDetector->EndSelectMode();
+	}
+
+	isSelectModeOn = !isSelectModeOn;
+
+}
+
+void CashmereDetector::on_spin_rotate_valueChanged(int val) {
+	areaDetector->RotateImage(val);
+	areaDetector->ShowCurrImg();
 }
 
 void CashmereDetector::on_pushButton_saveCurr_clicked() {
