@@ -50,7 +50,10 @@ public slots:
 	void on_pushButton_scalesDetect_clicked();
 	void on_pushButton_areaSelect_clicked();
 	void on_spin_rotate_valueChanged(int val);
+	void on_spin_selectorSize_valueChanged(int val);
 	void on_timer_timeout();
+	void wheelEvent(QWheelEvent *event);
+	void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::CashmereDetectorClass ui;

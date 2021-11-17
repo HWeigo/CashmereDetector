@@ -16,15 +16,31 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 
 
 	ui.resetAction->setEnabled(false);
-	//ui.pushButton_autoDetect->setEnabled(false);
+	
 	// Set timer
 	fTimer = new QTimer(this);
 	fTimer->stop();
 	fTimer->setInterval(10); // unit: ms
 	connect(fTimer, SIGNAL(timeout()), this, SLOT(on_timer_timeout()));
+
+	// Set slider and spin box
 	connect(ui.spin_rotate, SIGNAL(valueChanged(int)), ui.slider_rotate, SLOT(setValue(int)));
 	connect(ui.slider_rotate, SIGNAL(valueChanged(int)), ui.spin_rotate, SLOT(setValue(int)));
-
+	ui.slider_rotate->setMinimum(-180);
+	ui.spin_rotate->setMinimum(-180);
+	ui.slider_rotate->setMaximum(180);
+	ui.spin_rotate->setMaximum(180);
+	ui.spin_rotate->setValue(0);
+	
+	connect(ui.spin_selectorSize, SIGNAL(valueChanged(int)), ui.slider_selectorSize, SLOT(setValue(int)));
+	connect(ui.slider_selectorSize, SIGNAL(valueChanged(int)), ui.spin_selectorSize, SLOT(setValue(int)));
+	ui.slider_selectorSize->setMinimum(0);
+	ui.spin_selectorSize->setMinimum(0);
+	ui.slider_selectorSize->setMaximum(60);
+	ui.spin_selectorSize->setMaximum(60);
+	//ui.slider_selectorSize->setSingleStep(5);
+	//ui.spin_selectorSize->setSingleStep(5);
+	ui.spin_selectorSize->setValue(30);
 }
 
 void CashmereDetector::on_timer_timeout() {
@@ -44,6 +60,35 @@ void CashmereDetector::on_timer_timeout() {
 		areaDetector->ShowCurrImg();
 	}
 
+}
+
+void CashmereDetector::wheelEvent(QWheelEvent * event)
+{
+	if (!isSelectModeOn)
+		return;
+	int val = ui.spin_selectorSize->value();
+	int step = 5;
+	if (event->delta() > 0) {
+		ui.spin_selectorSize->setValue(val + step);
+	}
+	else {
+		ui.spin_selectorSize->setValue(val - step);
+	}
+	areaDetector->DrawRactangle();
+}
+
+void CashmereDetector::keyPressEvent(QKeyEvent * event){
+	if (event->key() == Qt::Key_Q) {
+		int val = ui.spin_rotate->value();
+		int step = 5;
+		ui.spin_rotate->setValue(val - step);
+	}
+	else if (event->key() == Qt::Key_E) {
+		int val = ui.spin_rotate->value();
+		int step = 5;
+		ui.spin_rotate->setValue(val + step);
+
+	}
 }
 
 void CashmereDetector::on_openFileAction_triggered(bool checked)
@@ -134,6 +179,7 @@ void CashmereDetector::on_pushButton_areaSelect_clicked()
 
 	if (!isSelectModeOn) {
 		PushMessage("select mode on");
+		areaDetector->SetRectSize(ui.spin_selectorSize->value());
 		areaDetector->StartSelectMode();
 	}
 	else {
@@ -148,6 +194,10 @@ void CashmereDetector::on_pushButton_areaSelect_clicked()
 void CashmereDetector::on_spin_rotate_valueChanged(int val) {
 	areaDetector->RotateImage(val);
 	areaDetector->ShowCurrImg();
+}
+
+void CashmereDetector::on_spin_selectorSize_valueChanged(int val){
+	areaDetector->SetRectSize(val);
 }
 
 void CashmereDetector::on_pushButton_saveCurr_clicked() {

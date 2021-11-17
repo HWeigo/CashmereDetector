@@ -30,12 +30,16 @@ private:
 	Ui::CashmereDetectorClass ui_;
 	HWND parent;
 
+	vector<string> split(const string& str, const string& delim);
+
 protected:
 	int dispImgWidth_;
 	int dispImgHeight_;
 	int imgWidth_;
 	int imgHeight_;
+	float scale_;
 	string winName = "img";
+	string imgID_;
 
 public:
 	BaseDetector(Ui::CashmereDetectorClass ui);
@@ -67,7 +71,10 @@ public:
 	Mat& GetCurrImgRef();
 
 	// Save currImg_ to filepath
-	void SaveCurrImg(string filepath = "./output/curr.jpg");
+	void SaveCurrImg(string filepath = "./output/curr.jpg"); 
+
+	// Get img ID
+	string GetImgID();
 	
 	//void ShowImage_QLable();
 };

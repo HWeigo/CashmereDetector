@@ -13,7 +13,6 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -66,7 +65,7 @@ public:
     QWidget *widget_4;
     QHBoxLayout *horizontalLayout_3;
     QSlider *slider_selectorSize;
-    QDoubleSpinBox *spin_selectorSize;
+    QSpinBox *spin_selectorSize;
     QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer;
@@ -221,7 +220,7 @@ public:
 
         horizontalLayout_3->addWidget(slider_selectorSize);
 
-        spin_selectorSize = new QDoubleSpinBox(widget_4);
+        spin_selectorSize = new QSpinBox(widget_4);
         spin_selectorSize->setObjectName(QStringLiteral("spin_selectorSize"));
 
         horizontalLayout_3->addWidget(spin_selectorSize);
