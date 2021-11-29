@@ -3,6 +3,9 @@
 #include<Windows.h>
 #include <opencv2/highgui/highgui_c.h>
 
+#include <io.h>
+#include <fstream>
+
 CashmereDetector::CashmereDetector(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -91,6 +94,68 @@ void CashmereDetector::keyPressEvent(QKeyEvent * event){
 	}
 }
 
+// Helper function to sort string in natual order
+bool compareNat(const std::string& a, const std::string& b)
+{
+    if (a.empty())
+        return true;
+    if (b.empty())
+        return false;
+    if (std::isdigit(a[0]) && !std::isdigit(b[0]))
+        return true;
+    if (!std::isdigit(a[0]) && std::isdigit(b[0]))
+        return false;
+    if (!std::isdigit(a[0]) && !std::isdigit(b[0]))
+    {
+        if (std::toupper(a[0]) == std::toupper(b[0]))
+            return compareNat(a.substr(1), b.substr(1));
+        return (std::toupper(a[0]) < std::toupper(b[0]));
+    }
+
+    // Both strings begin with digit --> parse both numbers
+    std::istringstream issa(a);
+    std::istringstream issb(b);
+    int ia, ib;
+    issa >> ia;
+    issb >> ib;
+    if (ia != ib)
+        return ia < ib;
+
+    // Numbers are the same --> remove numbers and recurse
+    std::string anew, bnew;
+    std::getline(issa, anew);
+    std::getline(issb, bnew);
+    return (compareNat(anew, bnew));
+}
+
+void getFileNames(string path, vector<string>& files)
+{
+	//文件句柄
+	//注意：我发现有些文章代码此处是long类型，实测运行中会报错访问异常
+	intptr_t hFile = 0;
+	//文件信息
+	struct _finddata_t fileinfo;
+	string p;
+	if ((hFile = _findfirst(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1)
+	{
+        do
+        {            
+			//如果是目录,递归查找
+            //如果不是,把文件绝对路径存入vector中
+            if ((fileinfo.attrib & _A_SUBDIR))
+            {
+				if (strcmp(fileinfo.name, ".") != 0 && strcmp(fileinfo.name, "..") != 0)
+					getFileNames(p.assign(path).append("/").append(fileinfo.name), files);
+            }
+            else
+            {               
+				files.push_back(p.assign(path).append(fileinfo.name));
+            }
+        } while (_findnext(hFile, &fileinfo) == 0);
+        _findclose(hFile);
+	}
+}
+
 void CashmereDetector::on_openFileAction_triggered(bool checked)
 {
 	QString curPath = QDir::currentPath();
@@ -119,6 +184,28 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 	ui.resetAction->setEnabled(true);
 	ui.label_filename->setText(QString::fromStdString(areaDetector->GetImgID()));
 	
+	if (m_filepaths.empty()) {
+		string filename = BaseDetector::split(filePath, "/").back(); // "home/img/a.jpg" -> {"home", "img", "a.jpg"}
+		string root = filePath;
+		root.erase(root.end() - filename.size(), root.end());
+		cout << "root: " << root << endl;
+		getFileNames(root, m_filepaths);
+		// Natural order sort 
+		sort(m_filepaths.begin(), m_filepaths.end(), compareNat);
+
+		//for (const auto &name : m_filepaths) {
+		//	cout << name << endl;
+		//	if (name == filePath) {
+		//		cout << "HERE!!!!" << endl;
+		//	}
+		//}
+		for (int i = 0; i < m_filepaths.size(); ++i) {
+			if (filePath == m_filepaths[i]) {
+				m_currIdx = i;
+				break;
+			}
+		}
+	}
 
 	ui.spin_rotate->setValue(0);
 	ui.label_mean->setText("-");
@@ -172,6 +259,51 @@ void CashmereDetector::on_pushButton_scalesDetect_clicked() {
 	//Mat curr = autoDetector->GetCurrImg();
 	//imshow("t", curr);
 	autoDetector->ScalesDetect();
+}
+
+void CashmereDetector::on_pushButton_next_clicked() {
+	if (m_filepaths.empty())
+		return;
+	int idx = m_currIdx + 1;
+	if (idx >= m_filepaths.size())
+		return;
+	string filePath = m_filepaths[idx];
+	manuDetector->LoadImg(filePath);
+	autoDetector->LoadImg(filePath);
+	areaDetector->LoadImg(filePath);
+	areaDetector->ShowCurrImg();
+
+	PushMessage("open file");
+	fTimer->start();
+	ui.resetAction->setEnabled(true);
+	ui.label_filename->setText(QString::fromStdString(areaDetector->GetImgID()));
+	ui.spin_rotate->setValue(0);
+	ui.label_mean->setText("-");
+	ui.label_length->setText("-");
+	m_currIdx = idx;
+}
+
+void CashmereDetector::on_pushButton_back_clicked() {
+	if (m_filepaths.empty())
+		return;
+	int idx = m_currIdx - 1;
+	if (idx < 0)
+		return;
+	string filePath = m_filepaths[idx];
+	manuDetector->LoadImg(filePath);
+	autoDetector->LoadImg(filePath);
+	areaDetector->LoadImg(filePath);
+	areaDetector->ShowCurrImg();
+
+	PushMessage("open file");
+	fTimer->start();
+	ui.resetAction->setEnabled(true);
+	ui.label_filename->setText(QString::fromStdString(areaDetector->GetImgID()));
+	ui.spin_rotate->setValue(0);
+	ui.label_mean->setText("-");
+	ui.label_length->setText("-");
+	m_currIdx = idx;
+
 }
 
 void CashmereDetector::on_pushButton_areaSelect_clicked()

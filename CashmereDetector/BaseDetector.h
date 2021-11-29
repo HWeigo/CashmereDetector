@@ -30,7 +30,6 @@ private:
 	Ui::CashmereDetectorClass ui_;
 	HWND parent;
 
-	vector<string> split(const string& str, const string& delim);
 
 protected:
 	int dispImgWidth_;
@@ -76,6 +75,8 @@ public:
 	// Get img ID
 	string GetImgID();
 	
+	// For spliting filepath
+	static vector<string> split(const string& str, const string& delim);
 	//void ShowImage_QLable();
 };
 

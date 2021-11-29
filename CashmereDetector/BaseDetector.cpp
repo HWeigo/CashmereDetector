@@ -56,8 +56,8 @@ void BaseDetector::LoadImg(string filepath) {
 	imgHeight_ = oriImg_.rows;
 	scale_ = (float)ui_.widget->width() / (float)imgWidth_;
 
-	vector<string> tempId1 = split(filepath, "/"); // "home/img/a.jpg" -> {"home", "img", "a.jpg"}
-	vector<string> tempId2 = split(tempId1.back(), "."); // "a.jpg" -> {"a", "jpg"}
+	vector<string> tempId1 = BaseDetector::split(filepath, "/"); // "home/img/a.jpg" -> {"home", "img", "a.jpg"}
+	vector<string> tempId2 = BaseDetector::split(tempId1.back(), "."); // "a.jpg" -> {"a", "jpg"}
     imgID_ = tempId2.front(); // "a"
 	cout << "id: " << imgID_ << endl;
 

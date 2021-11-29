@@ -48,6 +48,8 @@ public slots:
 	void on_pushButton_reset_clicked();
 	void on_pushButton_saveCurr_clicked();
 	void on_pushButton_scalesDetect_clicked();
+	void on_pushButton_next_clicked();
+	void on_pushButton_back_clicked();
 	void on_pushButton_areaSelect_clicked();
 	void on_spin_rotate_valueChanged(int val);
 	void on_spin_selectorSize_valueChanged(int val);
@@ -66,4 +68,8 @@ private:
 
 	bool isPickModeOn = false;
 	bool isSelectModeOn = false;
+
+	vector<string> m_filepaths;
+	int m_currIdx = -1;
+
 };
