@@ -117,8 +117,10 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 	PushMessage("open file");
 	fTimer->start();
 	ui.resetAction->setEnabled(true);
+	ui.label_filename->setText(QString::fromStdString(areaDetector->GetImgID()));
+	
 
-
+	ui.spin_rotate->setValue(0);
 	ui.label_mean->setText("-");
 	ui.label_length->setText("-");
 }

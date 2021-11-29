@@ -7,11 +7,10 @@ void AreaDetector::on_mouse(int event, int x, int y, int flags, void * ustc)
 	switch (event) {
 		case EVENT_LBUTTONDOWN://按下左键
 		{
-			cout << "mouse click: " << x << " " << y << endl;
-			cout << detector->GetRectWidth() << endl;
-			cout << detector->GetRectHeight() << endl;
+			cout << "mouse click at: " << x << " " << y << endl;
 			detector->CropRectangle(mousePoint);
 			++detector->cropCnt;
+			cout << "[INFO] image crop and save" << endl;
 			break;
 		}	
 		case EVENT_MOUSEMOVE://移动鼠标
@@ -67,7 +66,7 @@ void AreaDetector::DrawRectangle(Point center, int width, int height){
 	ComputeArea(center, width, height, topleft, buttomright);
 	Mat draw(rotImg_);
 	resize(draw, draw, Size(dispImgWidth_, dispImgHeight_));
-	rectangle(draw, topleft, buttomright, Scalar(0, 255, 0));
+	rectangle(draw, topleft, buttomright, Scalar(255, 0, 0));
 	Mat &currImgRef = GetCurrImgRef();
 	draw.copyTo(currImgRef);
 
@@ -104,7 +103,7 @@ void AreaDetector::CropRectangle(string filepath, Point center)
 	//imwrite("./output/rotate.jpg", cropImg);
 	cropImg(cropRect).copyTo(cropImg);
 
-	Size outputSize((int)40 * rectScale_, 40);
+	Size outputSize((int)50 * rectScale_, 50);
 	resize(cropImg, cropImg, outputSize);
 	imwrite(filepath, cropImg);
 }

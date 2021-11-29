@@ -7,7 +7,7 @@ private:
 	Mat rotImg_;
 	int cropCnt = 0;
 
-	float rectScale_ = 2.5;
+	float rectScale_ = 2.5; // rectWidth_ / rectHeight_
 	int rectWidth_;
 	int rectHeight_;
 
