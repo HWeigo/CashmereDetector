@@ -88,18 +88,18 @@
     <QtRcc Include="CashmereDetector.qrc" />
     <QtUic Include="CashmereDetector.ui" />
     <QtMoc Include="CashmereDetector.h" />
-    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\AreaDetector.cpp" />
-    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\AutoDetector.cpp" />
-    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\BaseDetector.cpp" />
-    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\ManualDetector.cpp" />
+    <ClCompile Include="AreaDetector.cpp" />
+    <ClCompile Include="AutoDetector.cpp" />
+    <ClCompile Include="BaseDetector.cpp" />
+    <ClCompile Include="ManualDetector.cpp" />
     <ClCompile Include="CashmereDetector.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\AreaDetector.h" />
-    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\AutoDetector.h" />
-    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\BaseDetector.h" />
-    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereDetector\ManualDetector.h" />
+    <ClInclude Include="AreaDetector.h" />
+    <ClInclude Include="AutoDetector.h" />
+    <ClInclude Include="BaseDetector.h" />
+    <ClInclude Include="ManualDetector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

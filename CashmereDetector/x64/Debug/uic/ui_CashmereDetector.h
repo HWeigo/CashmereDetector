@@ -22,7 +22,9 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
@@ -44,13 +46,26 @@ public:
     QPushButton *pushButton_pick;
     QPushButton *pushButton_reset;
     QPushButton *pushButton_saveCurr;
-    QFrame *line;
     QGridLayout *gridLayout;
     QPushButton *pushButton_saveLength;
     QLabel *label_lengthText;
     QLabel *label_mean;
     QLabel *label_lengthText_2;
     QLabel *label_length;
+    QFrame *line;
+    QWidget *widget_2;
+    QVBoxLayout *verticalLayout_2;
+    QPushButton *pushButton_areaSelect;
+    QLabel *label;
+    QWidget *widget_3;
+    QHBoxLayout *horizontalLayout;
+    QSlider *slider_rotate;
+    QSpinBox *spin_rotate;
+    QLabel *label_2;
+    QWidget *widget_4;
+    QHBoxLayout *horizontalLayout_3;
+    QSlider *slider_selectorSize;
+    QSpinBox *spin_selectorSize;
     QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer;
@@ -58,6 +73,13 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QPushButton *pushButton_clear;
     QTextBrowser *textBrowser;
+    QWidget *widget_5;
+    QHBoxLayout *horizontalLayout_4;
+    QPushButton *pushButton_back;
+    QSpacerItem *horizontalSpacer_3;
+    QLabel *label_filename;
+    QSpacerItem *horizontalSpacer_4;
+    QPushButton *pushButton_next;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QToolBar *mainToolBar;
@@ -67,7 +89,7 @@ public:
     {
         if (CashmereDetectorClass->objectName().isEmpty())
             CashmereDetectorClass->setObjectName(QStringLiteral("CashmereDetectorClass"));
-        CashmereDetectorClass->resize(1312, 810);
+        CashmereDetectorClass->resize(1355, 842);
         openFileAction = new QAction(CashmereDetectorClass);
         openFileAction->setObjectName(QStringLiteral("openFileAction"));
         resetAction = new QAction(CashmereDetectorClass);
@@ -76,10 +98,10 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         widget = new QWidget(centralWidget);
         widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(320, 10, 960, 720));
+        widget->setGeometry(QRect(350, 50, 960, 720));
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 301, 721));
+        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 761));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(7);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -87,6 +109,7 @@ public:
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         pushButton_autoDetect = new QPushButton(verticalLayoutWidget);
         pushButton_autoDetect->setObjectName(QStringLiteral("pushButton_autoDetect"));
+        pushButton_autoDetect->setMinimumSize(QSize(330, 0));
 
         verticalLayout->addWidget(pushButton_autoDetect);
 
@@ -104,13 +127,6 @@ public:
         pushButton_saveCurr->setObjectName(QStringLiteral("pushButton_saveCurr"));
 
         verticalLayout->addWidget(pushButton_saveCurr);
-
-        line = new QFrame(verticalLayoutWidget);
-        line->setObjectName(QStringLiteral("line"));
-        line->setFrameShape(QFrame::HLine);
-        line->setFrameShadow(QFrame::Sunken);
-
-        verticalLayout->addWidget(line);
 
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
@@ -146,7 +162,83 @@ public:
 
         verticalLayout->addLayout(gridLayout);
 
-        verticalSpacer_2 = new QSpacerItem(20, 200, QSizePolicy::Minimum, QSizePolicy::Fixed);
+        line = new QFrame(verticalLayoutWidget);
+        line->setObjectName(QStringLiteral("line"));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
+
+        verticalLayout->addWidget(line);
+
+        widget_2 = new QWidget(verticalLayoutWidget);
+        widget_2->setObjectName(QStringLiteral("widget_2"));
+        verticalLayout_2 = new QVBoxLayout(widget_2);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        pushButton_areaSelect = new QPushButton(widget_2);
+        pushButton_areaSelect->setObjectName(QStringLiteral("pushButton_areaSelect"));
+
+        verticalLayout_2->addWidget(pushButton_areaSelect);
+
+        label = new QLabel(widget_2);
+        label->setObjectName(QStringLiteral("label"));
+
+        verticalLayout_2->addWidget(label);
+
+        widget_3 = new QWidget(widget_2);
+        widget_3->setObjectName(QStringLiteral("widget_3"));
+        horizontalLayout = new QHBoxLayout(widget_3);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        slider_rotate = new QSlider(widget_3);
+        slider_rotate->setObjectName(QStringLiteral("slider_rotate"));
+        slider_rotate->setMaximum(180);
+        slider_rotate->setOrientation(Qt::Horizontal);
+        slider_rotate->setTickPosition(QSlider::TicksAbove);
+
+        horizontalLayout->addWidget(slider_rotate);
+
+        spin_rotate = new QSpinBox(widget_3);
+        spin_rotate->setObjectName(QStringLiteral("spin_rotate"));
+        spin_rotate->setMaximum(180);
+
+        horizontalLayout->addWidget(spin_rotate);
+
+
+        verticalLayout_2->addWidget(widget_3);
+
+        label_2 = new QLabel(widget_2);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        verticalLayout_2->addWidget(label_2);
+
+        widget_4 = new QWidget(widget_2);
+        widget_4->setObjectName(QStringLiteral("widget_4"));
+        horizontalLayout_3 = new QHBoxLayout(widget_4);
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        slider_selectorSize = new QSlider(widget_4);
+        slider_selectorSize->setObjectName(QStringLiteral("slider_selectorSize"));
+        slider_selectorSize->setValue(53);
+        slider_selectorSize->setOrientation(Qt::Horizontal);
+        slider_selectorSize->setTickPosition(QSlider::NoTicks);
+
+        horizontalLayout_3->addWidget(slider_selectorSize);
+
+        spin_selectorSize = new QSpinBox(widget_4);
+        spin_selectorSize->setObjectName(QStringLiteral("spin_selectorSize"));
+
+        horizontalLayout_3->addWidget(spin_selectorSize);
+
+
+        verticalLayout_2->addWidget(widget_4);
+
+
+        verticalLayout->addWidget(widget_2);
+
+        verticalSpacer_2 = new QSpacerItem(20, 200, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer_2);
 
@@ -184,10 +276,41 @@ public:
 
         verticalLayout->addWidget(textBrowser);
 
+        widget_5 = new QWidget(centralWidget);
+        widget_5->setObjectName(QStringLiteral("widget_5"));
+        widget_5->setGeometry(QRect(350, 0, 961, 50));
+        horizontalLayout_4 = new QHBoxLayout(widget_5);
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        pushButton_back = new QPushButton(widget_5);
+        pushButton_back->setObjectName(QStringLiteral("pushButton_back"));
+
+        horizontalLayout_4->addWidget(pushButton_back);
+
+        horizontalSpacer_3 = new QSpacerItem(356, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_3);
+
+        label_filename = new QLabel(widget_5);
+        label_filename->setObjectName(QStringLiteral("label_filename"));
+        label_filename->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_4->addWidget(label_filename);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_4);
+
+        pushButton_next = new QPushButton(widget_5);
+        pushButton_next->setObjectName(QStringLiteral("pushButton_next"));
+
+        horizontalLayout_4->addWidget(pushButton_next);
+
         CashmereDetectorClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CashmereDetectorClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1312, 26));
+        menuBar->setGeometry(QRect(0, 0, 1355, 26));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         CashmereDetectorClass->setMenuBar(menuBar);
@@ -222,6 +345,9 @@ public:
         label_mean->setText(QString());
         label_lengthText_2->setText(QApplication::translate("CashmereDetectorClass", "length: ", Q_NULLPTR));
         label_length->setText(QString());
+        pushButton_areaSelect->setText(QApplication::translate("CashmereDetectorClass", "Area Select", Q_NULLPTR));
+        label->setText(QApplication::translate("CashmereDetectorClass", "- Rotation -", Q_NULLPTR));
+        label_2->setText(QApplication::translate("CashmereDetectorClass", "- Selector Size -", Q_NULLPTR));
         label_info->setText(QApplication::translate("CashmereDetectorClass", "Info", Q_NULLPTR));
         pushButton_clear->setText(QApplication::translate("CashmereDetectorClass", "Clear", Q_NULLPTR));
         textBrowser->setHtml(QApplication::translate("CashmereDetectorClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -229,6 +355,9 @@ public:
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", Q_NULLPTR));
+        pushButton_back->setText(QApplication::translate("CashmereDetectorClass", "Back", Q_NULLPTR));
+        label_filename->setText(QApplication::translate("CashmereDetectorClass", "-", Q_NULLPTR));
+        pushButton_next->setText(QApplication::translate("CashmereDetectorClass", "Next", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("CashmereDetectorClass", "File", Q_NULLPTR));
     } // retranslateUi
 
