@@ -63,7 +63,6 @@ private:
 	AutoDetector *autoDetector = nullptr;
 	AreaDetector *areaDetector = nullptr;
 	
-
 	QTimer *fTimer; // Qt timer
 
 	bool isPickModeOn = false;
