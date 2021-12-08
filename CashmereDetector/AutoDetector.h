@@ -15,6 +15,12 @@ private:
 	Mat edgeImg_;
 	Mat skeletonImg_;
 	Mat straightenImg_;
+
+	float rectScale_ = 2.5; // rectWidth_ / rectHeight_
+	int rectHeight_ = 50;
+	int rectWidth_ = rectHeight_ * rectScale_; // 125
+
+
 	vector<Point> skeletonPoints_;
 	vector<Point> skeletonPointsSort_;
 
@@ -24,8 +30,8 @@ private:
 	int levelNum_ = 5;
 
 	void FillNeighbor(Mat &img, Point point, int layer, vector<Point> &list);
-	void thinningIteration(Mat& im, int iter);
-	void thinning(Mat& im);
+	void ThinningIteration(Mat& im, int iter);
+	void Thinning(Mat& im);
 	void StraightenImg();
 	void Clear();
 
@@ -34,7 +40,7 @@ private:
 	int findNearestRs(const vector<double>& vecSX, const vector<double>& vecSY, int x, int y, const vector<double>& snew, double disThresh);
 	vector<double> polyfit(vector<Point>& srcPoints);
 	double calFunc(vector<double> funcX, double x);
-	Mat skeletonization(Mat inputImage);
+	Mat Skeletonization(Mat inputImage);
 	const vector<pair<int, int>> directions{\
 	{ 0, 1 }, { 0,-1 }, { 1,0 }, { -1,0 }, \
 	{ 1, 1 }, { 1,-1 }, { -1,-1 }, { -1, 1 } };
@@ -51,7 +57,7 @@ public:
 
 	void OutputSkeleton();
 
-
+	void CropImage();
 
 	double GetLength();
 	void ScalesDetect();

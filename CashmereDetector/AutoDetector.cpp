@@ -93,6 +93,7 @@ void AutoDetector::AutoDetect() {
 	Clear();
 	double timer_start = double(clock() / 1000.0);
 	RegionDetect();
+	imwrite("result/regionImg.bmp", regionImg_);
 	double timer_mid = double(clock() / 1000.0);
 	skeletonPoints_.swap(vector<Point>());
 	
@@ -226,7 +227,7 @@ double AutoDetector::calFunc(vector<double> funcX, double x) {
 }
 
 void AutoDetector::StraightenImg() {
-	imwrite("result/regionImg.bmp", regionImgStore_);
+	//imwrite("result/regionImg.bmp", regionImgStore_);
 	// step1: ÄâºÏÇúÏß
 	cout << "p1 start polyfit" << endl;
 	int lenLimit = skeletonPointsSort_.size();
@@ -330,8 +331,7 @@ void AutoDetector::StraightenImg() {
 		colorVecVec[tid].push_back(grayImg.at<uchar>(r, c));
 				
 		// circle(tempDrawImg, Point(c, r), 1, (0, 0, 255), 3);
-				
-		
+
 	}
 
 
@@ -358,9 +358,9 @@ void AutoDetector::StraightenImg() {
 	
 
 	cout << "end" << endl;
-	int targetHt = 50;
 	int padding = 1;
-	double ratioY = targetHt*1.f / (dMax - dMin);
+	int outputHt = rectHeight_ - padding;
+	double ratioY = outputHt*1.f / (dMax - dMin);
 	cout << "ratioY: " << ratioY << endl;
 	vector<double> newSVec, newDVec;
 	//newSVec.reserve(sVec.size());
@@ -374,9 +374,9 @@ void AutoDetector::StraightenImg() {
 		maxNewS = max(maxNewS, newSVec[i]);
 	}
 	cout << sMax << " " << sMin << " " << dMax << " " << dMin << endl;
-	int targetWd = ceil(maxNewS);
-	cout << targetHt + padding << " " << targetWd + padding << endl;
-	Mat dstImg=Mat::zeros(Size(targetWd + padding, targetHt + padding), CV_8U);
+	int outputWd = ceil(maxNewS);
+	cout << outputHt + padding << " " << outputWd + padding << endl;
+	Mat dstImg=Mat::zeros(Size(outputWd + padding, outputHt + padding), CV_8U);
 
 	for (int i = 0; i < newSVec.size(); i++) {
 		int curX = floor(newSVec[i]);
@@ -386,36 +386,36 @@ void AutoDetector::StraightenImg() {
 		//circle(dstImg, Point(curX, curY), 1, Scalar(colorVec[i]), 2);
 	}
 	imwrite("result/dstImg.bmp", dstImg);
+	dstImg.copyTo(straightenImg_);
 }
 
 void AutoDetector::Clear()
 {
 	skeletonPoints_.clear(); 
 	skeletonPointsSort_.clear();
-
-
 }
 
 // Reference: https://github.com/krishraghuram/Zhang-Suen-Skeletonization/blob/master/skeletonization.hpp
-void AutoDetector::thinningIteration(Mat& im, int iter)
+void AutoDetector::ThinningIteration(Mat& im, int iter)
 {
     Mat marker = Mat::zeros(im.size(), CV_8UC1);
 
-#pragma omp parallel for schedule(dynamic, 10)
-    for (int i = 1; i < im.rows-1; i++)
+//#pragma omp parallel for schedule(dynamic, 50)
+#pragma omp parallel for schedule(dynamic, 50)
+    for (int j = 1; j < im.rows-1; j++)
     {
-        for (int j = 1; j < im.cols-1; j++)
+        for (int i = 1; i < im.cols-1; i++)
         {
-			if (im.at<uchar>(i, j) == 0)
+			if (im.at<uchar>(j, i) == 0)
 				continue;
-            uchar p2 = im.at<uchar>(i-1, j);
-            uchar p3 = im.at<uchar>(i-1, j+1);
-            uchar p4 = im.at<uchar>(i, j+1);
-            uchar p5 = im.at<uchar>(i+1, j+1);
-            uchar p6 = im.at<uchar>(i+1, j);
-            uchar p7 = im.at<uchar>(i+1, j-1);
-            uchar p8 = im.at<uchar>(i, j-1);
-            uchar p9 = im.at<uchar>(i-1, j-1);
+            uchar p2 = im.at<uchar>(j-1, i);
+            uchar p3 = im.at<uchar>(j-1, i+1);
+            uchar p4 = im.at<uchar>(j, i+1);
+            uchar p5 = im.at<uchar>(j+1, i+1);
+            uchar p6 = im.at<uchar>(j+1, i);
+            uchar p7 = im.at<uchar>(j+1, i-1);
+            uchar p8 = im.at<uchar>(j, i-1);
+            uchar p9 = im.at<uchar>(j-1, i-1);
 
             int A  = (p2 == 0 && p3 == 1) + (p3 == 0 && p4 == 1) +
                      (p4 == 0 && p5 == 1) + (p5 == 0 && p6 == 1) +
@@ -426,34 +426,33 @@ void AutoDetector::thinningIteration(Mat& im, int iter)
             int m2 = iter == 0 ? (p4 * p6 * p8) : (p2 * p6 * p8);
 
             if (A == 1 && (B >= 2 && B <= 6) && m1 == 0 && m2 == 0)
-                marker.at<uchar>(i,j) = 1;
+                marker.at<uchar>(j,i) = 1;
         }
     }
 
     im &= ~marker;
 }
 
-void AutoDetector::thinning(Mat& im)
+void AutoDetector::Thinning(Mat& im)
 {
     im /= 255;
 
     Mat prev = Mat::zeros(im.size(), CV_8UC1);
     Mat diff;
 	int cnt = 0;
+
     do {
-        thinningIteration(im, 0);
-        thinningIteration(im, 1);
+        ThinningIteration(im, 0);
+        ThinningIteration(im, 1);
         absdiff(im, prev, diff);
         im.copyTo(prev);
 		cnt += 2;
-    }
-    while (countNonZero(diff) > 0);
-	//cout << "iter num: " << cnt << endl;
+    } while (countNonZero(diff) > 0);
     im *= 255;
 }
 
 
-Mat AutoDetector::skeletonization(Mat inputImage)
+Mat AutoDetector::Skeletonization(Mat inputImage)
 {	
     if (inputImage.empty())
     	cout<<"Inside skeletonization, Source empty"<<endl;
@@ -461,7 +460,7 @@ Mat AutoDetector::skeletonization(Mat inputImage)
     Mat outputImage;
 	inputImage.copyTo(outputImage);
 
-    thinning(outputImage);
+    Thinning(outputImage);
  	//imshow("thres", outputImage);
 #if 0
 	imwrite("result/skeletonization111.bmp", outputImage);
@@ -487,13 +486,14 @@ void AutoDetector::SkeletonDetect() {
 
 #ifdef ZHANG_SUEN_SKELETONIZATION
 	double timer_start = double(clock() / 1000.0);
-	skeletonImg_ = skeletonization(regionImg_);
+	skeletonImg_ = Skeletonization(regionImg_);
 	OutputSkeleton();
 	double timer_mid = double(clock() / 1000.0);
 	StraightenImg();
 	double timer_end = double(clock() / 1000.0);
 	cout << "Skeletonization time use: " << timer_mid - timer_start << " s" << endl;
 	cout << "OutputSkeleton time use: " << timer_end - timer_mid << " s" << endl;
+	CropImage();
 #endif // ZHANG_SUEN_SKELETONIZATION
 
 #ifdef EDGE_DILATE
@@ -669,6 +669,27 @@ void AutoDetector::OutputSkeleton()
 	/*for (Point2i &p : skeletonPointsSort_) {
 		cout << p.y << "," << p.x << endl;
 	}*/
+}
+
+void AutoDetector::CropImage() {
+	int straightenWidth = straightenImg_.cols;
+	
+	int x = 0;
+	int step = 75;
+	int cropCnt = 0;
+	while (x + rectWidth_ < straightenWidth) {
+		Point topleft(x, 0);
+		Point buttomright(x + rectWidth_, rectHeight_);
+		Rect cropRect(topleft, buttomright);
+		Mat cropImg(straightenImg_);
+		cropImg(cropRect).copyTo(cropImg);
+		
+		string filepath = "./output/" + imgID_ + "_auto_" + to_string(cropCnt) + ".jpg";
+		imwrite(filepath, cropImg);
+		
+		x += step;
+		++cropCnt;
+	}
 }
 
 void AutoDetector::FillNeighbor(Mat &img, Point point, int layer, vector<Point> &list) {
