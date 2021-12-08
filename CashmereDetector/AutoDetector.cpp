@@ -159,61 +159,6 @@ void AutoDetector::RegionDetect() {
 	regionImg_.copyTo(regionImgStore_);
 }
 
-// Reference: https://github.com/krishraghuram/Zhang-Suen-Skeletonization/blob/master/skeletonization.hpp
-void AutoDetector::thinningIteration(Mat& im, int iter)
-{
-    Mat marker = Mat::zeros(im.size(), CV_8UC1);
-
-    for (int i = 1; i < im.rows-1; i++)
-    {
-        for (int j = 1; j < im.cols-1; j++)
-        {
-			if (im.at<uchar>(i, j) == 0)
-				continue;
-            uchar p2 = im.at<uchar>(i-1, j);
-            uchar p3 = im.at<uchar>(i-1, j+1);
-            uchar p4 = im.at<uchar>(i, j+1);
-            uchar p5 = im.at<uchar>(i+1, j+1);
-            uchar p6 = im.at<uchar>(i+1, j);
-            uchar p7 = im.at<uchar>(i+1, j-1);
-            uchar p8 = im.at<uchar>(i, j-1);
-            uchar p9 = im.at<uchar>(i-1, j-1);
-
-            int A  = (p2 == 0 && p3 == 1) + (p3 == 0 && p4 == 1) +
-                     (p4 == 0 && p5 == 1) + (p5 == 0 && p6 == 1) +
-                     (p6 == 0 && p7 == 1) + (p7 == 0 && p8 == 1) +
-                     (p8 == 0 && p9 == 1) + (p9 == 0 && p2 == 1);
-            int B  = p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9;
-            int m1 = iter == 0 ? (p2 * p4 * p6) : (p2 * p4 * p8);
-            int m2 = iter == 0 ? (p4 * p6 * p8) : (p2 * p6 * p8);
-
-            if (A == 1 && (B >= 2 && B <= 6) && m1 == 0 && m2 == 0)
-                marker.at<uchar>(i,j) = 1;
-        }
-    }
-
-    im &= ~marker;
-}
-
-void AutoDetector::thinning(Mat& im)
-{
-    im /= 255;
-
-    Mat prev = Mat::zeros(im.size(), CV_8UC1);
-    Mat diff;
-	int cnt = 0;
-    do {
-        thinningIteration(im, 0);
-        thinningIteration(im, 1);
-        absdiff(im, prev, diff);
-        im.copyTo(prev);
-		cnt += 2;
-    }
-    while (countNonZero(diff) > 0);
-	cout << "iter num: " << cnt << endl;
-    im *= 255;
-}
-
 void AutoDetector::cartesianToFrenet1D(double rs, double rx, double ry, double rtheta, int x, int y, double& dstS, double& dstD) {
 	double dx = x - rx;
 	double dy = y - ry;
@@ -280,8 +225,8 @@ double AutoDetector::calFunc(vector<double> funcX, double x) {
 	return res;
 }
 
-void AutoDetector::straightenImg() {
-	//imwrite("result/regionImg222.bmp", regionImgStore_);
+void AutoDetector::StraightenImg() {
+	imwrite("result/regionImg.bmp", regionImgStore_);
 	// step1: 拟合曲线
 	cout << "p1 start polyfit" << endl;
 	int lenLimit = skeletonPointsSort_.size();
@@ -451,6 +396,63 @@ void AutoDetector::Clear()
 
 }
 
+// Reference: https://github.com/krishraghuram/Zhang-Suen-Skeletonization/blob/master/skeletonization.hpp
+void AutoDetector::thinningIteration(Mat& im, int iter)
+{
+    Mat marker = Mat::zeros(im.size(), CV_8UC1);
+
+#pragma omp parallel for schedule(dynamic, 10)
+    for (int i = 1; i < im.rows-1; i++)
+    {
+        for (int j = 1; j < im.cols-1; j++)
+        {
+			if (im.at<uchar>(i, j) == 0)
+				continue;
+            uchar p2 = im.at<uchar>(i-1, j);
+            uchar p3 = im.at<uchar>(i-1, j+1);
+            uchar p4 = im.at<uchar>(i, j+1);
+            uchar p5 = im.at<uchar>(i+1, j+1);
+            uchar p6 = im.at<uchar>(i+1, j);
+            uchar p7 = im.at<uchar>(i+1, j-1);
+            uchar p8 = im.at<uchar>(i, j-1);
+            uchar p9 = im.at<uchar>(i-1, j-1);
+
+            int A  = (p2 == 0 && p3 == 1) + (p3 == 0 && p4 == 1) +
+                     (p4 == 0 && p5 == 1) + (p5 == 0 && p6 == 1) +
+                     (p6 == 0 && p7 == 1) + (p7 == 0 && p8 == 1) +
+                     (p8 == 0 && p9 == 1) + (p9 == 0 && p2 == 1);
+            int B  = p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9;
+            int m1 = iter == 0 ? (p2 * p4 * p6) : (p2 * p4 * p8);
+            int m2 = iter == 0 ? (p4 * p6 * p8) : (p2 * p6 * p8);
+
+            if (A == 1 && (B >= 2 && B <= 6) && m1 == 0 && m2 == 0)
+                marker.at<uchar>(i,j) = 1;
+        }
+    }
+
+    im &= ~marker;
+}
+
+void AutoDetector::thinning(Mat& im)
+{
+    im /= 255;
+
+    Mat prev = Mat::zeros(im.size(), CV_8UC1);
+    Mat diff;
+	int cnt = 0;
+    do {
+        thinningIteration(im, 0);
+        thinningIteration(im, 1);
+        absdiff(im, prev, diff);
+        im.copyTo(prev);
+		cnt += 2;
+    }
+    while (countNonZero(diff) > 0);
+	//cout << "iter num: " << cnt << endl;
+    im *= 255;
+}
+
+
 Mat AutoDetector::skeletonization(Mat inputImage)
 {	
     if (inputImage.empty())
@@ -461,7 +463,7 @@ Mat AutoDetector::skeletonization(Mat inputImage)
 
     thinning(outputImage);
  	//imshow("thres", outputImage);
-#if 1
+#if 0
 	imwrite("result/skeletonization111.bmp", outputImage);
 	Mat draw = GetCurrImg();
 	for (int u = 0; u < inputImage.cols; ++u) {
@@ -484,11 +486,14 @@ Mat AutoDetector::skeletonization(Mat inputImage)
 void AutoDetector::SkeletonDetect() {
 
 #ifdef ZHANG_SUEN_SKELETONIZATION
-	skeletonImg_ = skeletonization(regionImg_);
 	double timer_start = double(clock() / 1000.0);
+	skeletonImg_ = skeletonization(regionImg_);
 	OutputSkeleton();
+	double timer_mid = double(clock() / 1000.0);
+	StraightenImg();
 	double timer_end = double(clock() / 1000.0);
-	cout << "OutputSkeleton time use: " << timer_end - timer_start << " s" << endl;
+	cout << "Skeletonization time use: " << timer_mid - timer_start << " s" << endl;
+	cout << "OutputSkeleton time use: " << timer_end - timer_mid << " s" << endl;
 #endif // ZHANG_SUEN_SKELETONIZATION
 
 #ifdef EDGE_DILATE
@@ -601,8 +606,6 @@ vector<double> AutoDetector::polyfit(vector<Point>& srcPoints)
 
 void AutoDetector::OutputSkeleton()
 {
-	
-
 	Point2i pointStart;
 	rows_ = skeletonImg_.rows;
 	cols_ = skeletonImg_.cols;
@@ -662,7 +665,6 @@ void AutoDetector::OutputSkeleton()
 	}
 	cout << "start output" << endl;
 	
-	straightenImg();
 	// 打印坐标
 	/*for (Point2i &p : skeletonPointsSort_) {
 		cout << p.y << "," << p.x << endl;

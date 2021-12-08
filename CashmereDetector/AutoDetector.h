@@ -26,7 +26,7 @@ private:
 	void FillNeighbor(Mat &img, Point point, int layer, vector<Point> &list);
 	void thinningIteration(Mat& im, int iter);
 	void thinning(Mat& im);
-	void straightenImg();
+	void StraightenImg();
 	void Clear();
 
 	void cartesianToFrenet1D(double rs, double rx, double ry, double rtheta, int x, int y, double& dstS, double& dstD);
