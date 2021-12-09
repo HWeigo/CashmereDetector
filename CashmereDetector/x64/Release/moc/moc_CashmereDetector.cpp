@@ -20,9 +20,75 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+struct qt_meta_stringdata_WorkerThread_t {
+    QByteArrayData data[1];
+    char stringdata0[13];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_WorkerThread_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_WorkerThread_t qt_meta_stringdata_WorkerThread = {
+    {
+QT_MOC_LITERAL(0, 0, 12) // "WorkerThread"
+
+    },
+    "WorkerThread"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_WorkerThread[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void WorkerThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+const QMetaObject WorkerThread::staticMetaObject = {
+    { &QThread::staticMetaObject, qt_meta_stringdata_WorkerThread.data,
+      qt_meta_data_WorkerThread,  qt_static_metacall, nullptr, nullptr}
+};
+
+
+const QMetaObject *WorkerThread::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *WorkerThread::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_WorkerThread.stringdata0))
+        return static_cast<void*>(this);
+    return QThread::qt_metacast(_clname);
+}
+
+int WorkerThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QThread::qt_metacall(_c, _id, _a);
+    return _id;
+}
 struct qt_meta_stringdata_CashmereDetector_t {
-    QByteArrayData data[21];
-    char stringdata0[433];
+    QByteArrayData data[24];
+    char stringdata0[526];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,16 +108,19 @@ QT_MOC_LITERAL(7, 142, 30), // "on_pushButton_saveCurr_clicked"
 QT_MOC_LITERAL(8, 173, 34), // "on_pushButton_scalesDetect_cl..."
 QT_MOC_LITERAL(9, 208, 26), // "on_pushButton_next_clicked"
 QT_MOC_LITERAL(10, 235, 26), // "on_pushButton_back_clicked"
-QT_MOC_LITERAL(11, 262, 32), // "on_pushButton_areaSelect_clicked"
-QT_MOC_LITERAL(12, 295, 27), // "on_spin_rotate_valueChanged"
-QT_MOC_LITERAL(13, 323, 3), // "val"
-QT_MOC_LITERAL(14, 327, 33), // "on_spin_selectorSize_valueCha..."
-QT_MOC_LITERAL(15, 361, 16), // "on_timer_timeout"
-QT_MOC_LITERAL(16, 378, 10), // "wheelEvent"
-QT_MOC_LITERAL(17, 389, 12), // "QWheelEvent*"
-QT_MOC_LITERAL(18, 402, 5), // "event"
-QT_MOC_LITERAL(19, 408, 13), // "keyPressEvent"
-QT_MOC_LITERAL(20, 422, 10) // "QKeyEvent*"
+QT_MOC_LITERAL(11, 262, 30), // "on_pushButton_autoNext_clicked"
+QT_MOC_LITERAL(12, 293, 30), // "on_pushButton_autoBack_clicked"
+QT_MOC_LITERAL(13, 324, 30), // "on_pushButton_autoStop_clicked"
+QT_MOC_LITERAL(14, 355, 32), // "on_pushButton_areaSelect_clicked"
+QT_MOC_LITERAL(15, 388, 27), // "on_spin_rotate_valueChanged"
+QT_MOC_LITERAL(16, 416, 3), // "val"
+QT_MOC_LITERAL(17, 420, 33), // "on_spin_selectorSize_valueCha..."
+QT_MOC_LITERAL(18, 454, 16), // "on_timer_timeout"
+QT_MOC_LITERAL(19, 471, 10), // "wheelEvent"
+QT_MOC_LITERAL(20, 482, 12), // "QWheelEvent*"
+QT_MOC_LITERAL(21, 495, 5), // "event"
+QT_MOC_LITERAL(22, 501, 13), // "keyPressEvent"
+QT_MOC_LITERAL(23, 515, 10) // "QKeyEvent*"
 
     },
     "CashmereDetector\0on_openFileAction_triggered\0"
@@ -62,6 +131,9 @@ QT_MOC_LITERAL(20, 422, 10) // "QKeyEvent*"
     "on_pushButton_scalesDetect_clicked\0"
     "on_pushButton_next_clicked\0"
     "on_pushButton_back_clicked\0"
+    "on_pushButton_autoNext_clicked\0"
+    "on_pushButton_autoBack_clicked\0"
+    "on_pushButton_autoStop_clicked\0"
     "on_pushButton_areaSelect_clicked\0"
     "on_spin_rotate_valueChanged\0val\0"
     "on_spin_selectorSize_valueChanged\0"
@@ -76,7 +148,7 @@ static const uint qt_meta_data_CashmereDetector[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -84,20 +156,23 @@ static const uint qt_meta_data_CashmereDetector[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   84,    2, 0x0a /* Public */,
-       4,    0,   87,    2, 0x0a /* Public */,
-       5,    0,   88,    2, 0x0a /* Public */,
-       6,    0,   89,    2, 0x0a /* Public */,
-       7,    0,   90,    2, 0x0a /* Public */,
-       8,    0,   91,    2, 0x0a /* Public */,
-       9,    0,   92,    2, 0x0a /* Public */,
-      10,    0,   93,    2, 0x0a /* Public */,
-      11,    0,   94,    2, 0x0a /* Public */,
-      12,    1,   95,    2, 0x0a /* Public */,
-      14,    1,   98,    2, 0x0a /* Public */,
-      15,    0,  101,    2, 0x0a /* Public */,
-      16,    1,  102,    2, 0x0a /* Public */,
-      19,    1,  105,    2, 0x0a /* Public */,
+       1,    1,   99,    2, 0x0a /* Public */,
+       4,    0,  102,    2, 0x0a /* Public */,
+       5,    0,  103,    2, 0x0a /* Public */,
+       6,    0,  104,    2, 0x0a /* Public */,
+       7,    0,  105,    2, 0x0a /* Public */,
+       8,    0,  106,    2, 0x0a /* Public */,
+       9,    0,  107,    2, 0x0a /* Public */,
+      10,    0,  108,    2, 0x0a /* Public */,
+      11,    0,  109,    2, 0x0a /* Public */,
+      12,    0,  110,    2, 0x0a /* Public */,
+      13,    0,  111,    2, 0x0a /* Public */,
+      14,    0,  112,    2, 0x0a /* Public */,
+      15,    1,  113,    2, 0x0a /* Public */,
+      17,    1,  116,    2, 0x0a /* Public */,
+      18,    0,  119,    2, 0x0a /* Public */,
+      19,    1,  120,    2, 0x0a /* Public */,
+      22,    1,  123,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Bool,    3,
@@ -109,11 +184,14 @@ static const uint qt_meta_data_CashmereDetector[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   13,
-    QMetaType::Void, QMetaType::Int,   13,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 17,   18,
-    QMetaType::Void, 0x80000000 | 20,   18,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   16,
+    QMetaType::Void, QMetaType::Int,   16,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 20,   21,
+    QMetaType::Void, 0x80000000 | 23,   21,
 
        0        // eod
 };
@@ -132,12 +210,15 @@ void CashmereDetector::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 5: _t->on_pushButton_scalesDetect_clicked(); break;
         case 6: _t->on_pushButton_next_clicked(); break;
         case 7: _t->on_pushButton_back_clicked(); break;
-        case 8: _t->on_pushButton_areaSelect_clicked(); break;
-        case 9: _t->on_spin_rotate_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 10: _t->on_spin_selectorSize_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->on_timer_timeout(); break;
-        case 12: _t->wheelEvent((*reinterpret_cast< QWheelEvent*(*)>(_a[1]))); break;
-        case 13: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
+        case 8: _t->on_pushButton_autoNext_clicked(); break;
+        case 9: _t->on_pushButton_autoBack_clicked(); break;
+        case 10: _t->on_pushButton_autoStop_clicked(); break;
+        case 11: _t->on_pushButton_areaSelect_clicked(); break;
+        case 12: _t->on_spin_rotate_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: _t->on_spin_selectorSize_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->on_timer_timeout(); break;
+        case 15: _t->wheelEvent((*reinterpret_cast< QWheelEvent*(*)>(_a[1]))); break;
+        case 16: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -168,13 +249,13 @@ int CashmereDetector::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 17)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 14;
+        _id -= 17;
     }
     return _id;
 }

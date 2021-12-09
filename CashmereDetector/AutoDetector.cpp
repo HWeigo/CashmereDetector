@@ -462,8 +462,7 @@ Mat AutoDetector::Skeletonization(Mat inputImage)
 
     Thinning(outputImage);
  	//imshow("thres", outputImage);
-#if 0
-	imwrite("result/skeletonization111.bmp", outputImage);
+#if 1
 	Mat draw = GetCurrImg();
 	for (int u = 0; u < inputImage.cols; ++u) {
 		for (int v = 0; v < inputImage.rows; ++v) {
@@ -473,7 +472,7 @@ Mat AutoDetector::Skeletonization(Mat inputImage)
 			}
 		}
 	}
-	imwrite("result/skeletonization222.bmp", draw);
+	imwrite("result/skeletonization.bmp", draw);
 #endif   
 	return outputImage;
 }

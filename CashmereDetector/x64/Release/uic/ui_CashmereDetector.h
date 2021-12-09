@@ -76,10 +76,13 @@ public:
     QWidget *widget_5;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *pushButton_back;
+    QPushButton *pushButton_autoBack;
     QSpacerItem *horizontalSpacer_3;
-    QLabel *label_filename;
+    QPushButton *pushButton_autoStop;
     QSpacerItem *horizontalSpacer_4;
+    QPushButton *pushButton_autoNext;
     QPushButton *pushButton_next;
+    QLabel *label_filename;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QToolBar *mainToolBar;
@@ -89,7 +92,7 @@ public:
     {
         if (CashmereDetectorClass->objectName().isEmpty())
             CashmereDetectorClass->setObjectName(QStringLiteral("CashmereDetectorClass"));
-        CashmereDetectorClass->resize(1355, 842);
+        CashmereDetectorClass->resize(1355, 856);
         openFileAction = new QAction(CashmereDetectorClass);
         openFileAction->setObjectName(QStringLiteral("openFileAction"));
         resetAction = new QAction(CashmereDetectorClass);
@@ -101,7 +104,7 @@ public:
         widget->setGeometry(QRect(350, 50, 960, 720));
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 761));
+        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 781));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(7);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -288,25 +291,38 @@ public:
 
         horizontalLayout_4->addWidget(pushButton_back);
 
-        horizontalSpacer_3 = new QSpacerItem(356, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        pushButton_autoBack = new QPushButton(widget_5);
+        pushButton_autoBack->setObjectName(QStringLiteral("pushButton_autoBack"));
+
+        horizontalLayout_4->addWidget(pushButton_autoBack);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_4->addItem(horizontalSpacer_3);
 
-        label_filename = new QLabel(widget_5);
-        label_filename->setObjectName(QStringLiteral("label_filename"));
-        label_filename->setAlignment(Qt::AlignCenter);
+        pushButton_autoStop = new QPushButton(widget_5);
+        pushButton_autoStop->setObjectName(QStringLiteral("pushButton_autoStop"));
 
-        horizontalLayout_4->addWidget(label_filename);
+        horizontalLayout_4->addWidget(pushButton_autoStop);
 
         horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_4->addItem(horizontalSpacer_4);
+
+        pushButton_autoNext = new QPushButton(widget_5);
+        pushButton_autoNext->setObjectName(QStringLiteral("pushButton_autoNext"));
+
+        horizontalLayout_4->addWidget(pushButton_autoNext);
 
         pushButton_next = new QPushButton(widget_5);
         pushButton_next->setObjectName(QStringLiteral("pushButton_next"));
 
         horizontalLayout_4->addWidget(pushButton_next);
 
+        label_filename = new QLabel(centralWidget);
+        label_filename->setObjectName(QStringLiteral("label_filename"));
+        label_filename->setGeometry(QRect(790, 770, 111, 28));
+        label_filename->setAlignment(Qt::AlignCenter);
         CashmereDetectorClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CashmereDetectorClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -353,11 +369,14 @@ public:
         textBrowser->setHtml(QApplication::translate("CashmereDetectorClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", Q_NULLPTR));
+"</style></head><body style=\" font-family:'SimSun'; font-size:7.2pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"><br /></p></body></html>", Q_NULLPTR));
         pushButton_back->setText(QApplication::translate("CashmereDetectorClass", "Back", Q_NULLPTR));
-        label_filename->setText(QApplication::translate("CashmereDetectorClass", "-", Q_NULLPTR));
+        pushButton_autoBack->setText(QApplication::translate("CashmereDetectorClass", "Auto Back", Q_NULLPTR));
+        pushButton_autoStop->setText(QApplication::translate("CashmereDetectorClass", "Stop", Q_NULLPTR));
+        pushButton_autoNext->setText(QApplication::translate("CashmereDetectorClass", "Auto Next", Q_NULLPTR));
         pushButton_next->setText(QApplication::translate("CashmereDetectorClass", "Next", Q_NULLPTR));
+        label_filename->setText(QApplication::translate("CashmereDetectorClass", "-", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("CashmereDetectorClass", "File", Q_NULLPTR));
     } // retranslateUi
 

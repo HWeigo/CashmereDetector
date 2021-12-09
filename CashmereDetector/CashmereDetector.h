@@ -18,6 +18,8 @@
 #include <QMessageBox>
 #include <QComboBox>
 #include <QTimer>
+#include <QThread>
+#include <QMutex>
 
 #include <iostream>
 
@@ -30,6 +32,21 @@
 #include "AreaDetector.h"
 
 using namespace std;
+
+class WorkerThread : public QThread
+{
+    Q_OBJECT
+public:
+    WorkerThread(int num);
+private:
+    bool threadStop;
+    int number;
+    QMutex mutex;
+public:
+    void stop();
+protected:
+    void run();
+};
 
 class CashmereDetector : public QMainWindow
 {
@@ -50,6 +67,9 @@ public slots:
 	void on_pushButton_scalesDetect_clicked();
 	void on_pushButton_next_clicked();
 	void on_pushButton_back_clicked();
+	void on_pushButton_autoNext_clicked();
+	void on_pushButton_autoBack_clicked();
+	void on_pushButton_autoStop_clicked();
 	void on_pushButton_areaSelect_clicked();
 	void on_spin_rotate_valueChanged(int val);
 	void on_spin_selectorSize_valueChanged(int val);
@@ -59,16 +79,17 @@ public slots:
 
 private:
     Ui::CashmereDetectorClass ui;
-	ManualDetector *manuDetector = nullptr;
-	AutoDetector *autoDetector = nullptr;
-	AreaDetector *areaDetector = nullptr;
+	ManualDetector *manuDetector_ = nullptr;
+	AutoDetector *autoDetector_ = nullptr;
+	AreaDetector *areaDetector_ = nullptr;
 	
 	QTimer *fTimer; // Qt timer
 
-	bool isPickModeOn = false;
-	bool isSelectModeOn = false;
+	bool isPickModeOn_ = false;
+	bool isSelectModeOn_ = false;
+	bool isAutoDetecting_ = false;
 
-	vector<string> m_filepaths;
-	int m_currIdx = -1;
+	vector<string> filepaths_;
+	int currIdx_ = -1;
 
 };

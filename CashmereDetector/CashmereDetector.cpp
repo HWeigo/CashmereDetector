@@ -13,9 +13,9 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 
 	connect(ui.pushButton_clear, SIGNAL(clicked()), ui.textBrowser, SLOT(clear()));
 
-	manuDetector = new ManualDetector(ui);
-	autoDetector = new AutoDetector(ui);
-	areaDetector = new AreaDetector(ui);
+	manuDetector_ = new ManualDetector(ui);
+	autoDetector_ = new AutoDetector(ui);
+	areaDetector_ = new AreaDetector(ui);
 
 
 	ui.resetAction->setEnabled(false);
@@ -47,27 +47,26 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 }
 
 void CashmereDetector::on_timer_timeout() {
-	if (isPickModeOn) {
-		manuDetector->ShowCurrImg();
+	if (isPickModeOn_) {
+		manuDetector_->ShowCurrImg();
 		
-		double length = manuDetector->CalcMeanLength();
+		double length = manuDetector_->CalcMeanLength();
 		//ui.label_mean->setText("-");
 		//ui.label_length->setText("-");
 		
-		if (manuDetector->GetLengthNum() > 0 && isPickModeOn) {
-			ui.label_mean->setText(QString::number(manuDetector->GetMeanLength()));
-			ui.label_length->setText(QString::number(manuDetector->GetCurrLength()));
+		if (manuDetector_->GetLengthNum() > 0 && isPickModeOn_) {
+			ui.label_mean->setText(QString::number(manuDetector_->GetMeanLength()));
+			ui.label_length->setText(QString::number(manuDetector_->GetCurrLength()));
 		}
-	}
-	else {
-		areaDetector->ShowCurrImg();
+	} else {
+		areaDetector_->ShowCurrImg();
 	}
 
 }
 
 void CashmereDetector::wheelEvent(QWheelEvent * event)
 {
-	if (!isSelectModeOn)
+	if (!isSelectModeOn_)
 		return;
 	int val = ui.spin_selectorSize->value();
 	int step = 5;
@@ -77,7 +76,7 @@ void CashmereDetector::wheelEvent(QWheelEvent * event)
 	else {
 		ui.spin_selectorSize->setValue(val - step);
 	}
-	areaDetector->DrawRactangle();
+	areaDetector_->DrawRactangle();
 }
 
 void CashmereDetector::keyPressEvent(QKeyEvent * event){
@@ -174,24 +173,24 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 
 	cout << filePath << endl;
 
-	manuDetector->LoadImg(filePath);
-	autoDetector->LoadImg(filePath);
-	areaDetector->LoadImg(filePath);
-	areaDetector->ShowCurrImg();
+	manuDetector_->LoadImg(filePath);
+	autoDetector_->LoadImg(filePath);
+	areaDetector_->LoadImg(filePath);
+	areaDetector_->ShowCurrImg();
 
 	PushMessage("open file");
 	fTimer->start();
 	ui.resetAction->setEnabled(true);
-	ui.label_filename->setText(QString::fromStdString(areaDetector->GetImgID()));
+	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
 	
-	if (m_filepaths.empty()) {
+	if (filepaths_.empty()) {
 		string filename = BaseDetector::split(filePath, "/").back(); // "home/img/a.jpg" -> {"home", "img", "a.jpg"}
 		string root = filePath;
 		root.erase(root.end() - filename.size(), root.end());
 		cout << "root: " << root << endl;
-		getFileNames(root, m_filepaths);
+		getFileNames(root, filepaths_);
 		// Natural order sort 
-		sort(m_filepaths.begin(), m_filepaths.end(), compareNat);
+		sort(filepaths_.begin(), filepaths_.end(), compareNat);
 
 		//for (const auto &name : m_filepaths) {
 		//	cout << name << endl;
@@ -199,9 +198,9 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 		//		cout << "HERE!!!!" << endl;
 		//	}
 		//}
-		for (int i = 0; i < m_filepaths.size(); ++i) {
-			if (filePath == m_filepaths[i]) {
-				m_currIdx = i;
+		for (int i = 0; i < filepaths_.size(); ++i) {
+			if (filePath == filepaths_[i]) {
+				currIdx_ = i;
 				break;
 			}
 		}
@@ -213,44 +212,43 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 }
 
 void CashmereDetector::on_pushButton_reset_clicked() {
-	if (manuDetector->GetCurrImgRef().empty())
+	if (manuDetector_->GetCurrImgRef().empty())
 		return;
-	if (isPickModeOn) {
-		manuDetector->ResetManualDetector();
+	if (isPickModeOn_) {
+		manuDetector_->ResetManualDetector();
 		return;
 	}
-	manuDetector->ResetCurrImg();
+	manuDetector_->ResetCurrImg();
 }
 
 void CashmereDetector::on_pushButton_pick_clicked() {
-	if (manuDetector->GetCurrImgRef().empty())
+	if (manuDetector_->GetCurrImgRef().empty())
 		return;
 
-	if (!isPickModeOn) {
+	if (!isPickModeOn_) {
 		PushMessage("pick mode on");
-		manuDetector->StartPickMode();
+		manuDetector_->StartPickMode();
 	}
 	else {
 		PushMessage("pick mode off");
-		manuDetector->EndPickMode();
+		manuDetector_->EndPickMode();
 	}
 
-	isPickModeOn = !isPickModeOn;
+	isPickModeOn_ = !isPickModeOn_;
 }
 
-
 void CashmereDetector::on_pushButton_autoDetect_clicked() {
-	if (autoDetector->GetCurrImgRef().empty())
+	if (autoDetector_->GetCurrImgRef().empty())
 		return;
 
-	if (isPickModeOn) {
-		manuDetector->EndPickMode();
-		isPickModeOn = false;
+	if (isPickModeOn_) {
+		manuDetector_->EndPickMode();
+		isPickModeOn_ = false;
 	}
-	autoDetector->AutoDetect();
+	autoDetector_->AutoDetect();
 
 	ui.label_length->setText("-");
-	ui.label_mean->setText(QString::number(autoDetector->GetLength()));
+	ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
 	
 	PushMessage("auto detect done");
 }
@@ -258,86 +256,130 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 void CashmereDetector::on_pushButton_scalesDetect_clicked() {
 	//Mat curr = autoDetector->GetCurrImg();
 	//imshow("t", curr);
-	autoDetector->ScalesDetect();
+	autoDetector_->ScalesDetect();
 }
 
 void CashmereDetector::on_pushButton_next_clicked() {
-	if (m_filepaths.empty())
+	if (filepaths_.empty())
 		return;
-	int idx = m_currIdx + 1;
-	if (idx >= m_filepaths.size())
+	int idx = currIdx_ + 1;
+	if (idx >= filepaths_.size())
 		return;
-	string filePath = m_filepaths[idx];
-	manuDetector->LoadImg(filePath);
-	autoDetector->LoadImg(filePath);
-	areaDetector->LoadImg(filePath);
-	areaDetector->ShowCurrImg();
+	string filePath = filepaths_[idx];
+	manuDetector_->LoadImg(filePath);
+	autoDetector_->LoadImg(filePath);
+	areaDetector_->LoadImg(filePath);
+	areaDetector_->ShowCurrImg();
 
 	PushMessage("open file");
 	fTimer->start();
 	ui.resetAction->setEnabled(true);
-	ui.label_filename->setText(QString::fromStdString(areaDetector->GetImgID()));
+	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
 	ui.spin_rotate->setValue(0);
 	ui.label_mean->setText("-");
 	ui.label_length->setText("-");
-	m_currIdx = idx;
+	currIdx_ = idx;
 }
 
 void CashmereDetector::on_pushButton_back_clicked() {
-	if (m_filepaths.empty())
+	if (filepaths_.empty())
 		return;
-	int idx = m_currIdx - 1;
+	int idx = currIdx_ - 1;
 	if (idx < 0)
 		return;
-	string filePath = m_filepaths[idx];
-	manuDetector->LoadImg(filePath);
-	autoDetector->LoadImg(filePath);
-	areaDetector->LoadImg(filePath);
-	areaDetector->ShowCurrImg();
+	string filePath = filepaths_[idx];
+	manuDetector_->LoadImg(filePath);
+	autoDetector_->LoadImg(filePath);
+	areaDetector_->LoadImg(filePath);
+	areaDetector_->ShowCurrImg();
 
 	PushMessage("open file");
 	fTimer->start();
 	ui.resetAction->setEnabled(true);
-	ui.label_filename->setText(QString::fromStdString(areaDetector->GetImgID()));
+	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
 	ui.spin_rotate->setValue(0);
 	ui.label_mean->setText("-");
 	ui.label_length->setText("-");
-	m_currIdx = idx;
+	currIdx_ = idx;
+}
 
+void CashmereDetector::on_pushButton_autoNext_clicked() {
+
+	//if (filepaths_.empty())
+	//	return;
+	isAutoDetecting_ = true;
+	while (true) {
+		QCoreApplication::processEvents();
+		if (!isAutoDetecting_ || currIdx_ >= filepaths_.size())
+			return;
+		on_pushButton_next_clicked();
+		on_pushButton_autoDetect_clicked();
+	}
+	//while (currIdx_ < filepaths_.size()) {
+	//	string filePath = filepaths_[currIdx_];
+	//	manuDetector_->LoadImg(filePath);
+	//	autoDetector_->LoadImg(filePath);
+	//	areaDetector_->LoadImg(filePath);
+	//	autoDetector_->ShowCurrImg();
+
+	//	PushMessage("open file: " + autoDetector_->GetImgID());
+	//	ui.resetAction->setEnabled(true);
+	//	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
+
+	//	autoDetector_->AutoDetect();
+
+	//	ui.label_length->setText("-");
+	//	ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
+	//	
+	//	PushMessage("auto detect done");
+	//	++currIdx_;
+
+	//	cout << "-------------------------" << currIdx_ << "-------------------------" << endl;
+	//	if (currIdx_ > 8)
+	//		break;
+	//}
+
+}
+
+void CashmereDetector::on_pushButton_autoBack_clicked() {
+}
+
+void CashmereDetector::on_pushButton_autoStop_clicked() {
+	isAutoDetecting_ = false;
 }
 
 void CashmereDetector::on_pushButton_areaSelect_clicked()
 {
-	if (areaDetector->GetCurrImgRef().empty())
+	if (areaDetector_->GetCurrImgRef().empty())
 		return;
 
-	if (!isSelectModeOn) {
+	if (!isSelectModeOn_) {
 		PushMessage("select mode on");
-		areaDetector->SetRectSize(ui.spin_selectorSize->value());
-		areaDetector->StartSelectMode();
+		areaDetector_->SetRectSize(ui.spin_selectorSize->value());
+		areaDetector_->StartSelectMode();
 	}
 	else {
 		PushMessage("select mode off");
-		areaDetector->EndSelectMode();
+		areaDetector_->EndSelectMode();
 	}
 
-	isSelectModeOn = !isSelectModeOn;
+	isSelectModeOn_ = !isSelectModeOn_;
 
 }
 
 void CashmereDetector::on_spin_rotate_valueChanged(int val) {
-	areaDetector->RotateImage(val);
-	areaDetector->ShowCurrImg();
+	areaDetector_->RotateImage(val);
+	areaDetector_->ShowCurrImg();
 }
 
 void CashmereDetector::on_spin_selectorSize_valueChanged(int val){
-	areaDetector->SetRectSize(val);
+	areaDetector_->SetRectSize(val);
 }
 
 void CashmereDetector::on_pushButton_saveCurr_clicked() {
-	if (manuDetector->GetCurrImgRef().empty())
+	if (manuDetector_->GetCurrImgRef().empty())
 		return;
-	manuDetector->SaveCurrImg();
+	manuDetector_->SaveCurrImg();
 }
 
 void CashmereDetector::PushMessage(string msg)
@@ -352,4 +394,24 @@ void CashmereDetector::PushMessage(string msg)
 		msg += '\n';
 	QString qmsg = QString::fromStdString(msg);
 	ui.textBrowser->insertPlainText(qmsg);
+}
+
+void WorkerThread::stop() {
+    threadStop = true;
+    qDebug("[%d] Thread stop", number);
+}
+
+void WorkerThread::run() {
+    threadStop = false;
+    int i = 0;
+ 
+    while(!threadStop)
+    {
+        mutex.lock();
+        qDebug("[%d] MyThread %d", number, i);
+		cout << "thread running " << i << endl;
+        i++;
+        sleep(1);
+        mutex.unlock();
+    }
 }
