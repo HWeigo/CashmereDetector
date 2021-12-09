@@ -89,7 +89,7 @@ HalconCpp::HImage MatToHImage(const cv::Mat &image) {
 AutoDetector::AutoDetector(Ui::CashmereDetectorClass ui) : BaseDetector(ui) {
 }
 
-void AutoDetector::AutoDetect() {
+bool AutoDetector::AutoDetect() {
 	Clear();
 	double timer_start = double(clock() / 1000.0);
 	RegionDetect();
@@ -97,9 +97,10 @@ void AutoDetector::AutoDetect() {
 	double timer_mid = double(clock() / 1000.0);
 	skeletonPoints_.swap(vector<Point>());
 	
-	SkeletonDetect();
+	bool isSuccess = SkeletonDetect();
 	double timer_end = double(clock() / 1000.0);
 	cout << "auto detect time use: " << timer_end - timer_mid << " s" << endl;
+	return isSuccess;
 }
 
 void AutoDetector::RegionDetect() {
@@ -481,17 +482,24 @@ Mat AutoDetector::Skeletonization(Mat inputImage)
 #define EDGE_DILATE
 
 //#define SKELETON_IMSHOW
-void AutoDetector::SkeletonDetect() {
+bool AutoDetector::SkeletonDetect() {
 
 #ifdef ZHANG_SUEN_SKELETONIZATION
 	double timer_start = double(clock() / 1000.0);
 	skeletonImg_ = Skeletonization(regionImg_);
 	OutputSkeleton();
+	if (skeletonPointsSort_.size() < 50)
+		return false;
+
 	double timer_mid = double(clock() / 1000.0);
 	StraightenImg();
 	double timer_end = double(clock() / 1000.0);
 	cout << "Skeletonization time use: " << timer_mid - timer_start << " s" << endl;
 	cout << "OutputSkeleton time use: " << timer_end - timer_mid << " s" << endl;
+
+	//medianBlur(straightenImg_, straightenImg_, 3);
+	GaussianBlur(straightenImg_, straightenImg_, Size(3, 3), 15);
+
 	CropImage();
 #endif // ZHANG_SUEN_SKELETONIZATION
 

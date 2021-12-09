@@ -50,10 +50,10 @@ public:
 	~AutoDetector();
 
 	// Run auto-detect function
-	void AutoDetect();
+	bool AutoDetect();
 
 	void RegionDetect();
-	void SkeletonDetect();
+	bool SkeletonDetect();
 
 	void OutputSkeleton();
 

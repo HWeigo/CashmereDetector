@@ -271,7 +271,7 @@ void CashmereDetector::on_pushButton_next_clicked() {
 	areaDetector_->LoadImg(filePath);
 	areaDetector_->ShowCurrImg();
 
-	PushMessage("open file");
+	PushMessage("open file - " + autoDetector_->GetImgID());
 	fTimer->start();
 	ui.resetAction->setEnabled(true);
 	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
@@ -304,44 +304,79 @@ void CashmereDetector::on_pushButton_back_clicked() {
 }
 
 void CashmereDetector::on_pushButton_autoNext_clicked() {
-
-	//if (filepaths_.empty())
-	//	return;
 	isAutoDetecting_ = true;
-	while (true) {
+	int successCnt = 0, failedCnt = 0;;
+	while (currIdx_ < filepaths_.size()) {
 		QCoreApplication::processEvents();
-		if (!isAutoDetecting_ || currIdx_ >= filepaths_.size())
-			return;
-		on_pushButton_next_clicked();
-		on_pushButton_autoDetect_clicked();
+		if (!isAutoDetecting_) {
+			break;
+		}
+		string filePath = filepaths_[currIdx_];
+		manuDetector_->LoadImg(filePath);
+		autoDetector_->LoadImg(filePath);
+		areaDetector_->LoadImg(filePath);
+		areaDetector_->ShowCurrImg();
+
+		PushMessage("open file: " + autoDetector_->GetImgID());
+		ui.resetAction->setEnabled(true);
+		ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
+
+		if (autoDetector_->AutoDetect()) {
+			ui.label_length->setText("-");
+			ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
+			++successCnt;
+			PushMessage("auto detect done");
+		} else {
+			++failedCnt;
+			PushMessage("auto detect failed");
+		}
+		++currIdx_;
+
+		cout << "-------------------------" << currIdx_ << "-------------------------" << endl;
 	}
-	//while (currIdx_ < filepaths_.size()) {
-	//	string filePath = filepaths_[currIdx_];
-	//	manuDetector_->LoadImg(filePath);
-	//	autoDetector_->LoadImg(filePath);
-	//	areaDetector_->LoadImg(filePath);
-	//	autoDetector_->ShowCurrImg();
-
-	//	PushMessage("open file: " + autoDetector_->GetImgID());
-	//	ui.resetAction->setEnabled(true);
-	//	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
-
-	//	autoDetector_->AutoDetect();
-
-	//	ui.label_length->setText("-");
-	//	ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
-	//	
-	//	PushMessage("auto detect done");
-	//	++currIdx_;
-
-	//	cout << "-------------------------" << currIdx_ << "-------------------------" << endl;
-	//	if (currIdx_ > 8)
-	//		break;
-	//}
-
+	PushMessage("stop auto detect");
+	PushMessage("success: " + to_string(successCnt) + " failed: " + to_string(failedCnt));
+	isAutoDetecting_ = false;
+	return;
 }
 
 void CashmereDetector::on_pushButton_autoBack_clicked() {
+	isAutoDetecting_ = true;
+	int successCnt = 0, failedCnt = 0;;
+	while (currIdx_ >= 0) {
+		QCoreApplication::processEvents();
+		if (!isAutoDetecting_) {
+			PushMessage("stop auto detect");
+			return;
+		}
+		string filePath = filepaths_[currIdx_];
+		manuDetector_->LoadImg(filePath);
+		autoDetector_->LoadImg(filePath);
+		areaDetector_->LoadImg(filePath);
+		areaDetector_->ShowCurrImg();
+
+		PushMessage("open file: " + autoDetector_->GetImgID());
+		ui.resetAction->setEnabled(true);
+		ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
+
+		if (autoDetector_->AutoDetect()) {
+			ui.label_length->setText("-");
+			ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
+			++successCnt;
+			PushMessage("auto detect done");
+		} else {
+			++failedCnt;
+			PushMessage("auto detect failed");
+		}
+		--currIdx_;
+
+		cout << "-------------------------" << currIdx_ << "-------------------------" << endl;
+	}
+
+	PushMessage("stop auto detect");
+	PushMessage("success: " + to_string(successCnt) + " failed: " + to_string(failedCnt));
+	isAutoDetecting_ = false;
+	return;
 }
 
 void CashmereDetector::on_pushButton_autoStop_clicked() {
