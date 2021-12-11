@@ -14,7 +14,7 @@ private:
 	Mat regionImgStore_;
 	Mat edgeImg_;
 	Mat skeletonImg_;
-	Mat straightenImg_;
+	Mat img;
 
 	float rectScale_ = 2.5; // rectWidth_ / rectHeight_
 	int rectHeight_ = 50;
@@ -58,6 +58,8 @@ public:
 	void OutputSkeleton();
 
 	void CropImage();
+
+	bool DefectDetection(Mat &img);
 
 	double GetLength();
 	void ScalesDetect();

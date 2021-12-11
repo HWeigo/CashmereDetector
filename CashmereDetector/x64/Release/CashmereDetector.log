@@ -1,2 +1,3 @@
-﻿  CashmereDetector.cpp
+﻿  AutoDetector.cpp
+d:\onedrive@sjtu.edu.cn\algo\wool cashmere\cashmeredetector\cashmeredetector\autodetector.cpp(584): warning C4715: 'AutoDetector::SkeletonDetect': not all control paths return a value
   CashmereDetector.vcxproj -> D:\OneDrive@sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\x64\Release\CashmereDetector.exe

@@ -230,10 +230,10 @@ double AutoDetector::calFunc(vector<double> funcX, double x) {
 void AutoDetector::StraightenImg() {
 	//imwrite("result/regionImg.bmp", regionImgStore_);
 	// step1: 拟合曲线
-	cout << "p1 start polyfit" << endl;
+	//cout << "p1 start polyfit" << endl;
 	int lenLimit = skeletonPointsSort_.size();
 	int elemLimit = skeletonPointsSort_.size();
-	cout << "p2 size is: " << lenLimit << endl;
+	//cout << "p2 size is: " << lenLimit << endl;
 	vector<double> theta;
 	vector<double> coorX, coorY;
 	vector<Point> ptsX, ptsY;
@@ -358,11 +358,11 @@ void AutoDetector::StraightenImg() {
 
 	
 
-	cout << "end" << endl;
+	//cout << "end" << endl;
 	int padding = 1;
 	int outputHt = rectHeight_ - padding;
 	double ratioY = outputHt*1.f / (dMax - dMin);
-	cout << "ratioY: " << ratioY << endl;
+	//cout << "ratioY: " << ratioY << endl;
 	vector<double> newSVec, newDVec;
 	//newSVec.reserve(sVec.size());
 	newSVec.resize(sVec.size());
@@ -374,9 +374,9 @@ void AutoDetector::StraightenImg() {
 		newDVec[i] = (dVec[i] - dMin)*ratioY;
 		maxNewS = max(maxNewS, newSVec[i]);
 	}
-	cout << sMax << " " << sMin << " " << dMax << " " << dMin << endl;
+	//cout << sMax << " " << sMin << " " << dMax << " " << dMin << endl;
 	int outputWd = ceil(maxNewS);
-	cout << outputHt + padding << " " << outputWd + padding << endl;
+	//cout << outputHt + padding << " " << outputWd + padding << endl;
 	Mat dstImg=Mat::zeros(Size(outputWd + padding, outputHt + padding), CV_8U);
 
 	for (int i = 0; i < newSVec.size(); i++) {
@@ -387,7 +387,7 @@ void AutoDetector::StraightenImg() {
 		//circle(dstImg, Point(curX, curY), 1, Scalar(colorVec[i]), 2);
 	}
 	imwrite("result/dstImg.bmp", dstImg);
-	dstImg.copyTo(straightenImg_);
+	dstImg.copyTo(img);
 }
 
 void AutoDetector::Clear()
@@ -457,7 +457,7 @@ Mat AutoDetector::Skeletonization(Mat inputImage)
 {	
     if (inputImage.empty())
     	cout<<"Inside skeletonization, Source empty"<<endl;
-	cout << inputImage.type() << endl;
+	//cout << inputImage.type() << endl;
     Mat outputImage;
 	inputImage.copyTo(outputImage);
 
@@ -498,8 +498,8 @@ bool AutoDetector::SkeletonDetect() {
 	cout << "OutputSkeleton time use: " << timer_end - timer_mid << " s" << endl;
 
 	//medianBlur(straightenImg_, straightenImg_, 3);
-	GaussianBlur(straightenImg_, straightenImg_, Size(3, 3), 15);
-
+	//GaussianBlur(straightenImg_, straightenImg_, Size(3, 3), 15);
+	
 	CropImage();
 #endif // ZHANG_SUEN_SKELETONIZATION
 
@@ -521,7 +521,7 @@ bool AutoDetector::SkeletonDetect() {
 	rows_ = edgeImg_.rows;
 	cols_ = edgeImg_.cols;
 	vector<Point> edgePoints;
-	cout << cols_ << " " << rows_ << endl;
+	//cout << cols_ << " " << rows_ << endl;
 	Mat bfsMap(edgeImg_.size(), CV_8UC1);
 	for (int u = 0; u < cols_; ++u) {
 		for (int v = 0; v < rows_; ++v) {
@@ -545,7 +545,7 @@ bool AutoDetector::SkeletonDetect() {
 	while (!edgePoints.empty()) {
 		int currEdgeSize = edgePoints.size();
 		double ratio = (double)currEdgeSize / (double)lastEdgeSize;
-		cout << "layer: " << layer << " point size: " << currEdgeSize << " ratio: " << ratio << endl;
+		//cout << "layer: " << layer << " point size: " << currEdgeSize << " ratio: " << ratio << endl;
 		lastEdgeSize = currEdgeSize;
 		vector<Point> tempEdgePoints;
 		for (Point point : edgePoints) {
@@ -569,7 +569,7 @@ bool AutoDetector::SkeletonDetect() {
 	//imshow("bfsMap", bfsMap);
 	length_ = layer * 2;
 
-	cout << "thickness: " << length_ << endl;
+	//cout << "thickness: " << length_ << endl;
 
 
 #ifdef SKELETON_IMSHOW
@@ -603,7 +603,7 @@ vector<double> AutoDetector::polyfit(vector<Point>& srcPoints)
 	//矩阵运算，获得系数矩阵K
 	Mat mat_k(x_num, 1, CV_64F);
 	mat_k = (mat_u.t()*mat_u).inv()*mat_u.t()*mat_y;
-	cout << mat_k << endl;
+	//cout << mat_k << endl;
 	vector<double> coeffsVec;
 	for (int i = 0; i < x_num; i++) {
 		coeffsVec.push_back(mat_k.at<double>(i, 0));
@@ -670,7 +670,7 @@ void AutoDetector::OutputSkeleton()
 			}
 		}
 	}
-	cout << "start output" << endl;
+	//cout << "start output" << endl;
 	
 	// 打印坐标
 	/*for (Point2i &p : skeletonPointsSort_) {
@@ -679,7 +679,7 @@ void AutoDetector::OutputSkeleton()
 }
 
 void AutoDetector::CropImage() {
-	int straightenWidth = straightenImg_.cols;
+	int straightenWidth = img.cols;
 	
 	int x = 0;
 	int step = 75;
@@ -688,8 +688,10 @@ void AutoDetector::CropImage() {
 		Point topleft(x, 0);
 		Point buttomright(x + rectWidth_, rectHeight_);
 		Rect cropRect(topleft, buttomright);
-		Mat cropImg(straightenImg_);
+		Mat cropImg(img);
 		cropImg(cropRect).copyTo(cropImg);
+
+		DefectDetection(cropImg);
 		
 		string filepath = "./output/" + imgID_ + "_auto_" + to_string(cropCnt) + ".jpg";
 		imwrite(filepath, cropImg);
@@ -697,6 +699,45 @@ void AutoDetector::CropImage() {
 		x += step;
 		++cropCnt;
 	}
+}
+
+bool AutoDetector::DefectDetection(Mat &img) {
+	int cols = img.cols;
+	int rows = img.rows;
+	int padding = 1;
+	int backgroundCnt = 0;
+	for (int i = padding; i < cols - padding; ++i) {
+		for (int j = padding; j < rows - padding; ++j) {
+			if (img.at<uchar>(j, i) != 0)
+				continue;
+			
+			++backgroundCnt;
+			//int sumIntensity = 0;
+			vector<int> intensities;
+			for (pair<int, int> dir : directions) {
+				int u = i + dir.first;
+				int v = j + dir.second;
+				if (img.at<uchar>(v, u) != 0) {
+					//sumIntensity += straightenImg_.at<uchar>(v, u);
+					intensities.push_back(img.at<uchar>(v, u));
+				}
+			}
+			if (intensities.size() >= 7) {
+				sort(intensities.begin(), intensities.end());
+				int mid = intensities.size() / 2;
+				img.at<uchar>(j, i) = intensities.size() % 2 == 0 ? (intensities[mid] + intensities[mid-1]) / 2 : intensities[mid];
+				--backgroundCnt;
+			}
+		}
+	}
+
+	float ratio = (float)(backgroundCnt) / (float)(cols * rows);
+	cout << "Backgound ratio: " << ratio << endl;
+	if (ratio > 0.4) {
+		cout << "------ Fail defect detection -------" << endl;
+		return false;
+	}
+	return true;
 }
 
 void AutoDetector::FillNeighbor(Mat &img, Point point, int layer, vector<Point> &list) {
@@ -790,8 +831,8 @@ void AutoDetector::ScalesDetect() {
 	Mat temp;
 	HObject2Mat(ho_BinImage, temp);
 
-	cout << temp.size << endl;
-	cout << temp.type() << endl;
+	//cout << temp.size << endl;
+	//cout << temp.type() << endl;
 	Mat draw = GetCurrImg();
 	for (int u = 0; u < draw.cols; ++u) {
 		for (int v = 0; v < draw.rows; ++v) {
