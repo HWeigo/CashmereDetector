@@ -5,6 +5,7 @@
 
 using namespace HalconCpp;
 
+//#define INPUT_ORI
 class AutoDetector : public BaseDetector
 {
 private:
@@ -16,9 +17,9 @@ private:
 	Mat skeletonImg_;
 	Mat img;
 
-	float rectScale_ = 2.5; // rectWidth_ / rectHeight_
-	int rectHeight_ = 50;
-	int rectWidth_ = rectHeight_ * rectScale_; // 125
+	float rectScale_ = 3.5; // rectWidth_ / rectHeight_
+	int rectHeight_ = 32;
+	int rectWidth_ = rectHeight_ * rectScale_; // 112
 
 
 	vector<Point> skeletonPoints_;
@@ -53,6 +54,8 @@ public:
 	bool AutoDetect();
 
 	void RegionDetect();
+	void BinaryDetect();
+
 	bool SkeletonDetect();
 
 	void OutputSkeleton();

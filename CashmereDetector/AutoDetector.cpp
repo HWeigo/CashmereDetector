@@ -92,7 +92,12 @@ AutoDetector::AutoDetector(Ui::CashmereDetectorClass ui) : BaseDetector(ui) {
 bool AutoDetector::AutoDetect() {
 	Clear();
 	double timer_start = double(clock() / 1000.0);
+#ifdef INPUT_ORI
 	RegionDetect();
+#else
+	BinaryDetect();
+#endif // INPUT_ORI
+
 	imwrite("result/regionImg.bmp", regionImg_);
 	double timer_mid = double(clock() / 1000.0);
 	skeletonPoints_.swap(vector<Point>());
@@ -156,6 +161,24 @@ void AutoDetector::RegionDetect() {
 	RegionToBin(ho_RegionClosing, &ho_BinImage, 255, 0, hv_Width, hv_Height);
 	//WriteImage(ho_BinImage, "bmp", 0, 
 	//			  "D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereDetector/region.bmp");	
+	HObject2Mat(ho_BinImage, regionImg_);
+
+	regionImg_.copyTo(regionImgStore_);
+}
+
+void AutoDetector::BinaryDetect() {
+	// Local iconic variables
+	HObject  ho_Image, ho_Region, ho_BinImage;
+	
+	// Local control variables
+	HTuple  hv_Width, hv_Height;
+	
+	//ReadImage(&ho_Image, "C:/Users/sunzc/Desktop/\311\275\321\362\310\33620211202/0.bmp");
+	ho_Image = MatToHObject(GetCurrImg());
+	GetImageSize(ho_Image, &hv_Width, &hv_Height);
+	Threshold(ho_Image, &ho_Region, 1, 255);
+	RegionToBin(ho_Region, &ho_BinImage, 255, 0, hv_Width, hv_Height);
+	//WriteImage(ho_BinImage, "bmp", 0, HTuple(HTuple("C:/Users/sunzc/Desktop/")+1)+".bmp");
 	HObject2Mat(ho_BinImage, regionImg_);
 
 	regionImg_.copyTo(regionImgStore_);
@@ -248,18 +271,14 @@ void AutoDetector::StraightenImg() {
 	vector<double> fY = polyfit(ptsY);
 	vector<double> dfX, dfY;
 
-	/*
-	Mat drawTemp(GetOriImg());
-	for (int i = 0; i < 2000; ++i) {
-		int x = (int)calFunc(fX, i);
-		int y = (int)calFunc(fY, i);
-		circle(drawTemp, Point(x, y), 2, Scalar(0, 0, 255), -1);
-	}
-	resize(drawTemp, drawTemp, Size(), .5, .5);
-	imshow("draw", drawTemp);
-	waitKey(1);
-	*/
-
+	//Mat drawTemp(GetOriImg());
+	//for (int i = 0; i < 2000; ++i) {
+	//	int x = (int)calFunc(fX, i);
+	//	int y = (int)calFunc(fY, i);
+	//	circle(drawTemp, Point(x, y), 2, Scalar(0, 0, 255), -1);
+	//}
+	//resize(drawTemp, drawTemp, Size(), .5, .5);
+	//imwrite("./result/polyfit.jpg", drawTemp);
 	
 	for (int i = 1; i < fX.size(); i++) {
 		dfX.push_back(fX[i] * i);
@@ -462,8 +481,8 @@ Mat AutoDetector::Skeletonization(Mat inputImage)
 	inputImage.copyTo(outputImage);
 
     Thinning(outputImage);
- 	//imshow("thres", outputImage);
-#if 1
+ 	imwrite("result/skeleon.bmp", outputImage);
+#if 0
 	Mat draw = GetCurrImg();
 	for (int u = 0; u < inputImage.cols; ++u) {
 		for (int v = 0; v < inputImage.rows; ++v) {
@@ -556,7 +575,7 @@ bool AutoDetector::SkeletonDetect() {
 
 		// Check if most of the edges have already shrink
 		if (ratio < 0.96) {
-#if  1
+#if  0
 			string name = "./throw_" + to_string(layer) + "_" + to_string(ratio * 100) + ".bmp";
 			imwrite(name, bfsMap);
 #endif
@@ -682,7 +701,7 @@ void AutoDetector::CropImage() {
 	int straightenWidth = img.cols;
 	
 	int x = 0;
-	int step = 75;
+	int step = 80;
 	int cropCnt = 0;
 	while (x + rectWidth_ < straightenWidth) {
 		Point topleft(x, 0);
@@ -690,8 +709,18 @@ void AutoDetector::CropImage() {
 		Rect cropRect(topleft, buttomright);
 		Mat cropImg(img);
 		cropImg(cropRect).copyTo(cropImg);
+		
+		bool isSuccess = DefectDetection(cropImg);
+		//if (!isSuccess && x == 0) {
+		//	// Do not save the first image if failed defect detection
+		//	x += step;
+		//	++cropCnt;
+		//	continue;
+		//}
 
-		DefectDetection(cropImg);
+		if (cropImg.rows != 50) {
+			resize(cropImg, cropImg, Size(50 * rectScale_, 50));
+		}
 		
 		string filepath = "./output/" + imgID_ + "_auto_" + to_string(cropCnt) + ".jpg";
 		imwrite(filepath, cropImg);
@@ -722,7 +751,7 @@ bool AutoDetector::DefectDetection(Mat &img) {
 					intensities.push_back(img.at<uchar>(v, u));
 				}
 			}
-			if (intensities.size() >= 7) {
+			if (intensities.size() >= 6) {
 				sort(intensities.begin(), intensities.end());
 				int mid = intensities.size() / 2;
 				img.at<uchar>(j, i) = intensities.size() % 2 == 0 ? (intensities[mid] + intensities[mid-1]) / 2 : intensities[mid];
