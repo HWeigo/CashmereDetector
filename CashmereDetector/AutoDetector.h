@@ -5,7 +5,7 @@
 
 using namespace HalconCpp;
 
-//#define INPUT_ORI
+#define INPUT_ORI
 class AutoDetector : public BaseDetector
 {
 private:
@@ -15,7 +15,7 @@ private:
 	Mat regionImgStore_;
 	Mat edgeImg_;
 	Mat skeletonImg_;
-	Mat img;
+	Mat strightImg_;
 
 	float rectScale_ = 3.5; // rectWidth_ / rectHeight_
 	int rectHeight_ = 32;
@@ -61,6 +61,8 @@ public:
 	void OutputSkeleton();
 
 	void CropImage();
+
+	void DiameterStdCompute();
 
 	bool DefectDetection(Mat &img);
 

@@ -105,6 +105,7 @@ bool AutoDetector::AutoDetect() {
 	bool isSuccess = SkeletonDetect();
 	double timer_end = double(clock() / 1000.0);
 	cout << "auto detect time use: " << timer_end - timer_mid << " s" << endl;
+	DiameterStdCompute();
 	return isSuccess;
 }
 
@@ -406,7 +407,7 @@ void AutoDetector::StraightenImg() {
 		//circle(dstImg, Point(curX, curY), 1, Scalar(colorVec[i]), 2);
 	}
 	imwrite("result/dstImg.bmp", dstImg);
-	dstImg.copyTo(img);
+	dstImg.copyTo(strightImg_);
 }
 
 void AutoDetector::Clear()
@@ -482,7 +483,7 @@ Mat AutoDetector::Skeletonization(Mat inputImage)
 
     Thinning(outputImage);
  	imwrite("result/skeleon.bmp", outputImage);
-#if 0
+#if 1
 	Mat draw = GetCurrImg();
 	for (int u = 0; u < inputImage.cols; ++u) {
 		for (int v = 0; v < inputImage.rows; ++v) {
@@ -698,7 +699,7 @@ void AutoDetector::OutputSkeleton()
 }
 
 void AutoDetector::CropImage() {
-	int straightenWidth = img.cols;
+	int straightenWidth = strightImg_.cols;
 	
 	int x = 0;
 	int step = 80;
@@ -707,7 +708,7 @@ void AutoDetector::CropImage() {
 		Point topleft(x, 0);
 		Point buttomright(x + rectWidth_, rectHeight_);
 		Rect cropRect(topleft, buttomright);
-		Mat cropImg(img);
+		Mat cropImg(strightImg_);
 		cropImg(cropRect).copyTo(cropImg);
 		
 		bool isSuccess = DefectDetection(cropImg);
@@ -728,6 +729,43 @@ void AutoDetector::CropImage() {
 		x += step;
 		++cropCnt;
 	}
+}
+
+void AutoDetector::DiameterStdCompute() {
+	int slice = 30;
+	int straightenWidth = strightImg_.cols;
+	int straightenHeight = strightImg_.rows;
+	int padding = 30;
+
+	vector<int> diameters;
+	for (int i = padding; i < straightenWidth - padding; i += (straightenWidth - 2 * padding) / slice) {
+		int firstPixel = -1;
+		int lastPixel = -1;
+		for (int j = 0; j < straightenHeight; ++j) {
+			if (strightImg_.at<uchar>(j, i) == 0)
+				continue;
+			if (firstPixel < 0)
+				firstPixel = j;
+			lastPixel = j;
+		}
+		if (lastPixel <= firstPixel) {
+			cerr << "[ERROR] Wrong diameter" << endl;
+			continue;
+		}
+		diameters.push_back(lastPixel - firstPixel);
+	}
+	
+	double sum = std::accumulate(std::begin(diameters), std::end(diameters), 0.0);  
+	double mean =  sum / diameters.size();   // Cannot use as diameter
+	
+	double accum  = 0.0;  
+	std::for_each (std::begin(diameters), std::end(diameters), [&](const double d) {  
+	    accum  += (d-mean)*(d-mean);  
+	});  
+	
+	double stdev = sqrt(accum/(diameters.size()-1));   
+
+	cout << "std: " << stdev << endl;
 }
 
 bool AutoDetector::DefectDetection(Mat &img) {
