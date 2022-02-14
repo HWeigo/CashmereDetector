@@ -3,6 +3,7 @@
 #include <omp.h>
 #include "HalconCpp.h"
 
+#include<fstream>
 using namespace HalconCpp;
 
 #define INPUT_ORI
@@ -62,7 +63,8 @@ public:
 
 	void CropImage();
 
-	void DiameterStdCompute();
+	double DiameterStdCompute();
+	double DiameterStdCompute(Mat img, int slice);
 
 	bool DefectDetection(Mat &img);
 

@@ -105,7 +105,7 @@ bool AutoDetector::AutoDetect() {
 	bool isSuccess = SkeletonDetect();
 	double timer_end = double(clock() / 1000.0);
 	cout << "auto detect time use: " << timer_end - timer_mid << " s" << endl;
-	DiameterStdCompute();
+	//DiameterStdCompute();
 	return isSuccess;
 }
 
@@ -601,6 +601,14 @@ bool AutoDetector::SkeletonDetect() {
 
 
 #endif // EDGE_DILATE
+
+	ofstream dout("./strightImg/result.txt", ios::out | ios::app);
+	double stdev = DiameterStdCompute(strightImg_, 30);
+	dout << stdev << endl;
+	dout.close();
+
+	imwrite("./strightImg/" + imgID_ + "_" + to_string(stdev) + ".bmp", strightImg_);
+	
 }
 
 vector<double> AutoDetector::polyfit(vector<Point>& srcPoints)
@@ -731,7 +739,7 @@ void AutoDetector::CropImage() {
 	}
 }
 
-void AutoDetector::DiameterStdCompute() {
+double AutoDetector::DiameterStdCompute() {
 	int slice = 30;
 	int straightenWidth = strightImg_.cols;
 	int straightenHeight = strightImg_.rows;
@@ -766,6 +774,50 @@ void AutoDetector::DiameterStdCompute() {
 	double stdev = sqrt(accum/(diameters.size()-1));   
 
 	cout << "std: " << stdev << endl;
+	return stdev;
+}
+
+double AutoDetector::DiameterStdCompute(Mat img, int slice) {
+	int straightenWidth = img.cols;
+	int straightenHeight = img.rows;
+	int padding = 20;
+
+	medianBlur(img, img, 3);
+
+	vector<int> diameters;
+	//cout << "height" << straightenHeight << endl;
+	if (straightenWidth < 100 || straightenWidth - 2 * padding < padding)
+		return 0.0;
+	for (int i = padding; i < straightenWidth - padding; i += (straightenWidth - 2 * padding) / slice) {
+		int firstPixel = -1;
+		int lastPixel = -1;
+		for (int j = 0; j < straightenHeight; ++j) {
+			if (img.at<uchar>(j, i) == 0)
+				continue;
+			if (firstPixel < 0)
+				firstPixel = j;
+			lastPixel = j;
+		}
+		if (lastPixel <= firstPixel) {
+			cerr << "[ERROR] Wrong diameter" << endl;
+			continue;
+		}
+		diameters.push_back(lastPixel - firstPixel);
+	}
+	
+	double sum = std::accumulate(std::begin(diameters), std::end(diameters), 0.0);  
+	double mean =  sum / diameters.size();   // Cannot use as diameter
+	
+	double accum  = 0.0;  
+	std::for_each (std::begin(diameters), std::end(diameters), [&](const double d) {  
+	    accum  += (d-mean)*(d-mean);  
+	});  
+	
+	double stdev = sqrt(accum/(diameters.size()-1));   
+
+	cout << "std: " << stdev << endl;
+
+	return stdev;
 }
 
 bool AutoDetector::DefectDetection(Mat &img) {
