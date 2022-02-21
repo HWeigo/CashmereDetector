@@ -7,6 +7,7 @@
 using namespace HalconCpp;
 
 #define INPUT_ORI
+//#define HALCON_REGION_DETECT
 class AutoDetector : public BaseDetector
 {
 private:
@@ -55,6 +56,10 @@ public:
 	bool AutoDetect();
 
 	void RegionDetect();
+
+	int OtsuAlgThreshold(const Mat image);
+	void RegionDetectOpenCV(Mat srcImg, Mat& dstImg);
+
 	void BinaryDetect();
 
 	bool SkeletonDetect();

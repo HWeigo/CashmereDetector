@@ -93,7 +93,12 @@ bool AutoDetector::AutoDetect() {
 	Clear();
 	double timer_start = double(clock() / 1000.0);
 #ifdef INPUT_ORI
+	#ifdef HALCON_REGION_DETECT
 	RegionDetect();
+	#else
+	RegionDetectOpenCV(GetCurrImg(), regionImg_);
+	regionImg_.copyTo(regionImgStore_);
+	#endif
 #else
 	BinaryDetect();
 #endif // INPUT_ORI
@@ -165,6 +170,158 @@ void AutoDetector::RegionDetect() {
 	HObject2Mat(ho_BinImage, regionImg_);
 
 	regionImg_.copyTo(regionImgStore_);
+}
+
+int AutoDetector::OtsuAlgThreshold(const Mat image)
+{
+	if (image.channels() != 1)
+	{
+		cout << "请输入灰度图" << endl;
+		return 0;
+	}
+	int T = 0; //Otsu算法阈值
+	double varValue = 0; //类间方差中间值保存
+	double w0 = 0; //前景像素点数所占比例
+	double w1 = 0; //背景像素点数所占比例
+	double u0 = 0; //前景平均灰度
+	double u1 = 0; //背景平均灰度
+	double Histogram[256] = { 0 }; //灰度直方图，下标是灰度值，保存内容是灰度值对应的像素点总数
+	uchar *data = image.data;
+	double totalNum = image.rows*image.cols; //像素总数
+											 //计算灰度直方图分布，Histogram数组下标是灰度值，保存内容是灰度值对应像素点数
+	for (int i = 0; i<image.rows; i++)   //为表述清晰，并没有把rows和cols单独提出来
+	{
+		for (int j = 0; j<image.cols; j++)
+		{
+			Histogram[data[i*image.step + j]]++;
+		}
+	}
+	for (int i = 0; i<255; i++)
+	{
+		//每次遍历之前初始化各变量
+		w1 = 0;		u1 = 0;		w0 = 0;		u0 = 0;
+		//***********背景各分量值计算**************************
+		for (int j = 0; j <= i; j++) //背景部分各值计算
+		{
+			w1 += Histogram[j];  //背景部分像素点总数
+			u1 += j*Histogram[j]; //背景部分像素总灰度和
+		}
+		if (w1 == 0) //背景部分像素点数为0时退出
+		{
+			continue;
+		}
+		u1 = u1 / w1; //背景像素平均灰度
+		w1 = w1 / totalNum; // 背景部分像素点数所占比例
+							//***********背景各分量值计算**************************
+
+		for (int k = i + 1; k<255; k++)
+		{
+			w0 += Histogram[k];  //前景部分像素点总数
+			u0 += k*Histogram[k]; //前景部分像素总灰度和
+		}
+		if (w0 == 0) //前景部分像素点数为0时退出
+		{
+			break;
+		}
+		u0 = u0 / w0; //前景像素平均灰度
+		w0 = w0 / totalNum; // 前景部分像素点数所占比例
+							//***********前景各分量值计算**************************
+
+		// 计算类间方差
+		double varValueI = w0*w1*(u1 - u0)*(u1 - u0); //当前类间方差计算
+		if (varValue<varValueI)
+		{
+			varValue = varValueI;
+			T = i;
+		}
+	}
+	return T;
+}
+
+void AutoDetector::RegionDetectOpenCV(Mat srcImg, Mat& dstImg) {
+	Mat src, bw, bwTriangle, bwOtsu;
+	vector<vector<Point>> contours;
+
+	if (srcImg.channels() == 3)
+		cv::cvtColor(srcImg, src, COLOR_RGB2GRAY);
+	else
+		srcImg.copyTo(src);
+	int grayVal = srcImg.at<uchar>(0, 0);
+	cout << "The gray value of position (0,0) is: " << grayVal << endl;
+	
+	int thresholdValue = OtsuAlgThreshold(src);
+	int elementsize = 7;
+	cv::threshold(src, bwTriangle, thresholdValue - 1, 255, THRESH_TRIANGLE | THRESH_BINARY_INV); // THRESH_TRIANGLE
+	cv::threshold(src, bwOtsu, thresholdValue - 1, 255, THRESH_BINARY_INV); // THRESH_OTSU
+	bwTriangle.copyTo(bw);
+	bw = bwTriangle & bwOtsu;
+	// 先过滤掉小的连通域后再做闭运算，能减少粘连的情况
+	int minAreaLimit = 100;
+	vector<vector<Point>> removeContours;
+	cv::findContours(bw, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+	
+	for (size_t i = 0; i < contours.size(); i++){
+		double area = cv::contourArea(contours[i]);
+
+		if (area <= minAreaLimit){
+			removeContours.push_back(contours[i]);
+		}
+	}
+	Mat remMask = Mat::zeros(src.size(), CV_8UC1);
+	for (int i = 0; i < removeContours.size(); i++) {
+		drawContours(remMask, removeContours, i, Scalar(255), -1);
+	}
+	bw = bw ^ remMask;
+
+	Mat kernel = getStructuringElement(MORPH_RECT, Size(elementsize * 2 + 1, elementsize * 2 + 1));
+	
+	morphologyEx(bw, bw, MORPH_CLOSE, kernel);
+	cout << "类间方差为： " << thresholdValue << endl;
+	cv::findContours(bw, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+	double maxArea = 0;
+	double minAreaRatio = 0.00;
+	double maxAreaRatio = 0.08;
+	int maxContourIdx = 0;
+	vector<cv::Point> maxContour;
+
+	int maxAreaLimit = maxAreaRatio*srcImg.rows*srcImg.cols;
+
+	for (size_t i = 0; i < contours.size(); i++)
+	{
+		double area = cv::contourArea(contours[i]);
+		
+		if (area < minAreaLimit || area > maxAreaLimit)
+			continue;
+		if (area > maxArea)
+		{
+			maxArea = area;
+			maxContour = contours[i];
+			maxContourIdx = i;
+		}
+	}
+
+	drawContours(bw, contours, -1, Scalar(255, 255, 255), -1);
+	drawContours(dstImg, contours, maxContourIdx, Scalar(255), -1);
+	cout << maxArea*1.f/(srcImg.rows*srcImg.cols) << endl;
+	cv::Rect maxRect = cv::boundingRect(maxContour);	
+	cv::Mat result1, result2, bw3c;
+	cvtColor(bw, bw3c, COLOR_GRAY2BGR);
+	bw3c.copyTo(result1); // 展示所有轮廓的bbox
+	bw3c.copyTo(result2); // 仅展示限定范围内最大轮廓的bbox
+
+	for (size_t i = 0; i < contours.size(); i++)
+	{
+		cv::Rect r = cv::boundingRect(contours[i]);
+		cv::rectangle(result1, r, cv::Scalar(rand()%255, rand() % 255, rand() % 255));
+	}
+	
+	cv::rectangle(result2, maxRect, cv::Scalar(0, 0, 255));
+	Mat tmp(maxContour);
+	Moments moment = moments(tmp, false);
+	int x = cvRound(moment.m10 / moment.m00); // 计算重心横坐标
+	int y = cvRound(moment.m01 / moment.m00); // 计算重心纵坐标
+	
+	cv::circle(result2, Point(x, y), 8, Scalar(0,255,0));
 }
 
 void AutoDetector::BinaryDetect() {
