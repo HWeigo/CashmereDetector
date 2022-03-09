@@ -66,6 +66,9 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QSlider *slider_selectorSize;
     QSpinBox *spin_selectorSize;
+    QFrame *line_2;
+    QLabel *label_3;
+    QWidget *widget_6;
     QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer;
@@ -241,7 +244,25 @@ public:
 
         verticalLayout->addWidget(widget_2);
 
-        verticalSpacer_2 = new QSpacerItem(20, 200, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        line_2 = new QFrame(verticalLayoutWidget);
+        line_2->setObjectName(QStringLiteral("line_2"));
+        line_2->setFrameShape(QFrame::HLine);
+        line_2->setFrameShadow(QFrame::Sunken);
+
+        verticalLayout->addWidget(line_2);
+
+        label_3 = new QLabel(verticalLayoutWidget);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        verticalLayout->addWidget(label_3);
+
+        widget_6 = new QWidget(verticalLayoutWidget);
+        widget_6->setObjectName(QStringLiteral("widget_6"));
+        widget_6->setMinimumSize(QSize(0, 50));
+
+        verticalLayout->addWidget(widget_6);
+
+        verticalSpacer_2 = new QSpacerItem(20, 118, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer_2);
 
@@ -364,13 +385,14 @@ public:
         pushButton_areaSelect->setText(QApplication::translate("CashmereDetectorClass", "Area Select", Q_NULLPTR));
         label->setText(QApplication::translate("CashmereDetectorClass", "- Rotation -", Q_NULLPTR));
         label_2->setText(QApplication::translate("CashmereDetectorClass", "- Selector Size -", Q_NULLPTR));
+        label_3->setText(QApplication::translate("CashmereDetectorClass", " Result", Q_NULLPTR));
         label_info->setText(QApplication::translate("CashmereDetectorClass", "Info", Q_NULLPTR));
         pushButton_clear->setText(QApplication::translate("CashmereDetectorClass", "Clear", Q_NULLPTR));
         textBrowser->setHtml(QApplication::translate("CashmereDetectorClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'SimSun'; font-size:7.2pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"><br /></p></body></html>", Q_NULLPTR));
+"</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", Q_NULLPTR));
         pushButton_back->setText(QApplication::translate("CashmereDetectorClass", "Back", Q_NULLPTR));
         pushButton_autoBack->setText(QApplication::translate("CashmereDetectorClass", "Auto Back", Q_NULLPTR));
         pushButton_autoStop->setText(QApplication::translate("CashmereDetectorClass", "Stop", Q_NULLPTR));

@@ -7,7 +7,7 @@
 using namespace HalconCpp;
 
 #define INPUT_ORI
-//#define HALCON_REGION_DETECT
+#define HALCON_REGION_DETECT
 class AutoDetector : public BaseDetector
 {
 private:

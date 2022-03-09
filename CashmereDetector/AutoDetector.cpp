@@ -96,6 +96,7 @@ bool AutoDetector::AutoDetect() {
 	#ifdef HALCON_REGION_DETECT
 	RegionDetect();
 	#else
+	//regionImg_ = Mat::zeros(GetCurrImg().size(), CV_8UC1);
 	RegionDetectOpenCV(GetCurrImg(), regionImg_);
 	regionImg_.copyTo(regionImgStore_);
 	#endif
@@ -299,9 +300,10 @@ void AutoDetector::RegionDetectOpenCV(Mat srcImg, Mat& dstImg) {
 			maxContourIdx = i;
 		}
 	}
-
+	
+	Mat region = Mat::zeros(srcImg.size(), CV_8UC1);
 	drawContours(bw, contours, -1, Scalar(255, 255, 255), -1);
-	drawContours(dstImg, contours, maxContourIdx, Scalar(255), -1);
+	drawContours(region, contours, maxContourIdx, Scalar(255), -1);
 	cout << maxArea*1.f/(srcImg.rows*srcImg.cols) << endl;
 	cv::Rect maxRect = cv::boundingRect(maxContour);	
 	cv::Mat result1, result2, bw3c;
@@ -322,6 +324,21 @@ void AutoDetector::RegionDetectOpenCV(Mat srcImg, Mat& dstImg) {
 	int y = cvRound(moment.m01 / moment.m00); // 计算重心纵坐标
 	
 	cv::circle(result2, Point(x, y), 8, Scalar(0,255,0));
+
+	//srcImg.copyTo(dstImg);
+	//imshow("region", region);
+	//waitKey(0);
+	dstImg = Mat::zeros(srcImg.size(), CV_8UC1);
+	for (int v = 0; v < srcImg.rows; ++v) {
+		for (int u = 0; u < srcImg.cols; ++u) {
+			if (region.at<uchar>(v, u) == 0)
+				continue;
+			dstImg.at<uchar>(v, u) = srcImg.at<uchar>(v, u);
+		}
+	}
+
+	imshow("dst2", dstImg);
+	waitKey(0);
 }
 
 void AutoDetector::BinaryDetect() {
@@ -759,13 +776,26 @@ bool AutoDetector::SkeletonDetect() {
 
 #endif // EDGE_DILATE
 
-	ofstream dout("./strightImg/result.txt", ios::out | ios::app);
+	ofstream dout1("./strightImg/result.txt", ios::out | ios::app);
 	double stdev = DiameterStdCompute(strightImg_, 30);
-	dout << stdev << endl;
-	dout.close();
+	dout1 << stdev << endl;
+	dout1.close();
 
-	imwrite("./strightImg/" + imgID_ + "_" + to_string(stdev) + ".bmp", strightImg_);
-	
+	ofstream dout2("./CheckList.txt", ios::out | ios::app);
+	if (stdev < 3.5 && stdev > 0) {
+		imwrite("./strightImg/" + imgID_ + "_" + to_string(stdev) + ".bmp", strightImg_);
+	} else {
+		// Wrong stdev image
+		if (stdev >= 3.5) {
+			dout2 << imgID_ << " " << stdev << " " << filePath_ << endl;
+		}
+	}
+	dout2.close();
+
+	ofstream dout3("./std.txt", ios::out | ios::app);
+	if (stdev > 0)
+		dout3 << stdev << endl;
+	dout3.close();
 }
 
 vector<double> AutoDetector::polyfit(vector<Point>& srcPoints)

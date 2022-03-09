@@ -40,6 +40,7 @@ protected:
 	float scale_;
 	string winName = "img";
 	string imgID_;
+	string filePath_;
 
 public:
 	BaseDetector(Ui::CashmereDetectorClass ui);

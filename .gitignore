@@ -1,2 +1,4 @@
 CashmereDetector.VC.db
 *.db
+*.pth
+CashmereDetector/output/

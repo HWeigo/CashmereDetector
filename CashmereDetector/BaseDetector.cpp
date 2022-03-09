@@ -58,6 +58,7 @@ void BaseDetector::LoadImg(string filepath) {
 
 	vector<string> tempId1 = BaseDetector::split(filepath, "/"); // "home/img/a.jpg" -> {"home", "img", "a.jpg"}
 	vector<string> tempId2 = BaseDetector::split(tempId1.back(), "."); // "a.jpg" -> {"a", "jpg"}
+	filePath_ = filepath;
     imgID_ = tempId2.front(); // "a"
 	cout << "id: " << imgID_ << endl;
 
