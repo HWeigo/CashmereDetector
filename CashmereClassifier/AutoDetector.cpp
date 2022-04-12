@@ -940,6 +940,7 @@ int AutoDetector::ResNetClassify(string &&filename) {
 	int typeNum = type.size();
 	int n = cropImgs.size();
 	vector<vector<double>> scores(n);
+	vector<int> vote(2, 0);
 	for (int i = 0; i < n; ++i) {
 		//std::string filename = "./input/wool_" + std::to_string(i) + ".jpg";
 		//Mat image = imread(filename);
@@ -957,7 +958,7 @@ int AutoDetector::ResNetClassify(string &&filename) {
 		auto max_result = output.max(1, true);
 		auto max_index = std::get<1>(max_result).item<float>();
 		std::cout << "[RESULT] " << type[max_index] << std::endl;
-
+		++vote[max_index];
 		//for (int j = 0; j < typeNum; ++j) {
 		//	scores[i].push_back(output[0][i].item<double>());
 		//}
@@ -965,6 +966,15 @@ int AutoDetector::ResNetClassify(string &&filename) {
 		scores[i].push_back(output[0][1].item<double>());
 		
 	}
+
+	if (vote[CASHMERE] == vote[WOOL]) {
+		result_ = UNKNOWN;
+	} else if (vote[CASHMERE] > vote[WOOL]) {
+		result_ = CASHMERE;
+	} else {
+		result_ = WOOL;
+	}
+
 
 
 	end = clock();

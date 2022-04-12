@@ -67,8 +67,10 @@ public:
     QSlider *slider_selectorSize;
     QSpinBox *spin_selectorSize;
     QFrame *line_2;
+    QWidget *widget_7;
+    QHBoxLayout *horizontalLayout_5;
     QLabel *label_3;
-    QWidget *widget_6;
+    QLabel *label_result;
     QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer;
@@ -95,7 +97,7 @@ public:
     {
         if (CashmereDetectorClass->objectName().isEmpty())
             CashmereDetectorClass->setObjectName(QStringLiteral("CashmereDetectorClass"));
-        CashmereDetectorClass->resize(1355, 856);
+        CashmereDetectorClass->resize(1355, 874);
         openFileAction = new QAction(CashmereDetectorClass);
         openFileAction->setObjectName(QStringLiteral("openFileAction"));
         resetAction = new QAction(CashmereDetectorClass);
@@ -251,18 +253,27 @@ public:
 
         verticalLayout->addWidget(line_2);
 
-        label_3 = new QLabel(verticalLayoutWidget);
+        widget_7 = new QWidget(verticalLayoutWidget);
+        widget_7->setObjectName(QStringLiteral("widget_7"));
+        horizontalLayout_5 = new QHBoxLayout(widget_7);
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        label_3 = new QLabel(widget_7);
         label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setMaximumSize(QSize(75, 16777215));
 
-        verticalLayout->addWidget(label_3);
+        horizontalLayout_5->addWidget(label_3);
 
-        widget_6 = new QWidget(verticalLayoutWidget);
-        widget_6->setObjectName(QStringLiteral("widget_6"));
-        widget_6->setMinimumSize(QSize(0, 50));
+        label_result = new QLabel(widget_7);
+        label_result->setObjectName(QStringLiteral("label_result"));
 
-        verticalLayout->addWidget(widget_6);
+        horizontalLayout_5->addWidget(label_result);
 
-        verticalSpacer_2 = new QSpacerItem(20, 118, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addWidget(widget_7);
+
+        verticalSpacer_2 = new QSpacerItem(20, 67, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer_2);
 
@@ -385,7 +396,8 @@ public:
         pushButton_areaSelect->setText(QApplication::translate("CashmereDetectorClass", "Area Select", Q_NULLPTR));
         label->setText(QApplication::translate("CashmereDetectorClass", "- Rotation -", Q_NULLPTR));
         label_2->setText(QApplication::translate("CashmereDetectorClass", "- Selector Size -", Q_NULLPTR));
-        label_3->setText(QApplication::translate("CashmereDetectorClass", " Result", Q_NULLPTR));
+        label_3->setText(QApplication::translate("CashmereDetectorClass", " Result:", Q_NULLPTR));
+        label_result->setText(QApplication::translate("CashmereDetectorClass", "-", Q_NULLPTR));
         label_info->setText(QApplication::translate("CashmereDetectorClass", "Info", Q_NULLPTR));
         pushButton_clear->setText(QApplication::translate("CashmereDetectorClass", "Clear", Q_NULLPTR));
         textBrowser->setHtml(QApplication::translate("CashmereDetectorClass", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"

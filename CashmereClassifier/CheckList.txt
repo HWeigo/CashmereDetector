@@ -9,3 +9,8 @@ w0003 5.06438 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/label/Dataset/ÑòÃ«/w000
 w0003 5.06438 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/label/Dataset/ÑòÃ«/w0003.jpg
 w0003 5.06438 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/label/Dataset/ÑòÃ«/w0003.jpg
 w0006 9.19316 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/label/Dataset/ÑòÃ«/w0006.jpg
+sw0080 3.55298 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/cashmere/sw0080.jpg
+sw0061 4.87547 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0061.jpg
+sw0111 5.49526 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/cashmere/sw0111.jpg
+sw0114 8.20675 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/cashmere/sw0114.jpg
+sw0022 8.76687 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0022.jpg

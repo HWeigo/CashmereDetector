@@ -244,12 +244,32 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 		manuDetector_->EndPickMode();
 		isPickModeOn_ = false;
 	}
+
 	autoDetector_->AutoDetect();
 
 	ui.label_length->setText("-");
 	ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
 	
+	string outputMessage = "result: ";
+	switch (autoDetector_->GetResult()) {
+	case CASHMERE:
+		ui.label_result->setText("Cashmere");
+		outputMessage += "Cashmere";
+		break;
+	case WOOL:
+		ui.label_result->setText("Wool");
+		outputMessage += "Wool";
+		break;
+	case UNKNOWN:
+		ui.label_result->setText("Unknown");
+		outputMessage += "Unknown";
+		break;
+	default:
+		break;
+	}
+	
 	PushMessage("auto detect done");
+	PushMessage(outputMessage);
 }
 
 void CashmereDetector::on_pushButton_scalesDetect_clicked() {
@@ -277,6 +297,7 @@ void CashmereDetector::on_pushButton_next_clicked() {
 	ui.spin_rotate->setValue(0);
 	ui.label_mean->setText("-");
 	ui.label_length->setText("-");
+	ui.label_result->setText("-");
 	currIdx_ = idx;
 }
 
@@ -299,6 +320,7 @@ void CashmereDetector::on_pushButton_back_clicked() {
 	ui.spin_rotate->setValue(0);
 	ui.label_mean->setText("-");
 	ui.label_length->setText("-");
+	ui.label_result->setText("-");
 	currIdx_ = idx;
 }
 

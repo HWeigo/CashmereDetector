@@ -13,6 +13,8 @@
 
 using namespace HalconCpp;
 
+enum TYPE {CASHMERE = 0, WOOL, NONE, UNKNOWN};
+
 #define INPUT_ORI
 #define HALCON_REGION_DETECT
 class AutoDetector : public BaseDetector
@@ -40,6 +42,8 @@ private:
 	int rows_;
 	double length_;
 	int levelNum_ = 5;
+	
+	TYPE result_ = NONE;
 
 	void FillNeighbor(Mat &img, Point point, int layer, vector<Point> &list);
 	void ThinningIteration(Mat& im, int iter);
@@ -85,6 +89,7 @@ public:
 	bool DefectDetection(Mat &img);
 
 	double GetLength();
+	TYPE GetResult() { return result_; };
 	void ScalesDetect();
 };
 
