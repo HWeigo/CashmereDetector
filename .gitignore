@@ -1,4 +1,7 @@
 CashmereDetector.VC.db
 *.db
 *.pth
-CashmereDetector/output/
+CashmereClassifier/output/
+CashmereClassifier/input/
+*.ipch
+*.pt
