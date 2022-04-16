@@ -77,6 +77,9 @@ public:
 	// Get img ID
 	string GetImgID();
 	
+	// Get filepath
+	string GetImgFilePath() { return filePath_; };
+
 	// For spliting filepath
 	static vector<string> split(const string& str, const string& delim);
 	//void ShowImage_QLable();

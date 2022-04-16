@@ -14,3 +14,5 @@ sw0061 4.87547 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0061.jpg
 sw0111 5.49526 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/cashmere/sw0111.jpg
 sw0114 8.20675 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/cashmere/sw0114.jpg
 sw0022 8.76687 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0022.jpg
+sw0022 8.76687 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0022.jpg
+sw0033 4.0619 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0033.jpg

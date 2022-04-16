@@ -922,13 +922,37 @@ void AutoDetector::CropImage() {
 			resize(cropImg, cropImg, Size(50 * rectScale_, 50));
 		}
 		
-		string filepath = "./output/" + imgID_ + "_auto_" + to_string(cropCnt) + ".jpg";
-		imwrite(filepath, cropImg);
 		cropImgs.push_back(cropImg);
+
+		string filepath = "./output/" + imgID_ + "_auto_" + to_string(cropImgs.size()) + ".jpg";
+		imwrite(filepath, cropImg);
 		
 		x += step;
 		++cropCnt;
 	}
+
+	// Ensure odd crops number to avoid ambiguous classify result
+	while (cropImgs.size() % 2 == 0) {
+		x = (rand() % (straightenWidth - rectWidth_ - 0)) + 0; // [0, straightenWidth - rectWidth_)
+
+		Point topleft(x, 0);
+		Point buttomright(x + rectWidth_, rectHeight_);
+		Rect cropRect(topleft, buttomright);
+		Mat cropImg(strightImg_);
+		cropImg(cropRect).copyTo(cropImg);
+		
+		bool isSuccess = DefectDetection(cropImg);
+
+		if (cropImg.rows != 50) {
+			resize(cropImg, cropImg, Size(50 * rectScale_, 50));
+		}
+		
+		cropImgs.push_back(cropImg);
+
+		string filepath = "./output/" + imgID_ + "_auto_" + to_string(cropImgs.size()) + ".jpg";
+		imwrite(filepath, cropImg);
+	}
+
 }
 
 int AutoDetector::ResNetClassify(string &&filename) {
@@ -980,6 +1004,8 @@ int AutoDetector::ResNetClassify(string &&filename) {
 	end = clock();
 	std::cout << "Total time use: " << double(end - start) / CLOCKS_PER_SEC << "s" << std::endl;
 	std::cout << "Average time use: " << double(end - start) / CLOCKS_PER_SEC / n << "s" << std::endl;
+
+
 	return 0;
 }
 

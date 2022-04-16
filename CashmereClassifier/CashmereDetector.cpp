@@ -44,6 +44,10 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 	//ui.slider_selectorSize->setSingleStep(5);
 	//ui.spin_selectorSize->setSingleStep(5);
 	ui.spin_selectorSize->setValue(30);
+
+
+	// Clear result txt
+	ofstream file_writer("./result.txt", ios_base::out);
 }
 
 void CashmereDetector::on_timer_timeout() {
@@ -251,25 +255,37 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 	ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
 	
 	string outputMessage = "result: ";
-	switch (autoDetector_->GetResult()) {
-	case CASHMERE:
-		ui.label_result->setText("Cashmere");
-		outputMessage += "Cashmere";
-		break;
-	case WOOL:
-		ui.label_result->setText("Wool");
-		outputMessage += "Wool";
-		break;
-	case UNKNOWN:
-		ui.label_result->setText("Unknown");
-		outputMessage += "Unknown";
-		break;
-	default:
-		break;
-	}
-	
+	vector<string> resultList = { "Cashmere", "Wool", "Unknown" };
+	ui.label_result->setText(QString::fromStdString(resultList[autoDetector_->GetResult()]));
+	outputMessage += resultList[autoDetector_->GetResult()];
+
 	PushMessage("auto detect done");
 	PushMessage(outputMessage);
+
+	// Output result
+	ofstream dout("./result.txt", ios::out | ios::app);
+	dout << autoDetector_->GetImgFilePath() << " ";
+	dout << resultList[autoDetector_->GetResult()] << endl;
+	dout.close();
+
+	//switch (autoDetector_->GetResult()) {
+	//case CASHMERE:
+	//	ui.label_result->setText("Cashmere");
+	//	outputMessage += "Cashmere";
+	//	dout << "Cashmere" << endl;
+	//	break;
+	//case WOOL:
+	//	ui.label_result->setText("Wool");
+	//	outputMessage += "Wool";
+	//	break;
+	//case UNKNOWN:
+	//	ui.label_result->setText("Unknown");
+	//	outputMessage += "Unknown";
+	//	break;
+	//default:
+	//	break;
+	//}
+
 }
 
 void CashmereDetector::on_pushButton_scalesDetect_clicked() {

@@ -13,7 +13,7 @@
 
 using namespace HalconCpp;
 
-enum TYPE {CASHMERE = 0, WOOL, NONE, UNKNOWN};
+enum TYPE {CASHMERE = 0, WOOL, UNKNOWN, NONE};
 
 #define INPUT_ORI
 #define HALCON_REGION_DETECT
