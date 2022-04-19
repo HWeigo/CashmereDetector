@@ -16,3 +16,86 @@ sw0114 8.20675 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/cashmere/sw0114.jpg
 sw0022 8.76687 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0022.jpg
 sw0022 8.76687 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0022.jpg
 sw0033 4.0619 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0033.jpg
+w0018 5.17272 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/label/Dataset/羊毛/w0018.jpg
+w0020 4.30878 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/label/Dataset/羊毛/w0020.jpg
+w0006 9.19316 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/label/Dataset/羊毛/w0006.jpg
+sw0022 8.76687 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0022.jpg
+sw0033 4.0619 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0033.jpg
+sw0080 3.55298 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/cashmere/sw0080.jpg
+sw0080 3.55298 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/cashmere/sw0080.jpg
+sw0101 3.64545 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/cashmere/sw0101.jpg
+sw0047 4.01154 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0047.jpg
+sw0061 4.87547 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0061.jpg
+sw0078 5.01475 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/wool/sw0078.jpg
+sw0047 4.01154 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0047.jpg
+sw0047 4.01154 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0047.jpg
+sw0061 4.87547 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0061.jpg
+sw0078 5.01475 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0078.jpg
+sw0111 5.49526 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0111.jpg
+sw0114 8.20675 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0114.jpg
+sw0041 3.55661 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0041.jpg
+sw0047 4.01154 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0047.jpg
+sw0061 4.87547 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0061.jpg
+sw0078 5.01475 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0078.jpg
+sw0101 3.64545 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0101.jpg
+sw0111 5.49526 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0111.jpg
+sw0114 8.20675 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0114.jpg
+sw0022 8.76687 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0022.jpg
+sw0041 3.55661 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0041.jpg
+sw0041 3.55661 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0041.jpg
+sw0047 4.01154 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0047.jpg
+sw0041 3.55661 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0041.jpg
+sw0041 3.55661 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0041.jpg
+sw0047 4.01154 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0047.jpg
+sw0041 3.55661 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0041.jpg
+sw0047 4.01154 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0047.jpg
+sw0041 3.55661 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0041.jpg
+sw0047 4.01154 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0047.jpg
+sw0061 4.87547 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0061.jpg
+sw0067 5.30226 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0067.jpg
+sw0080 3.55298 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0080.jpg
+sw0022 8.76687 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0022.jpg
+sw0033 4.0619 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0033.jpg
+sw0041 3.55661 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0041.jpg
+sw0047 4.01154 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0047.jpg
+sw0061 4.87547 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0061.jpg
+sw0078 5.01475 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0078.jpg
+sw0109 7.36714 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0109.jpg
+sw0165 4.36433 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0165.jpg
+sw0188 5.64676 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0188.jpg
+sw0230 3.95896 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0230.jpg
+sw0233 5.78694 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0233.jpg
+sw0067 5.30226 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0067.jpg
+sw0080 3.55298 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0080.jpg
+sw0101 3.64545 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0101.jpg
+sw0111 5.49526 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0111.jpg
+sw0114 8.20675 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0114.jpg
+sw0179 7.79468 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0179.jpg
+sw0190 6.63066 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0190.jpg
+sw0209 4.75737 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0209.jpg
+sw0220 3.51 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0220.jpg
+sw0239 4.67653 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0239.jpg
+sw0247 3.87936 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0247.jpg
+sw0287 6.74817 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0287.jpg
+sw0319 6.43748 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0319.jpg
+sw0022 8.76687 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0022.jpg
+sw0033 4.0619 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0033.jpg
+sw0041 3.55661 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0041.jpg
+sw0047 4.01154 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0047.jpg
+sw0061 4.87547 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0061.jpg
+sw0078 5.01475 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0078.jpg
+sw0109 7.36714 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0109.jpg
+sw0165 4.36433 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0165.jpg
+sw0188 5.64676 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊毛 Wool/sw0188.jpg
+sw0067 5.30226 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0067.jpg
+sw0080 3.55298 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0080.jpg
+sw0101 3.64545 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0101.jpg
+sw0111 5.49526 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0111.jpg
+sw0114 8.20675 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0114.jpg
+sw0179 7.79468 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0179.jpg
+sw0190 6.63066 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0190.jpg
+sw0209 4.75737 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0209.jpg
+sw0220 3.51 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0220.jpg
+sw0239 4.67653 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0239.jpg
+sw0247 3.87936 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0247.jpg
+sw0287 6.74817 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0287.jpg

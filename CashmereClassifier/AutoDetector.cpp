@@ -589,6 +589,7 @@ void AutoDetector::StraightenImg() {
 
 void AutoDetector::Clear()
 {
+	length_ = 0;
 	skeletonPoints_.clear(); 
 	skeletonPointsSort_.clear();
 }
@@ -680,26 +681,6 @@ Mat AutoDetector::Skeletonization(Mat inputImage)
 
 //#define SKELETON_IMSHOW
 bool AutoDetector::SkeletonDetect() {
-
-#ifdef ZHANG_SUEN_SKELETONIZATION
-	double timer_start = double(clock() / 1000.0);
-	skeletonImg_ = Skeletonization(regionImg_);
-	OutputSkeleton();
-	if (skeletonPointsSort_.size() < 50)
-		return false;
-
-	double timer_mid = double(clock() / 1000.0);
-	StraightenImg();
-	double timer_end = double(clock() / 1000.0);
-	cout << "Skeletonization time use: " << timer_mid - timer_start << " s" << endl;
-	cout << "Straighten time use: " << timer_end - timer_mid << " s" << endl;
-
-	//medianBlur(straightenImg_, straightenImg_, 3);
-	//GaussianBlur(straightenImg_, straightenImg_, Size(3, 3), 15);
-	
-	CropImage();
-#endif // ZHANG_SUEN_SKELETONIZATION
-
 #ifdef EDGE_DILATE
 	// --- A simpele demo implementation based onf OpenCV dilate function ---	
 	//Canny(regionImg_, edgeImg_, 100, 100);
@@ -778,6 +759,26 @@ bool AutoDetector::SkeletonDetect() {
 
 
 #endif // EDGE_DILATE
+
+#ifdef ZHANG_SUEN_SKELETONIZATION
+	double timer_start = double(clock() / 1000.0);
+	skeletonImg_ = Skeletonization(regionImg_);
+	OutputSkeleton();
+	if (skeletonPointsSort_.size() < 50)
+		return false;
+
+	double timer_mid = double(clock() / 1000.0);
+	StraightenImg();
+	double timer_end = double(clock() / 1000.0);
+	cout << "Skeletonization time use: " << timer_mid - timer_start << " s" << endl;
+	cout << "Straighten time use: " << timer_end - timer_mid << " s" << endl;
+
+	//medianBlur(straightenImg_, straightenImg_, 3);
+	//GaussianBlur(straightenImg_, straightenImg_, Size(3, 3), 15);
+	
+	CropImage();
+#endif // ZHANG_SUEN_SKELETONIZATION
+
 
 	ofstream dout1("./strightImg/result.txt", ios::out | ios::app);
 	double stdev = DiameterStdCompute(strightImg_, 30);

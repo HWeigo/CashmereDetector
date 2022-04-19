@@ -26,6 +26,7 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 	fTimer->setInterval(10); // unit: ms
 	connect(fTimer, SIGNAL(timeout()), this, SLOT(on_timer_timeout()));
 
+#ifdef AREA_SELECTOR
 	// Set slider and spin box
 	connect(ui.spin_rotate, SIGNAL(valueChanged(int)), ui.slider_rotate, SLOT(setValue(int)));
 	connect(ui.slider_rotate, SIGNAL(valueChanged(int)), ui.spin_rotate, SLOT(setValue(int)));
@@ -41,13 +42,11 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 	ui.spin_selectorSize->setMinimum(0);
 	ui.slider_selectorSize->setMaximum(60);
 	ui.spin_selectorSize->setMaximum(60);
-	//ui.slider_selectorSize->setSingleStep(5);
-	//ui.spin_selectorSize->setSingleStep(5);
 	ui.spin_selectorSize->setValue(30);
-
+#endif // AREA_SELECTOR
 
 	// Clear result txt
-	ofstream file_writer("./result.txt", ios_base::out);
+	ofstream file_writer("./log/result.txt", ios_base::out);
 }
 
 void CashmereDetector::on_timer_timeout() {
@@ -70,6 +69,7 @@ void CashmereDetector::on_timer_timeout() {
 
 void CashmereDetector::wheelEvent(QWheelEvent * event)
 {
+#ifdef AREA_SELECTOR
 	if (!isSelectModeOn_)
 		return;
 	int val = ui.spin_selectorSize->value();
@@ -81,9 +81,11 @@ void CashmereDetector::wheelEvent(QWheelEvent * event)
 		ui.spin_selectorSize->setValue(val - step);
 	}
 	areaDetector_->DrawRactangle();
+#endif //AREA_SELECTOR
 }
 
 void CashmereDetector::keyPressEvent(QKeyEvent * event){
+#ifdef AREA_SELECTOR
 	if (event->key() == Qt::Key_Q) {
 		int val = ui.spin_rotate->value();
 		int step = 5;
@@ -93,8 +95,8 @@ void CashmereDetector::keyPressEvent(QKeyEvent * event){
 		int val = ui.spin_rotate->value();
 		int step = 5;
 		ui.spin_rotate->setValue(val + step);
-
 	}
+#endif //AREA_SELECTOR
 }
 
 // Helper function to sort string in natual order
@@ -209,9 +211,12 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 		}
 	}
 
+#ifdef AREA_SELECTOR
 	ui.spin_rotate->setValue(0);
+#endif
 	ui.label_mean->setText("-");
 	ui.label_length->setText("-");
+	ui.label_std->setText("-");
 }
 
 void CashmereDetector::on_pushButton_reset_clicked() {
@@ -254,8 +259,9 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 	ui.label_length->setText("-");
 	ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
 	
-	string outputMessage = "result: ";
+	string outputMessage = "classify result: ";
 	vector<string> resultList = { "Cashmere", "Wool", "Unknown" };
+	vector<string> resultListOutput = { "ÑòÈÞ", "ÑòÃ«", "Î´Öª" };
 	ui.label_result->setText(QString::fromStdString(resultList[autoDetector_->GetResult()]));
 	outputMessage += resultList[autoDetector_->GetResult()];
 
@@ -263,9 +269,9 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 	PushMessage(outputMessage);
 
 	// Output result
-	ofstream dout("./result.txt", ios::out | ios::app);
+	ofstream dout("./log/result.txt", ios::out | ios::app);
 	dout << autoDetector_->GetImgFilePath() << " ";
-	dout << resultList[autoDetector_->GetResult()] << endl;
+	dout << resultListOutput[autoDetector_->GetResult()] << endl;
 	dout.close();
 
 	//switch (autoDetector_->GetResult()) {
@@ -310,7 +316,10 @@ void CashmereDetector::on_pushButton_next_clicked() {
 	fTimer->start();
 	ui.resetAction->setEnabled(true);
 	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
+
+#ifdef AREA_SELECTOR
 	ui.spin_rotate->setValue(0);
+#endif
 	ui.label_mean->setText("-");
 	ui.label_length->setText("-");
 	ui.label_result->setText("-");
@@ -333,7 +342,10 @@ void CashmereDetector::on_pushButton_back_clicked() {
 	fTimer->start();
 	ui.resetAction->setEnabled(true);
 	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
+
+#ifdef AREA_SELECTOR
 	ui.spin_rotate->setValue(0);
+#endif
 	ui.label_mean->setText("-");
 	ui.label_length->setText("-");
 	ui.label_result->setText("-");
@@ -359,10 +371,25 @@ void CashmereDetector::on_pushButton_autoNext_clicked() {
 		ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
 
 		if (autoDetector_->AutoDetect()) {
+			++successCnt;
+
 			ui.label_length->setText("-");
 			ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
-			++successCnt;
+			
+			string outputMessage = "classify result: ";
+			vector<string> resultList = { "Cashmere", "Wool", "Unknown" };
+			vector<string> resultListOutput = { "ÑòÈÞ", "ÑòÃ«", "Î´Öª" };
+			ui.label_result->setText(QString::fromStdString(resultList[autoDetector_->GetResult()]));
+			outputMessage += resultList[autoDetector_->GetResult()];
+
 			PushMessage("auto detect done");
+			PushMessage(outputMessage);
+
+			// Output result
+			ofstream dout("./log/result.txt", ios::out | ios::app);
+			dout << autoDetector_->GetImgFilePath() << " ";
+			dout << resultListOutput[autoDetector_->GetResult()] << endl;
+			dout.close();
 		} else {
 			++failedCnt;
 			PushMessage("auto detect failed");
@@ -397,10 +424,25 @@ void CashmereDetector::on_pushButton_autoBack_clicked() {
 		ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
 
 		if (autoDetector_->AutoDetect()) {
+			++successCnt;
+
 			ui.label_length->setText("-");
 			ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
-			++successCnt;
+			
+			string outputMessage = "classify result: ";
+			vector<string> resultList = { "Cashmere", "Wool", "Unknown" };
+			vector<string> resultListOutput = { "ÑòÈÞ", "ÑòÃ«", "Î´Öª" };
+			ui.label_result->setText(QString::fromStdString(resultList[autoDetector_->GetResult()]));
+			outputMessage += resultList[autoDetector_->GetResult()];
+
 			PushMessage("auto detect done");
+			PushMessage(outputMessage);
+
+			// Output result
+			ofstream dout("./log/result.txt", ios::out | ios::app);
+			dout << autoDetector_->GetImgFilePath() << " ";
+			dout << resultListOutput[autoDetector_->GetResult()] << endl;
+			dout.close();
 		} else {
 			++failedCnt;
 			PushMessage("auto detect failed");
@@ -422,6 +464,7 @@ void CashmereDetector::on_pushButton_autoStop_clicked() {
 
 void CashmereDetector::on_pushButton_areaSelect_clicked()
 {
+#ifdef AREA_SELECTOR
 	if (areaDetector_->GetCurrImgRef().empty())
 		return;
 
@@ -436,7 +479,7 @@ void CashmereDetector::on_pushButton_areaSelect_clicked()
 	}
 
 	isSelectModeOn_ = !isSelectModeOn_;
-
+#endif
 }
 
 void CashmereDetector::on_spin_rotate_valueChanged(int val) {
