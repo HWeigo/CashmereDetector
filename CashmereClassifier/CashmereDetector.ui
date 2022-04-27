@@ -41,6 +41,20 @@
       <number>0</number>
      </property>
      <item>
+      <widget class="QPushButton" name="label_videoProcess">
+       <property name="text">
+        <string>图像自动采集</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="pushButton_pick">
        <property name="text">
         <string>直径测量</string>
@@ -383,7 +397,8 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>文件</string>
     </property>
-    <addaction name="openFileAction"/>
+    <addaction name="openFileAction_image"/>
+    <addaction name="openFileAction_video"/>
     <addaction name="resetAction"/>
    </widget>
    <addaction name="menuFile"/>
@@ -397,14 +412,19 @@ p, li { white-space: pre-wrap; }
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="openFileAction">
+  <action name="openFileAction_image">
    <property name="text">
-    <string>打开文件</string>
+    <string>打开图片</string>
    </property>
   </action>
   <action name="resetAction">
    <property name="text">
     <string>重置文件</string>
+   </property>
+  </action>
+  <action name="openFileAction_video">
+   <property name="text">
+    <string>打开视频</string>
    </property>
   </action>
  </widget>

@@ -23,51 +23,57 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\CashmereDetector.qrc">
+    <QtRcc Include="CashmereDetector.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\AreaDetector.cpp">
+    <ClCompile Include="AreaDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\AutoDetector.cpp">
+    <ClCompile Include="AutoDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\BaseDetector.cpp">
+    <ClCompile Include="BaseDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\CashmereDetector.cpp">
+    <ClCompile Include="CashmereDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\ManualDetector.cpp">
+    <ClCompile Include="ManualDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereClassifier\VideoDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\AreaDetector.h">
+    <ClInclude Include="AreaDetector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\AutoDetector.h">
+    <ClInclude Include="AutoDetector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\BaseDetector.h">
+    <ClInclude Include="BaseDetector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\ManualDetector.h">
+    <ClInclude Include="ManualDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereClassifier\VideoDetector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\CashmereDetector.h">
+    <QtMoc Include="CashmereDetector.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereClassifier\CashmereClassifier\CashmereDetector.ui">
+    <QtUic Include="CashmereDetector.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

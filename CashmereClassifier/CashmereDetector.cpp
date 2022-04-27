@@ -16,7 +16,8 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 	manuDetector_ = new ManualDetector(ui);
 	autoDetector_ = new AutoDetector(ui);
 	areaDetector_ = new AreaDetector(ui);
-
+	videoDetector_ = new VideoDetector(ui);
+	
 
 	ui.resetAction->setEnabled(false);
 	
@@ -161,7 +162,7 @@ void getFileNames(string path, vector<string>& files)
 	}
 }
 
-void CashmereDetector::on_openFileAction_triggered(bool checked)
+void CashmereDetector::on_openFileAction_image_triggered(bool checked)
 {
 	QString curPath = QDir::currentPath();
 	QString dlgTitle = "打开文件"; //对话框标题
@@ -184,7 +185,7 @@ void CashmereDetector::on_openFileAction_triggered(bool checked)
 	areaDetector_->LoadImg(filePath);
 	areaDetector_->ShowCurrImg();
 
-	PushMessage("open file");
+	PushMessage("open image file");
 	fTimer->start();
 	ui.resetAction->setEnabled(true);
 	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
@@ -227,6 +228,30 @@ void CashmereDetector::on_pushButton_reset_clicked() {
 		return;
 	}
 	manuDetector_->ResetCurrImg();
+}
+
+void CashmereDetector::on_openFileAction_video_triggered(bool checked)
+{
+	QString curPath = QDir::currentPath();
+	QString dlgTitle = "打开文件"; //对话框标题
+	QString filter = "mp4文件(*.mp4);;所有文件(*.*)"; //文件过滤器
+	QString fileName = QFileDialog::getOpenFileName(this, dlgTitle, curPath, filter);
+
+	if (fileName.isEmpty())
+	{
+		return;
+	}
+
+	QTextCodec *code = QTextCodec::codecForName("GB2312");//解决中文路径问题
+	string filePath = code->fromUnicode(fileName).data();
+
+
+	cout << filePath << endl;
+	videoDetector_->LoadVideo(filePath);
+
+
+	PushMessage("open video file");
+
 }
 
 void CashmereDetector::on_pushButton_pick_clicked() {

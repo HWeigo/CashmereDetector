@@ -30,6 +30,7 @@
 #include "ManualDetector.h"
 #include "AutoDetector.h"
 #include "AreaDetector.h"
+#include "VideoDetector.h"
 
 using namespace std;
 
@@ -58,7 +59,8 @@ public:
 	void PushMessage(string msg);
 
 public slots:
-	void on_openFileAction_triggered(bool checked);
+	void on_openFileAction_image_triggered(bool checked);
+	void on_openFileAction_video_triggered(bool checked);
 	//void on_resetAction_triggered();
 	void on_pushButton_pick_clicked();
 	void on_pushButton_autoDetect_clicked();
@@ -82,6 +84,7 @@ private:
 	ManualDetector *manuDetector_ = nullptr;
 	AutoDetector *autoDetector_ = nullptr;
 	AreaDetector *areaDetector_ = nullptr;
+	VideoDetector *videoDetector_ = nullptr;
 	
 	QTimer *fTimer; // Qt timer
 

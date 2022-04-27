@@ -64,6 +64,7 @@
     <QtUic Include="CashmereDetector.ui" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereClassifier\VideoDetector.cpp" />
     <ClCompile Include="AreaDetector.cpp" />
     <ClCompile Include="AutoDetector.cpp" />
     <ClCompile Include="BaseDetector.cpp" />
@@ -72,6 +73,7 @@
     <ClCompile Include="ManualDetector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereClassifier\VideoDetector.h" />
     <ClInclude Include="AreaDetector.h" />
     <ClInclude Include="AutoDetector.h" />
     <ClInclude Include="BaseDetector.h" />

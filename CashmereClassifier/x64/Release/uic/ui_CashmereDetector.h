@@ -34,12 +34,15 @@ QT_BEGIN_NAMESPACE
 class Ui_CashmereDetectorClass
 {
 public:
-    QAction *openFileAction;
+    QAction *openFileAction_image;
     QAction *resetAction;
+    QAction *openFileAction_video;
     QWidget *centralWidget;
     QWidget *widget;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
+    QPushButton *label_videoProcess;
+    QFrame *line_3;
     QPushButton *pushButton_pick;
     QPushButton *pushButton_reset;
     QPushButton *pushButton_saveCurr;
@@ -86,10 +89,12 @@ public:
         if (CashmereDetectorClass->objectName().isEmpty())
             CashmereDetectorClass->setObjectName(QStringLiteral("CashmereDetectorClass"));
         CashmereDetectorClass->resize(1355, 860);
-        openFileAction = new QAction(CashmereDetectorClass);
-        openFileAction->setObjectName(QStringLiteral("openFileAction"));
+        openFileAction_image = new QAction(CashmereDetectorClass);
+        openFileAction_image->setObjectName(QStringLiteral("openFileAction_image"));
         resetAction = new QAction(CashmereDetectorClass);
         resetAction->setObjectName(QStringLiteral("resetAction"));
+        openFileAction_video = new QAction(CashmereDetectorClass);
+        openFileAction_video->setObjectName(QStringLiteral("openFileAction_video"));
         centralWidget = new QWidget(CashmereDetectorClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         widget = new QWidget(centralWidget);
@@ -103,6 +108,18 @@ public:
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
+        label_videoProcess = new QPushButton(verticalLayoutWidget);
+        label_videoProcess->setObjectName(QStringLiteral("label_videoProcess"));
+
+        verticalLayout->addWidget(label_videoProcess);
+
+        line_3 = new QFrame(verticalLayoutWidget);
+        line_3->setObjectName(QStringLiteral("line_3"));
+        line_3->setFrameShape(QFrame::HLine);
+        line_3->setFrameShadow(QFrame::Sunken);
+
+        verticalLayout->addWidget(line_3);
+
         pushButton_pick = new QPushButton(verticalLayoutWidget);
         pushButton_pick->setObjectName(QStringLiteral("pushButton_pick"));
 
@@ -306,7 +323,8 @@ public:
         CashmereDetectorClass->setStatusBar(statusBar);
 
         menuBar->addAction(menuFile->menuAction());
-        menuFile->addAction(openFileAction);
+        menuFile->addAction(openFileAction_image);
+        menuFile->addAction(openFileAction_video);
         menuFile->addAction(resetAction);
 
         retranslateUi(CashmereDetectorClass);
@@ -318,8 +336,10 @@ public:
     void retranslateUi(QMainWindow *CashmereDetectorClass)
     {
         CashmereDetectorClass->setWindowTitle(QApplication::translate("CashmereDetectorClass", "CashmereDetector", Q_NULLPTR));
-        openFileAction->setText(QApplication::translate("CashmereDetectorClass", "\346\211\223\345\274\200\346\226\207\344\273\266", Q_NULLPTR));
+        openFileAction_image->setText(QApplication::translate("CashmereDetectorClass", "\346\211\223\345\274\200\345\233\276\347\211\207", Q_NULLPTR));
         resetAction->setText(QApplication::translate("CashmereDetectorClass", "\351\207\215\347\275\256\346\226\207\344\273\266", Q_NULLPTR));
+        openFileAction_video->setText(QApplication::translate("CashmereDetectorClass", "\346\211\223\345\274\200\350\247\206\351\242\221", Q_NULLPTR));
+        label_videoProcess->setText(QApplication::translate("CashmereDetectorClass", "\345\233\276\345\203\217\350\207\252\345\212\250\351\207\207\351\233\206", Q_NULLPTR));
         pushButton_pick->setText(QApplication::translate("CashmereDetectorClass", "\347\233\264\345\276\204\346\265\213\351\207\217", Q_NULLPTR));
         pushButton_reset->setText(QApplication::translate("CashmereDetectorClass", "\351\207\215\347\275\256\345\233\276\345\203\217", Q_NULLPTR));
         pushButton_saveCurr->setText(QApplication::translate("CashmereDetectorClass", "\344\277\235\345\255\230\345\233\276\345\203\217", Q_NULLPTR));
