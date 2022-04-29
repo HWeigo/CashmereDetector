@@ -17,6 +17,11 @@ enum TYPE {CASHMERE = 0, WOOL, UNKNOWN, NONE};
 
 #define INPUT_ORI
 #define HALCON_REGION_DETECT
+
+void HObject2Mat(const HObject &_Hobj, cv::Mat &outMat);
+HalconCpp::HObject MatToHObject(const cv::Mat &image);
+HalconCpp::HImage MatToHImage(const cv::Mat &image);
+
 class AutoDetector : public BaseDetector
 {
 private:

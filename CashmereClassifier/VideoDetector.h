@@ -13,5 +13,8 @@ public:
 	void LoadVideo(string filePath);
 
 	void ShowVideo();
+
+	void VideoAutoCrop();
+
 };
 
