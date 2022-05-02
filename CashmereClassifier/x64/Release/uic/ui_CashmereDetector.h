@@ -41,7 +41,7 @@ public:
     QWidget *widget;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
-    QPushButton *label_videoProcess;
+    QPushButton *pushButton_videoProcess;
     QFrame *line_3;
     QPushButton *pushButton_pick;
     QPushButton *pushButton_reset;
@@ -108,10 +108,10 @@ public:
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        label_videoProcess = new QPushButton(verticalLayoutWidget);
-        label_videoProcess->setObjectName(QStringLiteral("label_videoProcess"));
+        pushButton_videoProcess = new QPushButton(verticalLayoutWidget);
+        pushButton_videoProcess->setObjectName(QStringLiteral("pushButton_videoProcess"));
 
-        verticalLayout->addWidget(label_videoProcess);
+        verticalLayout->addWidget(pushButton_videoProcess);
 
         line_3 = new QFrame(verticalLayoutWidget);
         line_3->setObjectName(QStringLiteral("line_3"));
@@ -339,7 +339,7 @@ public:
         openFileAction_image->setText(QApplication::translate("CashmereDetectorClass", "\346\211\223\345\274\200\345\233\276\347\211\207", Q_NULLPTR));
         resetAction->setText(QApplication::translate("CashmereDetectorClass", "\351\207\215\347\275\256\346\226\207\344\273\266", Q_NULLPTR));
         openFileAction_video->setText(QApplication::translate("CashmereDetectorClass", "\346\211\223\345\274\200\350\247\206\351\242\221", Q_NULLPTR));
-        label_videoProcess->setText(QApplication::translate("CashmereDetectorClass", "\345\233\276\345\203\217\350\207\252\345\212\250\351\207\207\351\233\206", Q_NULLPTR));
+        pushButton_videoProcess->setText(QApplication::translate("CashmereDetectorClass", "\345\233\276\345\203\217\350\207\252\345\212\250\351\207\207\351\233\206", Q_NULLPTR));
         pushButton_pick->setText(QApplication::translate("CashmereDetectorClass", "\347\233\264\345\276\204\346\265\213\351\207\217", Q_NULLPTR));
         pushButton_reset->setText(QApplication::translate("CashmereDetectorClass", "\351\207\215\347\275\256\345\233\276\345\203\217", Q_NULLPTR));
         pushButton_saveCurr->setText(QApplication::translate("CashmereDetectorClass", "\344\277\235\345\255\230\345\233\276\345\203\217", Q_NULLPTR));

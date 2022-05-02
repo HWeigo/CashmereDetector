@@ -14,7 +14,7 @@ public:
 
 	void ShowVideo();
 
-	void VideoAutoCrop();
+	int VideoAutoCrop();
 
 };
 

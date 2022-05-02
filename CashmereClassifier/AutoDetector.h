@@ -21,6 +21,7 @@ enum TYPE {CASHMERE = 0, WOOL, UNKNOWN, NONE};
 void HObject2Mat(const HObject &_Hobj, cv::Mat &outMat);
 HalconCpp::HObject MatToHObject(const cv::Mat &image);
 HalconCpp::HImage MatToHImage(const cv::Mat &image);
+vector<Mat> MultiRegionDetect(Mat &srcImg);
 
 class AutoDetector : public BaseDetector
 {

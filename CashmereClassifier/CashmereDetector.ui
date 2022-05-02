@@ -41,7 +41,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QPushButton" name="label_videoProcess">
+      <widget class="QPushButton" name="pushButton_videoProcess">
        <property name="text">
         <string>图像自动采集</string>
        </property>

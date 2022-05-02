@@ -319,6 +319,15 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 
 }
 
+void CashmereDetector::on_pushButton_videoProcess_clicked()
+{
+	int cnt = videoDetector_->VideoAutoCrop();
+	if (cnt == -1)
+		return;
+	PushMessage("finish auto crop");
+	PushMessage("total: " + to_string(cnt));
+}
+
 void CashmereDetector::on_pushButton_scalesDetect_clicked() {
 	//Mat curr = autoDetector->GetCurrImg();
 	//imshow("t", curr);

@@ -64,6 +64,7 @@ public slots:
 	//void on_resetAction_triggered();
 	void on_pushButton_pick_clicked();
 	void on_pushButton_autoDetect_clicked();
+	void on_pushButton_videoProcess_clicked();
 	void on_pushButton_reset_clicked();
 	void on_pushButton_saveCurr_clicked();
 	void on_pushButton_scalesDetect_clicked();
