@@ -169,8 +169,8 @@ void CashmereDetector::on_openFileAction_image_triggered(bool checked)
 	QString filter = "jpg文件(*.jpg);;所有文件(*.*)"; //文件过滤器
 	QString fileName = QFileDialog::getOpenFileName(this, dlgTitle, curPath, filter);
 
-	if (fileName.isEmpty())
-	{
+	if (fileName.isEmpty()) {
+		PushMessage("no crop image found");
 		return;
 	}
 
@@ -185,7 +185,7 @@ void CashmereDetector::on_openFileAction_image_triggered(bool checked)
 	areaDetector_->LoadImg(filePath);
 	areaDetector_->ShowCurrImg();
 
-	PushMessage("open image file");
+	PushMessage("load crop images");
 	fTimer->start();
 	ui.resetAction->setEnabled(true);
 	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
@@ -284,39 +284,49 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 	ui.label_length->setText("-");
 	ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
 	
-	string outputMessage = "classify result: ";
+	vector<TYPE> results = autoDetector_->GetResults();
+	string outputMessage = "classify result:\n";
 	vector<string> resultList = { "Cashmere", "Wool", "Unknown" };
 	vector<string> resultListOutput = { "羊绒", "羊毛", "未知" };
-	ui.label_result->setText(QString::fromStdString(resultList[autoDetector_->GetResult()]));
-	outputMessage += resultList[autoDetector_->GetResult()];
+
+	// Output result
+	ofstream dout("./log/result.txt", ios::out | ios::app);
+
+	if (results.empty()) {
+		string resultMessage;
+		dout << autoDetector_->GetImgFilePath() << " ";
+		resultMessage += to_string(0) + ": " + resultList[UNKNOWN];
+		dout << 0 << ": ";
+		dout << resultListOutput[UNKNOWN] << " ";
+		ui.label_result->setText(QString::fromStdString(resultMessage));
+		outputMessage += resultMessage;
+	}
+	else {
+		int num = results.size();
+
+		string resultMessage;
+		dout << autoDetector_->GetImgFilePath() << " ";
+		for (int i = 0; i < num; ++i) {
+			resultMessage += to_string(i) + ": " + resultList[results[i]];
+			resultMessage += "\n";
+			dout << i << ": ";
+			dout << resultListOutput[results[i]] << " ";
+		}
+		resultMessage.pop_back();
+
+		ui.label_result->setText(QString::fromStdString(resultMessage));
+		outputMessage += resultMessage;
+	}
+	//ui.label_result->setText(QString::fromStdString(resultList[autoDetector_->GetResult()]));
+	//outputMessage += resultList[autoDetector_->GetResult()];
 
 	PushMessage("auto detect done");
 	PushMessage(outputMessage);
 
-	// Output result
-	ofstream dout("./log/result.txt", ios::out | ios::app);
-	dout << autoDetector_->GetImgFilePath() << " ";
-	dout << resultListOutput[autoDetector_->GetResult()] << endl;
+	//dout << autoDetector_->GetImgFilePath() << " ";
+	//dout << resultListOutput[autoDetector_->GetResult()] << endl;
+	dout << endl;
 	dout.close();
-
-	//switch (autoDetector_->GetResult()) {
-	//case CASHMERE:
-	//	ui.label_result->setText("Cashmere");
-	//	outputMessage += "Cashmere";
-	//	dout << "Cashmere" << endl;
-	//	break;
-	//case WOOL:
-	//	ui.label_result->setText("Wool");
-	//	outputMessage += "Wool";
-	//	break;
-	//case UNKNOWN:
-	//	ui.label_result->setText("Unknown");
-	//	outputMessage += "Unknown";
-	//	break;
-	//default:
-	//	break;
-	//}
-
 }
 
 void CashmereDetector::on_pushButton_videoProcess_clicked()
@@ -326,6 +336,40 @@ void CashmereDetector::on_pushButton_videoProcess_clicked()
 		return;
 	PushMessage("finish auto crop");
 	PushMessage("total: " + to_string(cnt));
+}
+
+void CashmereDetector::on_pushButton_loadCropImgs_clicked() {
+	string root = videoDetector_->GetCropsRoot();
+	cout << "root: " << root << endl;
+	filepaths_.clear();
+	getFileNames(root, filepaths_);
+	if (filepaths_.empty())
+		return;
+	// Natural order sort 
+	sort(filepaths_.begin(), filepaths_.end(), compareNat);
+
+	currIdx_ = 0;
+	string filePath = filepaths_[0];
+
+	cout << filePath << endl;
+
+	manuDetector_->LoadImg(filePath);
+	autoDetector_->LoadImg(filePath);
+	areaDetector_->LoadImg(filePath);
+	areaDetector_->ShowCurrImg();
+
+	PushMessage("open image file");
+	fTimer->start();
+	ui.resetAction->setEnabled(true);
+	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
+	
+#ifdef AREA_SELECTOR
+	ui.spin_rotate->setValue(0);
+#endif
+	ui.label_mean->setText("-");
+	ui.label_length->setText("-");
+	ui.label_std->setText("-");
+
 }
 
 void CashmereDetector::on_pushButton_scalesDetect_clicked() {
@@ -410,20 +454,46 @@ void CashmereDetector::on_pushButton_autoNext_clicked() {
 			ui.label_length->setText("-");
 			ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
 			
-			string outputMessage = "classify result: ";
+			vector<TYPE> results = autoDetector_->GetResults();
+			string outputMessage = "classify result:\n";
 			vector<string> resultList = { "Cashmere", "Wool", "Unknown" };
 			vector<string> resultListOutput = { "羊绒", "羊毛", "未知" };
-			ui.label_result->setText(QString::fromStdString(resultList[autoDetector_->GetResult()]));
-			outputMessage += resultList[autoDetector_->GetResult()];
+
+			// Output result
+			ofstream dout("./log/result.txt", ios::out | ios::app);
+
+			if (results.empty()) {
+				string resultMessage;
+				dout << autoDetector_->GetImgFilePath() << " ";
+				resultMessage += to_string(0) + ": " + resultList[UNKNOWN];
+				dout << 0 << ": ";
+				dout << resultListOutput[UNKNOWN] << " ";
+				ui.label_result->setText(QString::fromStdString(resultMessage));
+				outputMessage += resultMessage;
+			}
+			else {
+				int num = results.size();
+
+				string resultMessage;
+				dout << autoDetector_->GetImgFilePath() << " ";
+				for (int i = 0; i < num; ++i) {
+					resultMessage += to_string(i) + ": " + resultList[results[i]];
+					resultMessage += "\n";
+					dout << i << ": ";
+					dout << resultListOutput[results[i]] << " ";
+				}
+				resultMessage.pop_back();
+
+				ui.label_result->setText(QString::fromStdString(resultMessage));
+				outputMessage += resultMessage;
+			}
 
 			PushMessage("auto detect done");
 			PushMessage(outputMessage);
 
-			// Output result
-			ofstream dout("./log/result.txt", ios::out | ios::app);
-			dout << autoDetector_->GetImgFilePath() << " ";
-			dout << resultListOutput[autoDetector_->GetResult()] << endl;
+			dout << endl;
 			dout.close();
+
 		} else {
 			++failedCnt;
 			PushMessage("auto detect failed");
@@ -463,20 +533,46 @@ void CashmereDetector::on_pushButton_autoBack_clicked() {
 			ui.label_length->setText("-");
 			ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
 			
-			string outputMessage = "classify result: ";
+			vector<TYPE> results = autoDetector_->GetResults();
+			string outputMessage = "classify result:\n";
 			vector<string> resultList = { "Cashmere", "Wool", "Unknown" };
 			vector<string> resultListOutput = { "羊绒", "羊毛", "未知" };
-			ui.label_result->setText(QString::fromStdString(resultList[autoDetector_->GetResult()]));
-			outputMessage += resultList[autoDetector_->GetResult()];
+
+			// Output result
+			ofstream dout("./log/result.txt", ios::out | ios::app);
+
+			if (results.empty()) {
+				string resultMessage;
+				dout << autoDetector_->GetImgFilePath() << " ";
+				resultMessage += to_string(0) + ": " + resultList[UNKNOWN];
+				dout << 0 << ": ";
+				dout << resultListOutput[UNKNOWN] << " ";
+				ui.label_result->setText(QString::fromStdString(resultMessage));
+				outputMessage += resultMessage;
+			}
+			else {
+				int num = results.size();
+
+				string resultMessage;
+				dout << autoDetector_->GetImgFilePath() << " ";
+				for (int i = 0; i < num; ++i) {
+					resultMessage += to_string(i) + ": " + resultList[results[i]];
+					resultMessage += "\n";
+					dout << i << ": ";
+					dout << resultListOutput[results[i]] << " ";
+				}
+				resultMessage.pop_back();
+
+				ui.label_result->setText(QString::fromStdString(resultMessage));
+				outputMessage += resultMessage;
+			}
 
 			PushMessage("auto detect done");
 			PushMessage(outputMessage);
 
-			// Output result
-			ofstream dout("./log/result.txt", ios::out | ios::app);
-			dout << autoDetector_->GetImgFilePath() << " ";
-			dout << resultListOutput[autoDetector_->GetResult()] << endl;
+			dout << endl;
 			dout.close();
+
 		} else {
 			++failedCnt;
 			PushMessage("auto detect failed");

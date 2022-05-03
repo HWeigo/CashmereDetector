@@ -50,6 +50,7 @@ private:
 	int levelNum_ = 5;
 	
 	TYPE result_ = NONE;
+	vector<TYPE> results_;
 
 	void FillNeighbor(Mat &img, Point point, int layer, vector<Point> &list);
 	void ThinningIteration(Mat& im, int iter);
@@ -96,6 +97,7 @@ public:
 
 	double GetLength();
 	TYPE GetResult() { return result_; };
+	vector<TYPE> GetResults() { return results_; };
 	void ScalesDetect();
 };
 

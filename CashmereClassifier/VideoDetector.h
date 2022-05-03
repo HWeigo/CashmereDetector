@@ -7,6 +7,8 @@ private:
 	Mat currImg_;
 	VideoCapture capture_;
 
+	string autoCropsRoot = "./videoCrops/";
+
 public:
 	VideoDetector(Ui::CashmereDetectorClass ui);
 
@@ -15,6 +17,10 @@ public:
 	void ShowVideo();
 
 	int VideoAutoCrop();
+
+	//int VideoAutoCrop(CashmereDetector *ui);
+
+	string GetCropsRoot() { return autoCropsRoot; };
 
 };
 

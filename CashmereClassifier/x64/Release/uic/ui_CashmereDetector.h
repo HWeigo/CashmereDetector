@@ -41,8 +41,12 @@ public:
     QWidget *widget;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
+    QLabel *label;
+    QPushButton *pushButton_playVideo;
     QPushButton *pushButton_videoProcess;
+    QPushButton *pushButton_loadCropImgs;
     QFrame *line_3;
+    QLabel *label_2;
     QPushButton *pushButton_pick;
     QPushButton *pushButton_reset;
     QPushButton *pushButton_saveCurr;
@@ -58,9 +62,12 @@ public:
     QFrame *line_2;
     QPushButton *pushButton_autoDetect;
     QWidget *widget_7;
-    QHBoxLayout *horizontalLayout_5;
+    QHBoxLayout *horizontalLayout;
+    QWidget *widget_2;
+    QVBoxLayout *verticalLayout_2;
     QLabel *label_3;
     QLabel *label_result;
+    QSpacerItem *horizontalSpacer_5;
     QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer;
@@ -102,23 +109,57 @@ public:
         widget->setGeometry(QRect(350, 50, 960, 720));
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 781));
+        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 761));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(7);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
+        label = new QLabel(verticalLayoutWidget);
+        label->setObjectName(QStringLiteral("label"));
+        QFont font;
+        font.setPointSize(11);
+        font.setBold(true);
+        font.setItalic(false);
+        font.setUnderline(true);
+        font.setWeight(75);
+        label->setFont(font);
+        label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout->addWidget(label);
+
+        pushButton_playVideo = new QPushButton(verticalLayoutWidget);
+        pushButton_playVideo->setObjectName(QStringLiteral("pushButton_playVideo"));
+
+        verticalLayout->addWidget(pushButton_playVideo);
+
         pushButton_videoProcess = new QPushButton(verticalLayoutWidget);
         pushButton_videoProcess->setObjectName(QStringLiteral("pushButton_videoProcess"));
 
         verticalLayout->addWidget(pushButton_videoProcess);
 
+        pushButton_loadCropImgs = new QPushButton(verticalLayoutWidget);
+        pushButton_loadCropImgs->setObjectName(QStringLiteral("pushButton_loadCropImgs"));
+
+        verticalLayout->addWidget(pushButton_loadCropImgs);
+
         line_3 = new QFrame(verticalLayoutWidget);
         line_3->setObjectName(QStringLiteral("line_3"));
+        QFont font1;
+        font1.setBold(true);
+        font1.setWeight(75);
+        line_3->setFont(font1);
         line_3->setFrameShape(QFrame::HLine);
         line_3->setFrameShadow(QFrame::Sunken);
 
         verticalLayout->addWidget(line_3);
+
+        label_2 = new QLabel(verticalLayoutWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setFont(font);
+        label_2->setAlignment(Qt::AlignCenter);
+
+        verticalLayout->addWidget(label_2);
 
         pushButton_pick = new QPushButton(verticalLayoutWidget);
         pushButton_pick->setObjectName(QStringLiteral("pushButton_pick"));
@@ -191,6 +232,11 @@ public:
 
         line_2 = new QFrame(verticalLayoutWidget);
         line_2->setObjectName(QStringLiteral("line_2"));
+        QFont font2;
+        font2.setPointSize(9);
+        font2.setBold(false);
+        font2.setWeight(50);
+        line_2->setFont(font2);
         line_2->setFrameShape(QFrame::HLine);
         line_2->setFrameShadow(QFrame::Sunken);
 
@@ -204,25 +250,39 @@ public:
 
         widget_7 = new QWidget(verticalLayoutWidget);
         widget_7->setObjectName(QStringLiteral("widget_7"));
-        horizontalLayout_5 = new QHBoxLayout(widget_7);
-        horizontalLayout_5->setSpacing(6);
-        horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
-        label_3 = new QLabel(widget_7);
+        horizontalLayout = new QHBoxLayout(widget_7);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        widget_2 = new QWidget(widget_7);
+        widget_2->setObjectName(QStringLiteral("widget_2"));
+        verticalLayout_2 = new QVBoxLayout(widget_2);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        label_3 = new QLabel(widget_2);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setMaximumSize(QSize(140, 16777215));
 
-        horizontalLayout_5->addWidget(label_3);
+        verticalLayout_2->addWidget(label_3);
 
-        label_result = new QLabel(widget_7);
+        label_result = new QLabel(widget_2);
         label_result->setObjectName(QStringLiteral("label_result"));
+        label_result->setMinimumSize(QSize(145, 0));
 
-        horizontalLayout_5->addWidget(label_result);
+        verticalLayout_2->addWidget(label_result);
+
+
+        horizontalLayout->addWidget(widget_2);
+
+        horizontalSpacer_5 = new QSpacerItem(25, 26, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_5);
 
 
         verticalLayout->addWidget(widget_7);
 
-        verticalSpacer_2 = new QSpacerItem(20, 67, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_2 = new QSpacerItem(20, 75, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer_2);
 
@@ -339,7 +399,11 @@ public:
         openFileAction_image->setText(QApplication::translate("CashmereDetectorClass", "\346\211\223\345\274\200\345\233\276\347\211\207", Q_NULLPTR));
         resetAction->setText(QApplication::translate("CashmereDetectorClass", "\351\207\215\347\275\256\346\226\207\344\273\266", Q_NULLPTR));
         openFileAction_video->setText(QApplication::translate("CashmereDetectorClass", "\346\211\223\345\274\200\350\247\206\351\242\221", Q_NULLPTR));
+        label->setText(QApplication::translate("CashmereDetectorClass", "- \350\247\206\351\242\221\351\207\207\351\233\206 -", Q_NULLPTR));
+        pushButton_playVideo->setText(QApplication::translate("CashmereDetectorClass", "\346\222\255\346\224\276\350\247\206\351\242\221", Q_NULLPTR));
         pushButton_videoProcess->setText(QApplication::translate("CashmereDetectorClass", "\345\233\276\345\203\217\350\207\252\345\212\250\351\207\207\351\233\206", Q_NULLPTR));
+        pushButton_loadCropImgs->setText(QApplication::translate("CashmereDetectorClass", "\350\275\275\345\205\245\351\207\207\351\233\206\346\225\260\346\215\256", Q_NULLPTR));
+        label_2->setText(QApplication::translate("CashmereDetectorClass", "- \345\233\276\345\203\217\350\257\206\345\210\253 -", Q_NULLPTR));
         pushButton_pick->setText(QApplication::translate("CashmereDetectorClass", "\347\233\264\345\276\204\346\265\213\351\207\217", Q_NULLPTR));
         pushButton_reset->setText(QApplication::translate("CashmereDetectorClass", "\351\207\215\347\275\256\345\233\276\345\203\217", Q_NULLPTR));
         pushButton_saveCurr->setText(QApplication::translate("CashmereDetectorClass", "\344\277\235\345\255\230\345\233\276\345\203\217", Q_NULLPTR));

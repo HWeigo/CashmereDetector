@@ -208,7 +208,8 @@ vector<Mat> MultiRegionDetect(Mat &srcImg) {
 		Mat dstImg;
 		HObject2Mat(ho_BinImage, dstImg);
 		ret.push_back(dstImg);
-	} else {
+	}
+	else {
 		{
 			HTuple end_val97 = hv_Number;
 			HTuple step_val97 = 1;
@@ -237,10 +238,10 @@ bool AutoDetector::AutoDetect() {
 #ifdef HALCON_REGION_DETECT
 	//RegionDetect();
 
-	//Mat inputImg = GetCurrImg();
-	//vector<Mat> regionImgs = MultiRegionDetect(inputImg);
-	//if (regionImgs.empty())
-	//	return true;
+	Mat inputImg = GetCurrImg();
+	vector<Mat> regionImgs = MultiRegionDetect(inputImg);
+	if (regionImgs.empty())
+		return true;
 #else
 	//regionImg_ = Mat::zeros(GetCurrImg().size(), CV_8UC1);
 	RegionDetectOpenCV(GetCurrImg(), regionImg_);
@@ -250,27 +251,34 @@ bool AutoDetector::AutoDetect() {
 	BinaryDetect();
 #endif // INPUT_ORI
 
-	bool isSuccess = false;
-	//cout << "detect num: " << regionImgs.size() << endl;
-	//for (int i = 0; i < regionImgs.size(); ++i) {
-	//	imshow("win", regionImgs[i]);
-	//	regionImg_ = regionImgs[i];
-	//	imwrite("result/regionImg.bmp", regionImg_);
-	//	regionImg_.copyTo(regionImgStore_);
-	//	double timer_mid = double(clock() / 1000.0);
-	//	//skeletonPoints_.swap(vector<Point>());
-	//	skeletonPoints_.clear();
+	int failCnt = 0;
+	cout << "detect num: " << regionImgs.size() << endl;
+	for (int i = 0; i < regionImgs.size(); ++i) {
+		skeletonPoints_.clear();
+		skeletonPointsSort_.clear();
+		cropImgs.clear();
 
-	//	isSuccess = SkeletonDetect();
-	//	if (!isSuccess)
-	//		return false;
-	//	double timer_end = double(clock() / 1000.0);
-	//	cout << "auto detect time use: " << timer_end - timer_mid << " s" << endl;
-	//	//DiameterStdCompute();
+		//imwrite(to_string(i) + "_region.jpg", regionImgs[i]);
+		//imwrite(to_string(i) + "_ori.jpg", GetCurrImg());
+		regionImg_ = regionImgs[i];
+		//imwrite("result/regionImg.bmp", regionImg_);
+		regionImg_.copyTo(regionImgStore_);
+		double timer_mid = double(clock() / 1000.0);
 
-	//	ResNetClassify("./resnet164.pt");
-	//}
-	return isSuccess;
+		if (!SkeletonDetect()) {
+			++failCnt;
+			continue;
+		}
+		imwrite(to_string(i) + "_ski.jpg", skeletonImg_);
+		imwrite(to_string(i) + "_str.jpg", strightImg_);
+		double timer_end = double(clock() / 1000.0);
+		cout << "auto detect time use: " << timer_end - timer_mid << " s" << endl;
+		//DiameterStdCompute();
+
+		ResNetClassify("./resnet164.pt");
+	}
+
+	return failCnt != regionImgs.size();
 }
 
 void AutoDetector::RegionDetect() {
@@ -744,8 +752,13 @@ void AutoDetector::StraightenImg() {
 void AutoDetector::Clear()
 {
 	length_ = 0;
+
 	skeletonPoints_.clear();
 	skeletonPointsSort_.clear();
+	cropImgs.clear();
+
+
+	results_.clear();
 }
 
 // Reference: https://github.com/krishraghuram/Zhang-Suen-Skeletonization/blob/master/skeletonization.hpp
@@ -901,7 +914,7 @@ bool AutoDetector::SkeletonDetect() {
 	//imshow("bfsMap", bfsMap);
 	length_ = layer * 2;
 
-	//cout << "thickness: " << length_ << endl;
+	cout << "thickness: " << length_ << endl;
 
 
 #ifdef SKELETON_IMSHOW
@@ -930,7 +943,11 @@ bool AutoDetector::SkeletonDetect() {
 	//medianBlur(straightenImg_, straightenImg_, 3);
 	//GaussianBlur(straightenImg_, straightenImg_, Size(3, 3), 15);
 
+	cout << strightImg_.rows << " " << strightImg_.cols << endl;
 	CropImage();
+	if (cropImgs.empty())
+		return false;
+	cout << cropImgs.size() << endl;
 #endif // ZHANG_SUEN_SKELETONIZATION
 
 
@@ -955,7 +972,7 @@ bool AutoDetector::SkeletonDetect() {
 	if (stdev > 0)
 		dout3 << stdev << endl;
 	dout3.close();
-			}
+}
 
 vector<double> AutoDetector::polyfit(vector<Point>& srcPoints)
 {
@@ -1055,9 +1072,11 @@ void AutoDetector::OutputSkeleton()
 void AutoDetector::CropImage() {
 	cropImgs.clear();
 	int straightenWidth = strightImg_.cols;
+	if (straightenWidth < rectWidth_)
+		return;
 
 	int x = 0;
-	int step = 50;
+	int step = 30;
 	int cropCnt = 0;
 	while (x + rectWidth_ < straightenWidth) {
 		Point topleft(x, 0);
@@ -1066,7 +1085,7 @@ void AutoDetector::CropImage() {
 		Mat cropImg(strightImg_);
 		cropImg(cropRect).copyTo(cropImg);
 
-		bool isSuccess = DefectDetection(cropImg);
+		//bool isSuccess = DefectDetection(cropImg);
 		//if (!isSuccess && x == 0) {
 		//	// Do not save the first image if failed defect detection
 		//	x += step;
@@ -1149,12 +1168,15 @@ int AutoDetector::ResNetClassify(string &&filename) {
 
 	if (vote[CASHMERE] == vote[WOOL]) {
 		result_ = UNKNOWN;
+		results_.push_back(UNKNOWN);
 	}
 	else if (vote[CASHMERE] > vote[WOOL]) {
 		result_ = CASHMERE;
+		results_.push_back(CASHMERE);
 	}
 	else {
 		result_ = WOOL;
+		results_.push_back(WOOL);
 	}
 
 

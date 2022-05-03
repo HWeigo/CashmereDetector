@@ -1,6 +1,7 @@
 ﻿#include "VideoDetector.h"
 #include "AutoDetector.h"
 
+#include "CashmereDetector.h"
 VideoDetector::VideoDetector(Ui::CashmereDetectorClass ui) : BaseDetector(ui) {
 
 }
@@ -168,7 +169,6 @@ int VideoDetector::VideoAutoCrop() {
 	int conFrameCnt = 0;
 	bool storedFlag = false;
 	
-	string storeFileName = "./videoCrops/";
 	int storeCnt = 0;
 
 	vector<Mat> tmpFrameVec;
@@ -210,7 +210,9 @@ int VideoDetector::VideoAutoCrop() {
 					Mat toStoreImg = tmpFrameVec[tmpFrameVec.size() / 2];
 					vector<Mat> regionImgs = MultiRegionDetect(toStoreImg);
 					if (!regionImgs.empty()) {
-						imwrite(storeFileName + to_string(++storeCnt) + ".png", toStoreImg);
+						imwrite(autoCropsRoot + "autocrop_" + to_string(++storeCnt) + ".png", toStoreImg);
+						//ui->PushMessage("detect " + to_string(regionImgs.size()) + " fiber");
+						//ui->PushMessage("croping image");
 						cout << "img save" << endl;
 						++cropCnt;
 					}

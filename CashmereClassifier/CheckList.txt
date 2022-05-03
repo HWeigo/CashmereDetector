@@ -99,3 +99,14 @@ sw0220 3.51 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw02
 sw0239 4.67653 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0239.jpg
 sw0247 3.87936 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0247.jpg
 sw0287 6.74817 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0287.jpg
+2 7.52944 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/2.png
+2 7.52944 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/2.png
+2 7.52944 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/2.png
+2 7.52944 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/2.png
+2 7.52944 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/2.png
+2 7.52944 ./videoCrops/2.png
+3 7.52944 ./videoCrops/3.png
+3 7.52944 ./videoCrops/3.png
+3 7.52944 ./videoCrops/3.png
+3 7.52944 ./videoCrops/3.png
+autocrop_3 7.52944 ./videoCrops/autocrop_3.png
