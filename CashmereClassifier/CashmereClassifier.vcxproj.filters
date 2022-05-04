@@ -49,6 +49,9 @@
     <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereClassifier\VideoDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereClassifier\SubjectObserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AreaDetector.h">
@@ -64,6 +67,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereClassifier\VideoDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\OneDrive%40sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\CashmereClassifier\SubjectObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

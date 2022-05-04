@@ -331,11 +331,12 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 
 void CashmereDetector::on_pushButton_videoProcess_clicked()
 {
-	int cnt = videoDetector_->VideoAutoCrop();
+	int cnt = videoDetector_->VideoAutoCrop(this);
 	if (cnt == -1)
 		return;
 	PushMessage("finish auto crop");
-	PushMessage("total: " + to_string(cnt));
+	PushMessage("total: " + to_string(cnt) + " images");
+	PushMessage("save files to folder: " + videoDetector_->GetCropsRoot());
 }
 
 void CashmereDetector::on_pushButton_loadCropImgs_clicked() {

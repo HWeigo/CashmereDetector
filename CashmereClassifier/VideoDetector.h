@@ -1,5 +1,10 @@
 #pragma once
 #include "BaseDetector.h"
+#include "CashmereDetector.h"
+
+
+class CashmereDetector;
+
 class VideoDetector :
 	public BaseDetector
 {
@@ -16,9 +21,10 @@ public:
 
 	void ShowVideo();
 
-	int VideoAutoCrop();
+	//int VideoAutoCrop();
+	int VideoAutoCrop(CashmereDetector *ui);
 
-	//int VideoAutoCrop(CashmereDetector *ui);
+	//int update(CashmereDetector *ui);
 
 	string GetCropsRoot() { return autoCropsRoot; };
 

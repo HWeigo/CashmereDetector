@@ -32,7 +32,11 @@
 #include "AreaDetector.h"
 #include "VideoDetector.h"
 
+//#include "SubjectObserver.h"
+
 using namespace std;
+
+class VideoDetector;
 
 class WorkerThread : public QThread
 {

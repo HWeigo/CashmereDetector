@@ -106,10 +106,10 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         widget = new QWidget(centralWidget);
         widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(350, 50, 960, 720));
+        widget->setGeometry(QRect(370, 50, 960, 720));
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 761));
+        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 781));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(7);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -256,19 +256,21 @@ public:
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         widget_2 = new QWidget(widget_7);
         widget_2->setObjectName(QStringLiteral("widget_2"));
+        widget_2->setMinimumSize(QSize(0, 94));
         verticalLayout_2 = new QVBoxLayout(widget_2);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         label_3 = new QLabel(widget_2);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setMaximumSize(QSize(140, 16777215));
+        label_3->setMaximumSize(QSize(140, 20));
 
         verticalLayout_2->addWidget(label_3);
 
         label_result = new QLabel(widget_2);
         label_result->setObjectName(QStringLiteral("label_result"));
         label_result->setMinimumSize(QSize(145, 0));
+        label_result->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
 
         verticalLayout_2->addWidget(label_result);
 
@@ -322,7 +324,7 @@ public:
 
         widget_5 = new QWidget(centralWidget);
         widget_5->setObjectName(QStringLiteral("widget_5"));
-        widget_5->setGeometry(QRect(350, 0, 961, 50));
+        widget_5->setGeometry(QRect(370, 0, 961, 50));
         horizontalLayout_4 = new QHBoxLayout(widget_5);
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
@@ -362,11 +364,11 @@ public:
 
         label_filename = new QLabel(centralWidget);
         label_filename->setObjectName(QStringLiteral("label_filename"));
-        label_filename->setGeometry(QRect(830, 770, 111, 28));
+        label_filename->setGeometry(QRect(850, 770, 111, 28));
         label_filename->setAlignment(Qt::AlignCenter);
         label_filename_2 = new QLabel(centralWidget);
         label_filename_2->setObjectName(QStringLiteral("label_filename_2"));
-        label_filename_2->setGeometry(QRect(720, 770, 111, 28));
+        label_filename_2->setGeometry(QRect(740, 770, 111, 28));
         label_filename_2->setAlignment(Qt::AlignCenter);
         CashmereDetectorClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CashmereDetectorClass);
