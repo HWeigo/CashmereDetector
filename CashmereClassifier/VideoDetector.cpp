@@ -209,10 +209,11 @@ int VideoDetector::VideoAutoCrop(CashmereDetector *ui) {
 					Mat toStoreImg = tmpFrameVec[tmpFrameVec.size() / 2];
 					vector<Mat> regionImgs = MultiRegionDetect(toStoreImg);
 					if (!regionImgs.empty()) {
-						imwrite(autoCropsRoot + "autocrop_" + to_string(++storeCnt) + ".png", toStoreImg);
+						imwrite(autoCropsRoot + "autocrop_" + to_string(storeCnt) + ".jpg", toStoreImg);
 						ui->PushMessage("detect " + to_string(regionImgs.size()) + " fiber");
-						ui->PushMessage("croping image");
+						ui->PushMessage("save as: autocrop_" + to_string(storeCnt) + ".jpg");
 						cout << "img save" << endl;
+						++storeCnt;
 						++cropCnt;
 					}
 					//for (int j = 0; j < tmpFrameVec.size(); ++j) {

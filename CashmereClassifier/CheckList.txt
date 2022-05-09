@@ -110,3 +110,27 @@ sw0287 6.74817 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/Êý¾Ý¼¯-ÑòÈÞ Cashmere/s
 3 7.52944 ./videoCrops/3.png
 3 7.52944 ./videoCrops/3.png
 autocrop_3 7.52944 ./videoCrops/autocrop_3.png
+autocrop_3 7.52944 ./videoCrops/autocrop_3.png
+autocrop_4 5.09359 ./videoCrops/autocrop_4.png
+autocrop_5 5.31555 ./videoCrops/autocrop_5.png
+autocrop_26 4.94639 ./videoCrops/autocrop_26.png
+autocrop_27 4.79351 ./videoCrops/autocrop_27.png
+autocrop_43 3.64203 ./videoCrops/autocrop_43.png
+autocrop_61 5.81925 ./videoCrops/autocrop_61.png
+autocrop_62 4.00692 ./videoCrops/autocrop_62.png
+autocrop_63 4.39783 ./videoCrops/autocrop_63.png
+autocrop_64 8.02818 ./videoCrops/autocrop_64.png
+autocrop_65 7.84747 ./videoCrops/autocrop_65.png
+autocrop_66 7.48827 ./videoCrops/autocrop_66.png
+autocrop_69 6.01999 ./videoCrops/autocrop_69.png
+autocrop_70 5.6395 ./videoCrops/autocrop_70.png
+autocrop_83 4.13747 ./videoCrops/autocrop_83.png
+autocrop_120 7.39151 ./videoCrops/autocrop_120.png
+autocrop_121 7.46052 ./videoCrops/autocrop_121.png
+autocrop_126 5.0161 ./videoCrops/autocrop_126.png
+autocrop_127 4.79053 ./videoCrops/autocrop_127.png
+autocrop_128 4.46969 ./videoCrops/autocrop_128.png
+autocrop_132 4.46325 ./videoCrops/autocrop_132.png
+autocrop_2 7.37587 ./videoCrops/autocrop_2.jpg
+autocrop_27 4.79351 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCropsData/video7/autocrop_27.png
+autocrop_2 7.37587 ./videoCrops/autocrop_2.jpg

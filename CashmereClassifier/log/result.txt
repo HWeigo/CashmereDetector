@@ -1,0 +1,20 @@
+./videoCrops/autocrop_0.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_1.jpg 0: —Ú√´ 
+./videoCrops/autocrop_2.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_3.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_4.jpg 0: —Ú√´ 1: —Ú»ﬁ 
+./videoCrops/autocrop_5.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_6.jpg 0: —Ú√´ 1: —Ú»ﬁ 
+./videoCrops/autocrop_7.jpg 0: —Ú»ﬁ 1: —Ú»ﬁ 
+./videoCrops/autocrop_8.jpg 0: —Ú»ﬁ 1: —Ú»ﬁ 
+./videoCrops/autocrop_9.jpg 0: —Ú√´ 
+./videoCrops/autocrop_10.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_11.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_12.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_13.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_14.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_15.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_16.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_17.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_18.jpg 0: —Ú»ﬁ 
+./videoCrops/autocrop_19.jpg 0: —Ú»ﬁ 
