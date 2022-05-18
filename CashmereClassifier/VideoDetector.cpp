@@ -204,9 +204,10 @@ int VideoDetector::VideoAutoCrop(CashmereDetector *ui) {
 				}		
 			}
 			if (pixelDiffSum > numThresh) {
-				if (conFrameCnt > contFrameThresh && !tmpFrameVec.empty()) {
+				int cropIdx = 5;
+				if (conFrameCnt > contFrameThresh && tmpFrameVec.size() > cropIdx) {
 					//imwrite(storeFileName + "best_" + to_string(++storeCnt) + ".png", getBestFrame(tmpFrameVec));
-					Mat toStoreImg = tmpFrameVec[tmpFrameVec.size() / 2];
+					Mat toStoreImg = tmpFrameVec[tmpFrameVec.size() - cropIdx];
 					vector<Mat> regionImgs = MultiRegionDetect(toStoreImg);
 					if (!regionImgs.empty()) {
 						imwrite(autoCropsRoot + "autocrop_" + to_string(storeCnt) + ".jpg", toStoreImg);

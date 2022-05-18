@@ -1,5 +1,5 @@
 ﻿  Reading Qt configuration (D:/EnvSetting/Qt/Qt5.9.9_new/5.9.9/msvc2017_64/bin/qmake)
-  AutoDetector.cpp
+  VideoDetector.cpp
 d:\envsetting\libtorch\include\c10\macros\macros.h(142): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
 d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
           with
@@ -1230,6 +1230,5 @@ d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::
           [
               T=torch::jit::NamedValue
           ]
-d:\onedrive@sjtu.edu.cn\algo\wool cashmere\cashmeredetector\cashmereclassifier\autodetector.cpp(975): warning C4715: “AutoDetector::SkeletonDetect”: 不是所有的控件路径都返回值
     正在创建库 D:\OneDrive@sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\x64\Release\CashmereClassifier.lib 和对象 D:\OneDrive@sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\x64\Release\CashmereClassifier.exp
   CashmereClassifier.vcxproj -> D:\OneDrive@sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\x64\Release\CashmereClassifier.exe
