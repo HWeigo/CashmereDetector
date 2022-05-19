@@ -73,7 +73,7 @@ public:
 	~AutoDetector();
 
 	// Run auto-detect function
-	bool AutoDetect();
+	bool AutoDetect(bool isTargetMode = false);
 
 	void RegionDetect();
 
@@ -100,8 +100,8 @@ public:
 	vector<TYPE> GetResults() { return results_; };
 	void ScalesDetect();
 
-	Mat BullseyeDetectAndFill(Mat oriImg, Point &center);
+	Mat BullseyeDetectAndPadding(Mat oriImg, Point &center);
 
-	void TargetSelect(Mat oriImg, vector<Mat> &regionImgs);
+	void TargetSelect(const Mat &oriImg, vector<Mat> &regionImgs, Point center);
 };
 

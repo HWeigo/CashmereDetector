@@ -134,3 +134,11 @@ autocrop_132 4.46325 ./videoCrops/autocrop_132.png
 autocrop_2 7.37587 ./videoCrops/autocrop_2.jpg
 autocrop_27 4.79351 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCropsData/video7/autocrop_27.png
 autocrop_2 7.37587 ./videoCrops/autocrop_2.jpg
+autocrop_13 6.50368 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_13.jpg
+autocrop_6 6.00403 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_6.jpg
+autocrop_12 6.33984 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_12.jpg
+autocrop_12 6.33984 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_12.jpg
+autocrop_13 6.50368 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_13.jpg
+autocrop_6 6.00403 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_6.jpg
+autocrop_12 6.33984 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_12.jpg
+autocrop_13 6.50368 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_13.jpg

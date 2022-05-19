@@ -6,4 +6,5 @@ CashmereClassifier/input/
 *.ipch
 *.pt
 *.zip
+*.opendb
 CashmereClassifier/videoCropsData/

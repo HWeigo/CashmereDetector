@@ -279,7 +279,7 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 		isPickModeOn_ = false;
 	}
 
-	autoDetector_->AutoDetect();
+	autoDetector_->AutoDetect(ui.checkBox_targetMode->isChecked());
 
 	ui.label_length->setText("-");
 	ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
@@ -449,7 +449,7 @@ void CashmereDetector::on_pushButton_autoNext_clicked() {
 		ui.resetAction->setEnabled(true);
 		ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
 
-		if (autoDetector_->AutoDetect()) {
+		if (autoDetector_->AutoDetect(ui.checkBox_targetMode->isChecked())) {
 			++successCnt;
 
 			ui.label_length->setText("-");
@@ -528,7 +528,7 @@ void CashmereDetector::on_pushButton_autoBack_clicked() {
 		ui.resetAction->setEnabled(true);
 		ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
 
-		if (autoDetector_->AutoDetect()) {
+		if (autoDetector_->AutoDetect(ui.checkBox_targetMode->isChecked())) {
 			++successCnt;
 
 			ui.label_length->setText("-");

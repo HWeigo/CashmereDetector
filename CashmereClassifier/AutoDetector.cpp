@@ -231,7 +231,7 @@ vector<Mat> MultiRegionDetect(Mat &srcImg) {
 	return ret;
 }
 
-bool AutoDetector::AutoDetect() {
+bool AutoDetector::AutoDetect(bool isTargetMode) {
 	Clear();
 	double timer_start = double(clock() / 1000.0);
 #ifdef INPUT_ORI
@@ -239,10 +239,20 @@ bool AutoDetector::AutoDetect() {
 	//RegionDetect();
 
 	Mat inputImg = GetCurrImg();
+
+	Point center;
+	if (isTargetMode) {
+		BullseyeDetectAndPadding(inputImg, center);
+	}
+
 	vector<Mat> regionImgs = MultiRegionDetect(inputImg);
+
+	if (isTargetMode) {
+		TargetSelect(inputImg, regionImgs, center);
+	}
+
 	if (regionImgs.empty())
 		return true;
-
 #else
 	//regionImg_ = Mat::zeros(GetCurrImg().size(), CV_8UC1);
 	RegionDetectOpenCV(GetCurrImg(), regionImg_);
@@ -1414,7 +1424,7 @@ void AutoDetector::ScalesDetect() {
 	imshow("draw", draw);
 }
 
-Mat AutoDetector::BullseyeDetectAndFill(Mat oriImg, Point & center)
+Mat AutoDetector::BullseyeDetectAndPadding(Mat oriImg, Point & center)
 {
 	Mat imgHSV, mask;
 	cvtColor(oriImg, imgHSV, COLOR_BGR2HSV);
@@ -1472,12 +1482,24 @@ Mat AutoDetector::BullseyeDetectAndFill(Mat oriImg, Point & center)
 	return outImg;
 }
 
-void AutoDetector::TargetSelect(Mat oriImg, vector<Mat>& regionImgs) {
+void AutoDetector::TargetSelect(const Mat &oriImg, vector<Mat>& regionImgs, Point center) {
+	if (regionImgs.empty())
+		return;
 	Mat map = Mat::zeros(oriImg.size(), CV_8UC1);
 	for (int i = 0; i < regionImgs.size(); ++i) {
-		Mat regionImg = regionImgs[i] / 255 * i;
+		Mat regionImg = regionImgs[i] / 255 * (i + 1);
 		map |= regionImg;
 	}
+
+	vector<Mat> tmpRegionImgs;
+	for (int i = center.x; i < map.cols; i += 2) {
+		int idx = map.at<uchar>(center.y, i);
+		if (idx != 0) {
+			tmpRegionImgs.push_back(regionImgs[idx - 1]);
+			break;
+		}
+	}
+	regionImgs.swap(tmpRegionImgs);
 }
 
 double AutoDetector::GetLength() {

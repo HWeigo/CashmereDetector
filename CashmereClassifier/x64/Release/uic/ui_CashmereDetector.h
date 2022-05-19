@@ -99,7 +99,7 @@ public:
     {
         if (CashmereDetectorClass->objectName().isEmpty())
             CashmereDetectorClass->setObjectName(QStringLiteral("CashmereDetectorClass"));
-        CashmereDetectorClass->resize(1355, 860);
+        CashmereDetectorClass->resize(1355, 877);
         openFileAction_image = new QAction(CashmereDetectorClass);
         openFileAction_image->setObjectName(QStringLiteral("openFileAction_image"));
         resetAction = new QAction(CashmereDetectorClass);
@@ -113,7 +113,7 @@ public:
         widget->setGeometry(QRect(370, 50, 960, 720));
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 919));
+        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 801));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(7);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -253,6 +253,7 @@ public:
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(-1, -1, -1, 0);
         pushButton_autoDetect = new QPushButton(widget_3);
         pushButton_autoDetect->setObjectName(QStringLiteral("pushButton_autoDetect"));
         pushButton_autoDetect->setMinimumSize(QSize(0, 0));
@@ -273,6 +274,7 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(-1, 0, -1, -1);
         widget_2 = new QWidget(widget_7);
         widget_2->setObjectName(QStringLiteral("widget_2"));
         widget_2->setMinimumSize(QSize(0, 94));
@@ -303,7 +305,7 @@ public:
 
         verticalLayout->addWidget(widget_7);
 
-        verticalSpacer_2 = new QSpacerItem(20, 75, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_2 = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer_2);
 
@@ -383,11 +385,11 @@ public:
 
         label_filename = new QLabel(centralWidget);
         label_filename->setObjectName(QStringLiteral("label_filename"));
-        label_filename->setGeometry(QRect(850, 770, 111, 28));
+        label_filename->setGeometry(QRect(850, 780, 111, 28));
         label_filename->setAlignment(Qt::AlignCenter);
         label_filename_2 = new QLabel(centralWidget);
         label_filename_2->setObjectName(QStringLiteral("label_filename_2"));
-        label_filename_2->setGeometry(QRect(740, 770, 111, 28));
+        label_filename_2->setGeometry(QRect(740, 780, 111, 28));
         label_filename_2->setAlignment(Qt::AlignCenter);
         CashmereDetectorClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CashmereDetectorClass);

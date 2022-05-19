@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1355</width>
-    <height>860</height>
+    <height>877</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
       <x>10</x>
       <y>10</y>
       <width>332</width>
-      <height>919</height>
+      <height>801</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -234,6 +234,9 @@
      <item>
       <widget class="QWidget" name="widget_3" native="true">
        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
          <widget class="QPushButton" name="pushButton_autoDetect">
           <property name="minimumSize">
@@ -260,6 +263,9 @@
      <item>
       <widget class="QWidget" name="widget_7" native="true">
        <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
         <item>
          <widget class="QWidget" name="widget_2" native="true">
           <property name="minimumSize">
@@ -328,7 +334,7 @@
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
-         <height>75</height>
+         <height>20</height>
         </size>
        </property>
       </spacer>
@@ -473,7 +479,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>850</x>
-      <y>770</y>
+      <y>780</y>
       <width>111</width>
       <height>28</height>
      </rect>
@@ -489,7 +495,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>740</x>
-      <y>770</y>
+      <y>780</y>
       <width>111</width>
       <height>28</height>
      </rect>
