@@ -30,7 +30,7 @@
       <x>10</x>
       <y>10</y>
       <width>332</width>
-      <height>781</height>
+      <height>919</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -61,6 +61,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_playVideo">
+       <property name="minimumSize">
+        <size>
+         <width>330</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="text">
         <string>播放视频</string>
        </property>
@@ -226,16 +232,29 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_autoDetect">
-       <property name="minimumSize">
-        <size>
-         <width>330</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>AI图像识别</string>
-       </property>
+      <widget class="QWidget" name="widget_3" native="true">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QPushButton" name="pushButton_autoDetect">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>AI图像识别</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_targetMode">
+          <property name="text">
+           <string>定向识别模式</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>

@@ -242,6 +242,7 @@ bool AutoDetector::AutoDetect() {
 	vector<Mat> regionImgs = MultiRegionDetect(inputImg);
 	if (regionImgs.empty())
 		return true;
+
 #else
 	//regionImg_ = Mat::zeros(GetCurrImg().size(), CV_8UC1);
 	RegionDetectOpenCV(GetCurrImg(), regionImg_);
@@ -1411,6 +1412,72 @@ void AutoDetector::ScalesDetect() {
 		}
 	}
 	imshow("draw", draw);
+}
+
+Mat AutoDetector::BullseyeDetectAndFill(Mat oriImg, Point & center)
+{
+	Mat imgHSV, mask;
+	cvtColor(oriImg, imgHSV, COLOR_BGR2HSV);
+
+	// Mask for RED color bulleye
+	Mat mask1, mask2;
+	inRange(imgHSV, Scalar(0, 70, 50), Scalar(10, 255, 255), mask1);
+	inRange(imgHSV, Scalar(170, 70, 50), Scalar(180, 255, 255), mask2);
+	Mat ret = mask1 | mask2;
+
+	vector<Vec3f> circles;
+	double dp = 1; //
+	//double minDist = 400;  //两个圆心之间的最小距离
+	//double  param1 = 100;  //Canny边缘检测的较大阈值
+	//double  param2 = 100;  //累加器阈值
+	//int min_radius = 0;  //圆形半径的最小值
+	//int max_radius = 300;  //圆形半径的最大值
+	HoughCircles(ret, circles, HOUGH_GRADIENT, dp, 50, 20, 15);
+
+	cout << circles.size() << endl;
+	if (circles.empty()) {
+		center = Point(oriImg.cols / 2, oriImg.rows / 2);
+		return oriImg;
+	}
+
+	//读取圆心
+	center = Point(cvRound(circles[0][0]), cvRound(circles[0][1]));
+	//读取半径
+	int radius = cvRound(circles[0][2]);
+
+	// Compute background color (color that )
+	vector<vector<int>>  histogram(3, vector<int>(255));
+	for (int j = 0; j < oriImg.rows; ++j) {
+		for (int i = 0; i < oriImg.cols; ++i) {
+			for (int k = 0; k < 3; ++k) {
+				int val = oriImg.at<Vec3b>(j, i)[k];
+				++histogram[k][val];
+			}
+		}
+	}
+	vector<pair<int, int>> targetColor(3, {-1, -1});
+	for (int k = 0; k < 3; ++k) {
+		for (int i = 0; i < 255; ++i) {
+			if (histogram[k][i] > targetColor[k].first) {
+				targetColor[k] = { histogram[k][i], i };
+			}
+		}
+	}
+
+	//绘制圆心
+	//circle(oriImg, center, 3, Scalar(0, 255, 0), -1, 8, 0);
+	Mat outImg;
+	oriImg.copyTo(outImg);
+	circle(outImg, center, radius + 3, Scalar(targetColor[0].second, targetColor[1].second, targetColor[2].second), -1, 8, 0);
+	return outImg;
+}
+
+void AutoDetector::TargetSelect(Mat oriImg, vector<Mat>& regionImgs) {
+	Mat map = Mat::zeros(oriImg.size(), CV_8UC1);
+	for (int i = 0; i < regionImgs.size(); ++i) {
+		Mat regionImg = regionImgs[i] / 255 * i;
+		map |= regionImg;
+	}
 }
 
 double AutoDetector::GetLength() {

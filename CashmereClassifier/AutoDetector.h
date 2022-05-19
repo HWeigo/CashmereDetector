@@ -99,5 +99,9 @@ public:
 	TYPE GetResult() { return result_; };
 	vector<TYPE> GetResults() { return results_; };
 	void ScalesDetect();
+
+	Mat BullseyeDetectAndFill(Mat oriImg, Point &center);
+
+	void TargetSelect(Mat oriImg, vector<Mat> &regionImgs);
 };
 

@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -60,7 +61,10 @@ public:
     QLabel *label_std;
     QFrame *line;
     QFrame *line_2;
+    QWidget *widget_3;
+    QVBoxLayout *verticalLayout_3;
     QPushButton *pushButton_autoDetect;
+    QCheckBox *checkBox_targetMode;
     QWidget *widget_7;
     QHBoxLayout *horizontalLayout;
     QWidget *widget_2;
@@ -109,7 +113,7 @@ public:
         widget->setGeometry(QRect(370, 50, 960, 720));
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 781));
+        verticalLayoutWidget->setGeometry(QRect(10, 10, 332, 919));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(7);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -130,6 +134,7 @@ public:
 
         pushButton_playVideo = new QPushButton(verticalLayoutWidget);
         pushButton_playVideo->setObjectName(QStringLiteral("pushButton_playVideo"));
+        pushButton_playVideo->setMinimumSize(QSize(330, 0));
 
         verticalLayout->addWidget(pushButton_playVideo);
 
@@ -242,11 +247,25 @@ public:
 
         verticalLayout->addWidget(line_2);
 
-        pushButton_autoDetect = new QPushButton(verticalLayoutWidget);
+        widget_3 = new QWidget(verticalLayoutWidget);
+        widget_3->setObjectName(QStringLiteral("widget_3"));
+        verticalLayout_3 = new QVBoxLayout(widget_3);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        pushButton_autoDetect = new QPushButton(widget_3);
         pushButton_autoDetect->setObjectName(QStringLiteral("pushButton_autoDetect"));
-        pushButton_autoDetect->setMinimumSize(QSize(330, 0));
+        pushButton_autoDetect->setMinimumSize(QSize(0, 0));
 
-        verticalLayout->addWidget(pushButton_autoDetect);
+        verticalLayout_3->addWidget(pushButton_autoDetect);
+
+        checkBox_targetMode = new QCheckBox(widget_3);
+        checkBox_targetMode->setObjectName(QStringLiteral("checkBox_targetMode"));
+
+        verticalLayout_3->addWidget(checkBox_targetMode);
+
+
+        verticalLayout->addWidget(widget_3);
 
         widget_7 = new QWidget(verticalLayoutWidget);
         widget_7->setObjectName(QStringLiteral("widget_7"));
@@ -417,6 +436,7 @@ public:
         pushButton_saveLength->setText(QApplication::translate("CashmereDetectorClass", "Save Data", Q_NULLPTR));
         label_std->setText(QString());
         pushButton_autoDetect->setText(QApplication::translate("CashmereDetectorClass", "AI\345\233\276\345\203\217\350\257\206\345\210\253", Q_NULLPTR));
+        checkBox_targetMode->setText(QApplication::translate("CashmereDetectorClass", "\345\256\232\345\220\221\350\257\206\345\210\253\346\250\241\345\274\217", Q_NULLPTR));
         label_3->setText(QApplication::translate("CashmereDetectorClass", "AI\347\273\274\345\220\210\351\242\204\346\265\213\347\273\223\346\236\234\357\274\232", Q_NULLPTR));
         label_result->setText(QApplication::translate("CashmereDetectorClass", "-", Q_NULLPTR));
         label_info->setText(QApplication::translate("CashmereDetectorClass", "\344\277\241\346\201\257", Q_NULLPTR));
