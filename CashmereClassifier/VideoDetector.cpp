@@ -161,7 +161,7 @@ int VideoDetector::VideoAutoCrop(CashmereDetector *ui) {
 
 	int contFrameThresh = 30;
 	double updateThresh = 0.5;
-	int numThresh = 1.5e6;
+	int numThresh = 2.5e6;
 	//int numThresh = 3e6;
 
 	Mat tmpStore;

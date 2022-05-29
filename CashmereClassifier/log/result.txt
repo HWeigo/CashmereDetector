@@ -1,17 +1,7 @@
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_16.jpg 0: Î´Öª 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_0.jpg 0: Î´Öª 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_1.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_2.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_3.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_6.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_7.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_8.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_9.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_10.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_11.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_12.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_13.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_14.jpg 0: ÑòÃ« 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_17.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_18.jpg 0: ÑòÈÞ 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_19.jpg 0: Î´Öª 
+D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/Êý¾Ý¼¯-ÑòÈÞ Cashmere/sw0008.jpg 0: ÑòÈÞ 
+D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/Êý¾Ý¼¯-ÑòÈÞ Cashmere/sw0009.jpg 0: ÑòÈÞ 1: ÑòÃ« 
+D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/Êý¾Ý¼¯-ÑòÈÞ Cashmere/sw0016.jpg 0: ÑòÃ« 
+D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/Êý¾Ý¼¯-ÑòÈÞ Cashmere/sw0017.jpg 0: ÑòÃ« 
+D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/Êý¾Ý¼¯-ÑòÈÞ Cashmere/sw0023.jpg 0: ÑòÈÞ 
+D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/Êý¾Ý¼¯-ÑòÈÞ Cashmere/sw0087.jpg 0: ÑòÃ« 
+D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/Êý¾Ý¼¯-ÑòÈÞ Cashmere/sw0090.jpg 0: ÑòÃ« 

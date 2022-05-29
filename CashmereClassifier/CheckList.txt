@@ -142,3 +142,21 @@ autocrop_13 6.50368 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/
 autocrop_6 6.00403 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_6.jpg
 autocrop_12 6.33984 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_12.jpg
 autocrop_13 6.50368 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/CashmereDetector/CashmereClassifier/videoCrops/autocrop_13.jpg
+autocrop_3 6.14008 ./videoCrops/autocrop_3.jpg
+autocrop_6 6.60517 ./videoCrops/autocrop_6.jpg
+autocrop_3 6.14008 ./videoCrops/autocrop_3.jpg
+autocrop_6 6.60517 ./videoCrops/autocrop_6.jpg
+autocrop_0 6.70179 ./videoCrops/autocrop_0.jpg
+autocrop_3 6.14008 ./videoCrops/autocrop_3.jpg
+autocrop_6 6.60517 ./videoCrops/autocrop_6.jpg
+autocrop_2 6.08471 ./videoCrops/autocrop_2.jpg
+autocrop_5 6.58359 ./videoCrops/autocrop_5.jpg
+autocrop_2 6.08471 ./videoCrops/autocrop_2.jpg
+autocrop_5 6.58359 ./videoCrops/autocrop_5.jpg
+autocrop_12 4.51119 ./videoCrops/autocrop_12.jpg
+ca0136_target 5.1977 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/label/Dataset/山羊绒/ca0136_target.jpg
+ca0136_target 5.1977 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/label/Dataset/山羊绒/ca0136_target.jpg
+sw0004 4.54599 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0004.jpg
+sw0009 5.00402 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0009.jpg
+sw0009 5.00402 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0009.jpg
+sw0009 5.00402 D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0009.jpg

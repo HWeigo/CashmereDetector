@@ -50,15 +50,13 @@ public:
     QLabel *label_2;
     QPushButton *pushButton_pick;
     QPushButton *pushButton_reset;
-    QPushButton *pushButton_saveCurr;
     QGridLayout *gridLayout;
-    QLabel *label_lengthText;
     QLabel *label_mean;
-    QLabel *label_lengthText_2;
-    QLabel *label_length;
     QLabel *label_lengthText_3;
-    QPushButton *pushButton_saveLength;
     QLabel *label_std;
+    QLabel *label_lengthText_2;
+    QLabel *label_lengthText;
+    QLabel *label_length;
     QFrame *line;
     QFrame *line_2;
     QWidget *widget_3;
@@ -176,35 +174,13 @@ public:
 
         verticalLayout->addWidget(pushButton_reset);
 
-        pushButton_saveCurr = new QPushButton(verticalLayoutWidget);
-        pushButton_saveCurr->setObjectName(QStringLiteral("pushButton_saveCurr"));
-
-        verticalLayout->addWidget(pushButton_saveCurr);
-
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        label_lengthText = new QLabel(verticalLayoutWidget);
-        label_lengthText->setObjectName(QStringLiteral("label_lengthText"));
-        label_lengthText->setMinimumSize(QSize(0, 29));
-
-        gridLayout->addWidget(label_lengthText, 1, 0, 1, 1);
-
         label_mean = new QLabel(verticalLayoutWidget);
         label_mean->setObjectName(QStringLiteral("label_mean"));
 
         gridLayout->addWidget(label_mean, 1, 1, 1, 1);
-
-        label_lengthText_2 = new QLabel(verticalLayoutWidget);
-        label_lengthText_2->setObjectName(QStringLiteral("label_lengthText_2"));
-        label_lengthText_2->setMinimumSize(QSize(0, 29));
-
-        gridLayout->addWidget(label_lengthText_2, 0, 0, 1, 1);
-
-        label_length = new QLabel(verticalLayoutWidget);
-        label_length->setObjectName(QStringLiteral("label_length"));
-
-        gridLayout->addWidget(label_length, 0, 1, 1, 1);
 
         label_lengthText_3 = new QLabel(verticalLayoutWidget);
         label_lengthText_3->setObjectName(QStringLiteral("label_lengthText_3"));
@@ -212,19 +188,29 @@ public:
 
         gridLayout->addWidget(label_lengthText_3, 2, 0, 1, 1);
 
-        pushButton_saveLength = new QPushButton(verticalLayoutWidget);
-        pushButton_saveLength->setObjectName(QStringLiteral("pushButton_saveLength"));
-
-        gridLayout->addWidget(pushButton_saveLength, 2, 2, 1, 1);
-
         label_std = new QLabel(verticalLayoutWidget);
         label_std->setObjectName(QStringLiteral("label_std"));
 
         gridLayout->addWidget(label_std, 2, 1, 1, 1);
 
+        label_lengthText_2 = new QLabel(verticalLayoutWidget);
+        label_lengthText_2->setObjectName(QStringLiteral("label_lengthText_2"));
+        label_lengthText_2->setMinimumSize(QSize(0, 29));
+
+        gridLayout->addWidget(label_lengthText_2, 0, 0, 1, 1);
+
+        label_lengthText = new QLabel(verticalLayoutWidget);
+        label_lengthText->setObjectName(QStringLiteral("label_lengthText"));
+        label_lengthText->setMinimumSize(QSize(0, 29));
+
+        gridLayout->addWidget(label_lengthText, 1, 0, 1, 1);
+
+        label_length = new QLabel(verticalLayoutWidget);
+        label_length->setObjectName(QStringLiteral("label_length"));
+
+        gridLayout->addWidget(label_length, 0, 1, 1, 1);
+
         gridLayout->setColumnStretch(0, 1);
-        gridLayout->setColumnStretch(1, 3);
-        gridLayout->setColumnStretch(2, 1);
 
         verticalLayout->addLayout(gridLayout);
 
@@ -429,14 +415,12 @@ public:
         label_2->setText(QApplication::translate("CashmereDetectorClass", "- \345\233\276\345\203\217\350\257\206\345\210\253 -", Q_NULLPTR));
         pushButton_pick->setText(QApplication::translate("CashmereDetectorClass", "\347\233\264\345\276\204\346\265\213\351\207\217", Q_NULLPTR));
         pushButton_reset->setText(QApplication::translate("CashmereDetectorClass", "\351\207\215\347\275\256\345\233\276\345\203\217", Q_NULLPTR));
-        pushButton_saveCurr->setText(QApplication::translate("CashmereDetectorClass", "\344\277\235\345\255\230\345\233\276\345\203\217", Q_NULLPTR));
-        label_lengthText->setText(QApplication::translate("CashmereDetectorClass", "\345\271\263\345\235\207\347\233\264\345\276\204: ", Q_NULLPTR));
         label_mean->setText(QString());
-        label_lengthText_2->setText(QApplication::translate("CashmereDetectorClass", "\346\265\213\351\207\217\347\233\264\345\276\204: ", Q_NULLPTR));
-        label_length->setText(QString());
         label_lengthText_3->setText(QApplication::translate("CashmereDetectorClass", "\345\210\206\345\270\203\346\226\271\345\267\256: ", Q_NULLPTR));
-        pushButton_saveLength->setText(QApplication::translate("CashmereDetectorClass", "Save Data", Q_NULLPTR));
         label_std->setText(QString());
+        label_lengthText_2->setText(QApplication::translate("CashmereDetectorClass", "\346\265\213\351\207\217\347\233\264\345\276\204: ", Q_NULLPTR));
+        label_lengthText->setText(QApplication::translate("CashmereDetectorClass", "\345\271\263\345\235\207\347\233\264\345\276\204: ", Q_NULLPTR));
+        label_length->setText(QString());
         pushButton_autoDetect->setText(QApplication::translate("CashmereDetectorClass", "AI\345\233\276\345\203\217\350\257\206\345\210\253", Q_NULLPTR));
         checkBox_targetMode->setText(QApplication::translate("CashmereDetectorClass", "\345\256\232\345\220\221\350\257\206\345\210\253\346\250\241\345\274\217", Q_NULLPTR));
         label_3->setText(QApplication::translate("CashmereDetectorClass", "AI\347\273\274\345\220\210\351\242\204\346\265\213\347\273\223\346\236\234\357\274\232", Q_NULLPTR));
@@ -448,7 +432,7 @@ public:
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", Q_NULLPTR));
-        pushButton_back->setText(QApplication::translate("CashmereDetectorClass", "\345\211\215\344\270\200\345\274\240", Q_NULLPTR));
+        pushButton_back->setText(QApplication::translate("CashmereDetectorClass", "\344\270\212\344\270\200\345\274\240", Q_NULLPTR));
         pushButton_autoBack->setText(QApplication::translate("CashmereDetectorClass", "\350\207\252\345\212\250\345\220\216\346\273\232", Q_NULLPTR));
         pushButton_autoStop->setText(QApplication::translate("CashmereDetectorClass", "\346\232\202\345\201\234", Q_NULLPTR));
         pushButton_autoNext->setText(QApplication::translate("CashmereDetectorClass", "\350\207\252\345\212\250\345\211\215\346\273\232", Q_NULLPTR));
