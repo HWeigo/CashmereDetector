@@ -181,7 +181,7 @@ vector<Mat> MultiRegionDetect(Mat &srcImg) {
 	SelectShape(ho_SelectedRegions2, &ho_SelectedRegions1, "area", "and", 10000, 9999999);
 	//closing_circle (SelectedRegions1, RegionClosing, 35)
 
-	ErosionCircle(ho_SelectedRegions1, &ho_RegionErosion, 5);
+	ErosionCircle(ho_SelectedRegions1, &ho_RegionErosion, 9);
 	OpeningCircle(ho_RegionErosion, &ho_RegionOpening, 10);
 
 
@@ -251,6 +251,7 @@ bool AutoDetector::AutoDetect(bool isTargetMode) {
 		TargetSelect(inputImg, regionImgs, center);
 	}
 
+	cout << "regions nums: " <<  regionImgs.size() << endl;
 	if (regionImgs.empty())
 		return true;
 #else
@@ -269,7 +270,7 @@ bool AutoDetector::AutoDetect(bool isTargetMode) {
 		skeletonPointsSort_.clear();
 		cropImgs.clear();
 
-		//imwrite(to_string(i) + "_region.jpg", regionImgs[i]);
+		imwrite("./result/" + to_string(i) + "_region.jpg", regionImgs[i]);
 		//imwrite(to_string(i) + "_ori.jpg", GetCurrImg());
 		regionImg_ = regionImgs[i];
 		//imwrite("result/regionImg.bmp", regionImg_);
