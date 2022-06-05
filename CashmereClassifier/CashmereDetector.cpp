@@ -47,7 +47,10 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 #endif // AREA_SELECTOR
 
 	// Clear result txt
-	ofstream file_writer("./log/result.txt", ios_base::out);
+	ofstream file_txt_writer("./log/result.txt", ios_base::out);
+	ofstream file_csv_writer("./log/result.csv", ios_base::out);
+	file_csv_writer << "文件路径,文件名,识别结果" << endl;
+	file_csv_writer.close();
 }
 
 void CashmereDetector::on_timer_timeout() {
@@ -290,14 +293,21 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 	vector<string> resultListOutput = { "羊绒", "羊毛", "未知" };
 
 	// Output result
-	ofstream dout("./log/result.txt", ios::out | ios::app);
+	ofstream dout_txt("./log/result.txt", ios::out | ios::app);
+	ofstream dout_csv("./log/result.csv", ios::out | ios::app);
 
 	if (results.empty()) {
 		string resultMessage;
-		dout << autoDetector_->GetImgFilePath() << " ";
+		dout_txt << autoDetector_->GetImgFilePath() << " ";
+		dout_txt << 0 << ": ";
+		dout_txt << resultListOutput[UNKNOWN] << " ";
+
+		dout_csv << autoDetector_->GetImgFilePath() << ",";
+		dout_csv << autoDetector_->GetImgID() << ",";
+		dout_csv << 0 << ": ";
+		dout_csv << resultListOutput[UNKNOWN] << " ";
+
 		resultMessage += to_string(0) + ": " + resultList[UNKNOWN];
-		dout << 0 << ": ";
-		dout << resultListOutput[UNKNOWN] << " ";
 		ui.label_result->setText(QString::fromStdString(resultMessage));
 		outputMessage += resultMessage;
 	}
@@ -305,28 +315,35 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 		int num = results.size();
 
 		string resultMessage;
-		dout << autoDetector_->GetImgFilePath() << " ";
+
+		dout_txt << autoDetector_->GetImgFilePath() << " ";
+
+		dout_csv << autoDetector_->GetImgFilePath() << ",";
+		dout_csv << autoDetector_->GetImgID() << ",";
+
 		for (int i = 0; i < num; ++i) {
 			resultMessage += to_string(i) + ": " + resultList[results[i]];
 			resultMessage += "\n";
-			dout << i << ": ";
-			dout << resultListOutput[results[i]] << " ";
+
+			dout_txt << i << ": ";
+			dout_txt << resultListOutput[results[i]] << " ";
+
+			dout_csv << i << ": ";
+			dout_csv << resultListOutput[results[i]] << " ";
 		}
 		resultMessage.pop_back();
 
 		ui.label_result->setText(QString::fromStdString(resultMessage));
 		outputMessage += resultMessage;
 	}
-	//ui.label_result->setText(QString::fromStdString(resultList[autoDetector_->GetResult()]));
-	//outputMessage += resultList[autoDetector_->GetResult()];
 
 	PushMessage("auto detect done");
 	PushMessage(outputMessage);
 
-	//dout << autoDetector_->GetImgFilePath() << " ";
-	//dout << resultListOutput[autoDetector_->GetResult()] << endl;
-	dout << endl;
-	dout.close();
+	dout_txt << endl;
+	dout_txt.close();
+	dout_csv << endl;
+	dout_csv.close();
 }
 
 void CashmereDetector::on_pushButton_videoProcess_clicked()
@@ -461,14 +478,21 @@ void CashmereDetector::on_pushButton_autoNext_clicked() {
 			vector<string> resultListOutput = { "羊绒", "羊毛", "未知" };
 
 			// Output result
-			ofstream dout("./log/result.txt", ios::out | ios::app);
+			ofstream dout_txt("./log/result.txt", ios::out | ios::app);
+			ofstream dout_csv("./log/result.csv", ios::out | ios::app);
 
 			if (results.empty()) {
 				string resultMessage;
-				dout << autoDetector_->GetImgFilePath() << " ";
+				dout_txt << autoDetector_->GetImgFilePath() << " ";
+				dout_txt << 0 << ": ";
+				dout_txt << resultListOutput[UNKNOWN] << " ";
+
+				dout_csv << autoDetector_->GetImgFilePath() << ",";
+				dout_csv << autoDetector_->GetImgID() << ",";
+				dout_csv << 0 << ": ";
+				dout_csv << resultListOutput[UNKNOWN] << " ";
+
 				resultMessage += to_string(0) + ": " + resultList[UNKNOWN];
-				dout << 0 << ": ";
-				dout << resultListOutput[UNKNOWN] << " ";
 				ui.label_result->setText(QString::fromStdString(resultMessage));
 				outputMessage += resultMessage;
 			}
@@ -476,12 +500,21 @@ void CashmereDetector::on_pushButton_autoNext_clicked() {
 				int num = results.size();
 
 				string resultMessage;
-				dout << autoDetector_->GetImgFilePath() << " ";
+
+				dout_txt << autoDetector_->GetImgFilePath() << " ";
+
+				dout_csv << autoDetector_->GetImgFilePath() << ",";
+				dout_csv << autoDetector_->GetImgID() << ",";
+
 				for (int i = 0; i < num; ++i) {
 					resultMessage += to_string(i) + ": " + resultList[results[i]];
 					resultMessage += "\n";
-					dout << i << ": ";
-					dout << resultListOutput[results[i]] << " ";
+
+					dout_txt << i << ": ";
+					dout_txt << resultListOutput[results[i]] << " ";
+
+					dout_csv << i << ": ";
+					dout_csv << resultListOutput[results[i]] << " ";
 				}
 				resultMessage.pop_back();
 
@@ -492,8 +525,10 @@ void CashmereDetector::on_pushButton_autoNext_clicked() {
 			PushMessage("auto detect done");
 			PushMessage(outputMessage);
 
-			dout << endl;
-			dout.close();
+			dout_txt << endl;
+			dout_txt.close();
+			dout_csv << endl;
+			dout_csv.close();
 
 		} else {
 			++failedCnt;
@@ -504,7 +539,7 @@ void CashmereDetector::on_pushButton_autoNext_clicked() {
 		cout << "-------------------------" << currIdx_ << "-------------------------" << endl;
 	}
 	PushMessage("stop auto detect");
-	PushMessage("success: " + to_string(successCnt) + " failed: " + to_string(failedCnt));
+	PushMessage("success: " + to_string(successCnt) + " unknown: " + to_string(failedCnt));
 	isAutoDetecting_ = false;
 	return;
 }
@@ -540,14 +575,21 @@ void CashmereDetector::on_pushButton_autoBack_clicked() {
 			vector<string> resultListOutput = { "羊绒", "羊毛", "未知" };
 
 			// Output result
-			ofstream dout("./log/result.txt", ios::out | ios::app);
+			ofstream dout_txt("./log/result.txt", ios::out | ios::app);
+			ofstream dout_csv("./log/result.csv", ios::out | ios::app);
 
 			if (results.empty()) {
 				string resultMessage;
-				dout << autoDetector_->GetImgFilePath() << " ";
+				dout_txt << autoDetector_->GetImgFilePath() << " ";
+				dout_txt << 0 << ": ";
+				dout_txt << resultListOutput[UNKNOWN] << " ";
+
+				dout_csv << autoDetector_->GetImgFilePath() << " ";
+				dout_csv << autoDetector_->GetImgID() << ",";
+				dout_csv << 0 << ": ";
+				dout_csv << resultListOutput[UNKNOWN] << " ";
+
 				resultMessage += to_string(0) + ": " + resultList[UNKNOWN];
-				dout << 0 << ": ";
-				dout << resultListOutput[UNKNOWN] << " ";
 				ui.label_result->setText(QString::fromStdString(resultMessage));
 				outputMessage += resultMessage;
 			}
@@ -555,12 +597,21 @@ void CashmereDetector::on_pushButton_autoBack_clicked() {
 				int num = results.size();
 
 				string resultMessage;
-				dout << autoDetector_->GetImgFilePath() << " ";
+
+				dout_txt << autoDetector_->GetImgFilePath() << " ";
+
+				dout_csv << autoDetector_->GetImgFilePath() << " ";
+				dout_csv << autoDetector_->GetImgID() << ",";
+
 				for (int i = 0; i < num; ++i) {
 					resultMessage += to_string(i) + ": " + resultList[results[i]];
 					resultMessage += "\n";
-					dout << i << ": ";
-					dout << resultListOutput[results[i]] << " ";
+
+					dout_txt << i << ": ";
+					dout_txt << resultListOutput[results[i]] << " ";
+
+					dout_csv << i << ": ";
+					dout_csv << resultListOutput[results[i]] << " ";
 				}
 				resultMessage.pop_back();
 
@@ -571,8 +622,10 @@ void CashmereDetector::on_pushButton_autoBack_clicked() {
 			PushMessage("auto detect done");
 			PushMessage(outputMessage);
 
-			dout << endl;
-			dout.close();
+			dout_txt << endl;
+			dout_txt.close();
+			dout_csv << endl;
+			dout_csv.close();
 
 		} else {
 			++failedCnt;

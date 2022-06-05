@@ -253,7 +253,7 @@ bool AutoDetector::AutoDetect(bool isTargetMode) {
 
 	cout << "regions nums: " <<  regionImgs.size() << endl;
 	if (regionImgs.empty())
-		return true;
+		return false;
 #else
 	//regionImg_ = Mat::zeros(GetCurrImg().size(), CV_8UC1);
 	RegionDetectOpenCV(GetCurrImg(), regionImg_);
