@@ -1,8 +1,0 @@
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0023.jpg 0: 羊绒 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0024.jpg 0: 羊绒 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0044.jpg 0: 羊绒 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0045.jpg 0: 羊绒 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0046.jpg 0: 羊毛 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0048.jpg 0: 羊毛 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0051.jpg 0: 羊毛 
-D:/OneDrive@sjtu.edu.cn/ALGO/wool cashmere/数据集-羊绒 Cashmere/sw0064.jpg 0: 羊绒 

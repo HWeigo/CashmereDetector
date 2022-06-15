@@ -38,6 +38,7 @@ public:
     QAction *openFileAction_image;
     QAction *resetAction;
     QAction *openFileAction_video;
+    QAction *activate_software;
     QWidget *centralWidget;
     QWidget *widget;
     QWidget *verticalLayoutWidget;
@@ -100,10 +101,16 @@ public:
         CashmereDetectorClass->resize(1355, 877);
         openFileAction_image = new QAction(CashmereDetectorClass);
         openFileAction_image->setObjectName(QStringLiteral("openFileAction_image"));
+        openFileAction_image->setEnabled(false);
+        openFileAction_image->setVisible(true);
         resetAction = new QAction(CashmereDetectorClass);
         resetAction->setObjectName(QStringLiteral("resetAction"));
+        resetAction->setEnabled(false);
         openFileAction_video = new QAction(CashmereDetectorClass);
         openFileAction_video->setObjectName(QStringLiteral("openFileAction_video"));
+        openFileAction_video->setEnabled(false);
+        activate_software = new QAction(CashmereDetectorClass);
+        activate_software->setObjectName(QStringLiteral("activate_software"));
         centralWidget = new QWidget(CashmereDetectorClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         widget = new QWidget(centralWidget);
@@ -395,6 +402,7 @@ public:
         menuFile->addAction(openFileAction_image);
         menuFile->addAction(openFileAction_video);
         menuFile->addAction(resetAction);
+        menuFile->addAction(activate_software);
 
         retranslateUi(CashmereDetectorClass);
         QObject::connect(pushButton_clear, SIGNAL(clicked()), textBrowser, SLOT(clear()));
@@ -408,6 +416,7 @@ public:
         openFileAction_image->setText(QApplication::translate("CashmereDetectorClass", "\346\211\223\345\274\200\345\233\276\347\211\207", Q_NULLPTR));
         resetAction->setText(QApplication::translate("CashmereDetectorClass", "\351\207\215\347\275\256\346\226\207\344\273\266", Q_NULLPTR));
         openFileAction_video->setText(QApplication::translate("CashmereDetectorClass", "\346\211\223\345\274\200\350\247\206\351\242\221", Q_NULLPTR));
+        activate_software->setText(QApplication::translate("CashmereDetectorClass", "\350\275\257\344\273\266\346\277\200\346\264\273", Q_NULLPTR));
         label->setText(QApplication::translate("CashmereDetectorClass", "- \350\247\206\351\242\221\351\207\207\351\233\206 -", Q_NULLPTR));
         pushButton_playVideo->setText(QApplication::translate("CashmereDetectorClass", "\346\222\255\346\224\276\350\247\206\351\242\221", Q_NULLPTR));
         pushButton_videoProcess->setText(QApplication::translate("CashmereDetectorClass", "\345\233\276\345\203\217\350\207\252\345\212\250\351\207\207\351\233\206", Q_NULLPTR));

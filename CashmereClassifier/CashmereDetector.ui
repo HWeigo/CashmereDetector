@@ -510,6 +510,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="openFileAction_image"/>
     <addaction name="openFileAction_video"/>
     <addaction name="resetAction"/>
+    <addaction name="activate_software"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -523,18 +524,35 @@ p, li { white-space: pre-wrap; }
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="openFileAction_image">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>打开图片</string>
    </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="resetAction">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>重置文件</string>
    </property>
   </action>
   <action name="openFileAction_video">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>打开视频</string>
+   </property>
+  </action>
+  <action name="activate_software">
+   <property name="text">
+    <string>软件激活</string>
    </property>
   </action>
  </widget>

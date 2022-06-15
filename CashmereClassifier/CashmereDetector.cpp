@@ -1,10 +1,15 @@
 #include "CashmereDetector.h"
-#include<opencv2/opencv.hpp>
-#include<Windows.h>
+#include <opencv2/opencv.hpp>
+#include <Windows.h>
 #include <opencv2/highgui/highgui_c.h>
 
 #include <io.h>
 #include <fstream>
+
+#include "HardwareInfo.h"
+#include "aes.h"
+#include <algorithm>
+#include <stdio.h>
 
 CashmereDetector::CashmereDetector(QWidget *parent)
     : QMainWindow(parent)
@@ -257,6 +262,78 @@ void CashmereDetector::on_openFileAction_video_triggered(bool checked)
 
 }
 
+void CashmereDetector::on_activate_software_triggered(bool checked) {
+	vector<string> hardDiskList = GetAllHardDiskSerialNumber();
+
+	vector<string> MACList = GetAllMACAddress();
+
+	string requestCode;
+	if (hardDiskList.size())
+		requestCode = hardDiskList[0];
+	else if (MACList.size())
+		requestCode = MACList[0];
+	else
+		requestCode = "0000000000000000";
+
+	if (requestCode.size() > 16)
+		requestCode.resize(16);
+	else if (requestCode.size() < 16)
+	{
+		while (requestCode.size() < 16)
+			requestCode += "0";
+	}
+
+	unsigned char key[] = { 0x62, 0x46, 0x48, 0x12, 0x0c, 0x27, 0x3b, 0x5a, 0x7d, 0xb5, 0x81, 0x93, 0x6b, 0xed, 0xc0, 0x23 };
+
+	unsigned char result[16];
+	for (int i = 0; i < 16; ++i)
+	{
+		result[i] = requestCode[i];
+	}
+
+	AES aes(key);
+	aes.Cipher(result);
+
+	string regCode;
+	for (string::size_type pos = 0; pos != 16; pos++)
+	{
+		char ch[10];
+		sprintf_s(ch, "%02X", result[pos]);
+		regCode += ch;
+	}
+
+	QDialog dialog(this);
+	dialog.setFixedSize(400, 120);
+	dialog.setWindowTitle(QString::fromLocal8Bit("Èí¼þ¼¤»î"));
+	QFormLayout form(&dialog);
+
+	QLineEdit textRequestCode;
+	textRequestCode.setText(const_cast<char*>(requestCode.c_str()));
+	//textRequestCode.setEnabled(false);
+	textRequestCode.setReadOnly(true);
+	form.addRow(QString::fromLocal8Bit("×¢²áÂë:"), &textRequestCode);
+	QLineEdit textMax;
+	textMax.setText("");
+	form.addRow(QString::fromLocal8Bit("ÐòÁÐºÅ:"), &textMax);
+
+	QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+		Qt::Horizontal, &dialog);
+	form.addRow(&buttonBox);
+	QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
+	QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
+
+	if (dialog.exec() == QDialog::Rejected) {
+		return;
+	}
+
+	string minStr = textMax.text().toStdString();
+	cout << minStr << endl;
+	if (minStr == regCode) {
+		ui.openFileAction_image->setEnabled(true);
+		ui.openFileAction_video->setEnabled(true);
+	}
+}
+
 void CashmereDetector::on_pushButton_pick_clicked() {
 	if (manuDetector_->GetCurrImgRef().empty())
 		return;
@@ -449,6 +526,8 @@ void CashmereDetector::on_pushButton_back_clicked() {
 }
 
 void CashmereDetector::on_pushButton_autoNext_clicked() {
+	if (autoDetector_->GetCurrImgRef().empty())
+		return;
 	isAutoDetecting_ = true;
 	int successCnt = 0, failedCnt = 0;;
 	while (currIdx_ < filepaths_.size()) {
@@ -545,6 +624,8 @@ void CashmereDetector::on_pushButton_autoNext_clicked() {
 }
 
 void CashmereDetector::on_pushButton_autoBack_clicked() {
+	if (autoDetector_->GetCurrImgRef().empty())
+		return;
 	isAutoDetecting_ = true;
 	int successCnt = 0, failedCnt = 0;;
 	while (currIdx_ >= 0) {

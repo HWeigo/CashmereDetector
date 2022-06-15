@@ -65,6 +65,7 @@ public:
 public slots:
 	void on_openFileAction_image_triggered(bool checked);
 	void on_openFileAction_video_triggered(bool checked);
+	void on_activate_software_triggered(bool checked);
 	//void on_resetAction_triggered();
 	void on_pushButton_pick_clicked();
 	void on_pushButton_autoDetect_clicked();
