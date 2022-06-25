@@ -1,7 +1,7 @@
 ﻿#include "AutoDetector.h"
 //#include "HalconWidthCalc.cpp"
 
-
+//#define DEBUG_MODE
 void HObject2Mat(const HObject &_Hobj, cv::Mat &outMat)
 {
 	HTuple htCh = HTuple();
@@ -270,10 +270,11 @@ bool AutoDetector::AutoDetect(bool isTargetMode) {
 		skeletonPointsSort_.clear();
 		cropImgs.clear();
 
+#ifdef DEBUG_MODE
 		imwrite("./result/" + to_string(i) + "_region.jpg", regionImgs[i]);
-		//imwrite(to_string(i) + "_ori.jpg", GetCurrImg());
+#endif // DEBUG_MODE
+
 		regionImg_ = regionImgs[i];
-		//imwrite("result/regionImg.bmp", regionImg_);
 		regionImg_.copyTo(regionImgStore_);
 		double timer_mid = double(clock() / 1000.0);
 
@@ -281,8 +282,6 @@ bool AutoDetector::AutoDetect(bool isTargetMode) {
 			++failCnt;
 			continue;
 		}
-		imwrite(to_string(i) + "_ski.jpg", skeletonImg_);
-		imwrite(to_string(i) + "_str.jpg", strightImg_);
 		double timer_end = double(clock() / 1000.0);
 		cout << "auto detect time use: " << timer_end - timer_mid << " s" << endl;
 		//DiameterStdCompute();
@@ -657,7 +656,10 @@ void AutoDetector::StraightenImg() {
 	Mat tempDrawImg = GetOriImg();
 	Mat grayImg;
 	cvtColor(tempDrawImg, grayImg, CV_BGR2GRAY);
+#ifdef DEBUG_MODE
 	imwrite("result/gray.bmp", grayImg);
+#endif // DEBUG_MODE
+
 	regionImgStore_.copyTo(tempRegionImg);
 
 	vector<int> rVec, cVec;
@@ -757,7 +759,10 @@ void AutoDetector::StraightenImg() {
 		dstImg.at<uchar>(curY, curX) = uchar(colorVec[i]);
 		//circle(dstImg, Point(curX, curY), 1, Scalar(colorVec[i]), 2);
 	}
+#ifdef DEBUG_MODE
 	imwrite("result/dstImg.bmp", dstImg);
+#endif // DEBUG_MODE
+
 	dstImg.copyTo(strightImg_);
 }
 
@@ -839,7 +844,10 @@ Mat AutoDetector::Skeletonization(Mat inputImage)
 	inputImage.copyTo(outputImage);
 
 	Thinning(outputImage);
+#ifdef DEBUG_MODE
 	imwrite("result/skeleon.bmp", outputImage);
+#endif // DEBUG_MODE
+
 #if 1
 	Mat draw = GetCurrImg();
 	for (int u = 0; u < inputImage.cols; ++u) {
@@ -850,7 +858,10 @@ Mat AutoDetector::Skeletonization(Mat inputImage)
 			}
 		}
 	}
+#ifdef DEBUG_MODE
 	imwrite("result/skeletonization.bmp", draw);
+#endif // DEBUG_MODE
+
 #endif   
 	return outputImage;
 }
@@ -963,6 +974,7 @@ bool AutoDetector::SkeletonDetect() {
 #endif // ZHANG_SUEN_SKELETONIZATION
 
 
+#ifdef DEBUG_MODE
 	ofstream dout1("./strightImg/result.txt", ios::out | ios::app);
 	double stdev = DiameterStdCompute(strightImg_, 30);
 	dout1 << stdev << endl;
@@ -984,6 +996,7 @@ bool AutoDetector::SkeletonDetect() {
 	if (stdev > 0)
 		dout3 << stdev << endl;
 	dout3.close();
+#endif // DEBUG_MODE
 }
 
 vector<double> AutoDetector::polyfit(vector<Point>& srcPoints)
@@ -1111,8 +1124,10 @@ void AutoDetector::CropImage() {
 
 		cropImgs.push_back(cropImg);
 
+#ifdef DEBUG_MODE
 		string filepath = "./output/" + imgID_ + "_auto_" + to_string(cropImgs.size()) + ".jpg";
 		imwrite(filepath, cropImg);
+#endif // DEBUG_MODE
 
 		x += step;
 		++cropCnt;
@@ -1136,8 +1151,10 @@ void AutoDetector::CropImage() {
 
 		cropImgs.push_back(cropImg);
 
+#ifdef DEBUG_MODE
 		string filepath = "./output/" + imgID_ + "_auto_" + to_string(cropImgs.size()) + ".jpg";
 		imwrite(filepath, cropImg);
+#endif // DEBUG_MODE
 	}
 
 }

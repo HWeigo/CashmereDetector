@@ -156,8 +156,8 @@ int VideoDetector::VideoAutoCrop(CashmereDetector *ui) {
 	capture_.read(tempFrame);
 
 	vector<int> frameDiffVec;	
-	fstream file;	
-	file.open("result.txt", ios_base::out);
+	//fstream file;	
+	//file.open("result.txt", ios_base::out);
 
 	int contFrameThresh = 30;
 	double updateThresh = 0.5;
@@ -183,8 +183,6 @@ int VideoDetector::VideoAutoCrop(CashmereDetector *ui) {
 		if (frameCnt >= 2) {
 			Mat frameDiff;
 
-			//imshow("origin", currFrame);
-			//imshow("prev", preFrame);
 			absdiff(currFrame, preFrame, frameDiff);
 			Scalar channleDiff = sum(frameDiff);
 			int pixelDiffSum = channleDiff[0]+ channleDiff[1] + channleDiff[2];
@@ -217,10 +215,6 @@ int VideoDetector::VideoAutoCrop(CashmereDetector *ui) {
 						++storeCnt;
 						++cropCnt;
 					}
-					//for (int j = 0; j < tmpFrameVec.size(); ++j) {
-					//	imwrite(storeFileName + "store_" + to_string(storeCnt) + "_" + to_string(j) + ".png", tmpFrameVec[j]);
-					//}
-					//imwrite(storeFileName + to_string(++storeCnt) + ".png", currFrame);
 				}
 				tmpFrameVec.clear();
 				tmpFrameVec.resize(0);
@@ -228,13 +222,13 @@ int VideoDetector::VideoAutoCrop(CashmereDetector *ui) {
 				storedFlag = false;
 			}
 
-			file << pixelDiffSum << endl;
+			//file << pixelDiffSum << endl;
 			 //imshow("diff", frameDiff);
 		}
 		currFrame.copyTo(preFrame);
 		waitKey(1);
 	}
-	file.close();
+	//file.close();
 	//capture_.release();
 	return cropCnt;
 }
