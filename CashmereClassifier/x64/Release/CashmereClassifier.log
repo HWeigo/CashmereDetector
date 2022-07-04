@@ -1,8 +1,1240 @@
 ﻿  Reading Qt configuration (D:/EnvSetting/Qt/Qt5.9.9_new/5.9.9/msvc2017_64/bin/qmake)
+  AutoDetector.cpp
+d:\envsetting\libtorch\include\c10\macros\macros.h(142): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::impl::InlineDeviceGuard<c10::impl::VirtualGuardImpl>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=c10::impl::InlineDeviceGuard<c10::impl::VirtualGuardImpl>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=c10::impl::InlineDeviceGuard<c10::impl::VirtualGuardImpl>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=c10::impl::InlineDeviceGuard<c10::impl::VirtualGuardImpl>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<c10::impl::InlineDeviceGuard<c10::impl::VirtualGuardImpl>>" 的引用
+  d:\envsetting\libtorch\include\c10\core\impl\inlinedeviceguard.h(427): note: 参见对正在编译的 类 模板 实例化 "c10::optional<c10::impl::InlineDeviceGuard<c10::impl::VirtualGuardImpl>>" 的引用
+  d:\envsetting\libtorch\include\c10\core\deviceguard.h(178): note: 参见对正在编译的 类 模板 实例化 "c10::impl::InlineOptionalDeviceGuard<c10::impl::VirtualGuardImpl>" 的引用
+  d:\envsetting\libtorch\include\c10\core\tensorimpl.h(2809): note: 参见对正在编译的 类 模板 实例化 "c10::C10_TensorImpl_Size_Check_Dummy_Class<199711,0,0,0,0,0,0,8>" 的引用
+  d:\envsetting\libtorch\include\c10\core\memoryformat.h(63): note: 参见对正在编译的 类 模板 实例化 "c10::ArrayRef<int64_t>" 的引用
+  d:\envsetting\libtorch\include\c10\core\dispatchkeyset.h(57): note: 参见对正在编译的 类 模板 实例化 "std::initializer_list<c10::DispatchKey>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::impl::InlineDeviceGuard<c10::impl::VirtualGuardImpl>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::TensorBase
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=at::TensorBase
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=at::TensorBase
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=at::TensorBase
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<at::TensorBase>" 的引用
+  d:\envsetting\libtorch\include\aten\core\tensorbase.h(933): note: 参见对正在编译的 类 模板 实例化 "c10::optional<at::TensorBase>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::TensorBase
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::Tensor
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=at::Tensor
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=at::Tensor
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=at::Tensor
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<at::Tensor>" 的引用
+  d:\envsetting\libtorch\include\aten\core\tensorbody.h(502): note: 参见对正在编译的 类 模板 实例化 "c10::optional<at::Tensor>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::Tensor
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::Generator
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=at::Generator
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=at::Generator
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=at::Generator
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<at::Generator>" 的引用
+  d:\envsetting\libtorch\include\aten\core\tensorbody.h(576): note: 参见对正在编译的 类 模板 实例化 "c10::optional<at::Generator>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::Generator
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::DimVector
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=at::DimVector
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=at::DimVector
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=at::DimVector
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<at::DimVector>" 的引用
+  d:\envsetting\libtorch\include\aten\tensoriterator.h(766): note: 参见对正在编译的 类 模板 实例化 "c10::optional<at::DimVector>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::DimVector
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::string
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::string
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::string
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::string
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::string>" 的引用
+  d:\envsetting\libtorch\include\aten\core\jit_type_base.h(443): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::string>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::string
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::QualifiedName
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=c10::QualifiedName
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=c10::QualifiedName
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=c10::QualifiedName
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<c10::QualifiedName>" 的引用
+  d:\envsetting\libtorch\include\aten\core\jit_type_base.h(691): note: 参见对正在编译的 类 模板 实例化 "c10::optional<c10::QualifiedName>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::QualifiedName
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::shared_ptr<torch::jit::CompilationUnit>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::shared_ptr<torch::jit::CompilationUnit>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::shared_ptr<torch::jit::CompilationUnit>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::shared_ptr<torch::jit::CompilationUnit>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::shared_ptr<torch::jit::CompilationUnit>>" 的引用
+  d:\envsetting\libtorch\include\aten\core\ivalue.h(1241): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::shared_ptr<torch::jit::CompilationUnit>>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::shared_ptr<torch::jit::CompilationUnit>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::weak_ptr<torch::jit::CompilationUnit>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::weak_ptr<torch::jit::CompilationUnit>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::weak_ptr<torch::jit::CompilationUnit>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::weak_ptr<torch::jit::CompilationUnit>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::weak_ptr<torch::jit::CompilationUnit>>" 的引用
+  d:\envsetting\libtorch\include\aten\core\ivalue.h(1242): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::weak_ptr<torch::jit::CompilationUnit>>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::weak_ptr<torch::jit::CompilationUnit>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<c10::ShapeSymbol,std::allocator<c10::ShapeSymbol>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::vector<c10::ShapeSymbol,std::allocator<c10::ShapeSymbol>>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::vector<c10::ShapeSymbol,std::allocator<c10::ShapeSymbol>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::vector<c10::ShapeSymbol,std::allocator<c10::ShapeSymbol>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::vector<c10::ShapeSymbol,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=c10::ShapeSymbol
+          ]
+  d:\envsetting\libtorch\include\aten\core\jit_type.h(460): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::vector<c10::ShapeSymbol,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=c10::ShapeSymbol
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<c10::ShapeSymbol,std::allocator<c10::ShapeSymbol>>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<c10::optional<c10::Stride>,std::allocator<c10::optional<c10::Stride>>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::vector<c10::optional<c10::Stride>,std::allocator<c10::optional<c10::Stride>>>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::vector<c10::optional<c10::Stride>,std::allocator<c10::optional<c10::Stride>>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::vector<c10::optional<c10::Stride>,std::allocator<c10::optional<c10::Stride>>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::vector<c10::optional<c10::Stride>,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=c10::optional<c10::Stride>
+          ]
+  d:\envsetting\libtorch\include\aten\core\jit_type.h(545): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::vector<c10::optional<c10::Stride>,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=c10::optional<c10::Stride>
+          ]
+  d:\envsetting\libtorch\include\aten\core\jit_type.h(800): note: 参见对正在编译的 类 模板 实例化 "c10::VaryingShape<c10::Stride>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<c10::optional<c10::Stride>,std::allocator<c10::optional<c10::Stride>>>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<c10::optional<int64_t>,std::allocator<c10::optional<int64_t>>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::vector<c10::optional<int64_t>,std::allocator<c10::optional<int64_t>>>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::vector<c10::optional<int64_t>,std::allocator<c10::optional<int64_t>>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::vector<c10::optional<int64_t>,std::allocator<c10::optional<int64_t>>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::vector<c10::optional<int64_t>,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=c10::optional<int64_t>
+          ]
+  d:\envsetting\libtorch\include\aten\core\jit_type.h(545): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::vector<c10::optional<int64_t>,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=c10::optional<int64_t>
+          ]
+  d:\envsetting\libtorch\include\aten\core\jit_type.h(591): note: 参见对正在编译的 类 模板 实例化 "c10::VaryingShape<int64_t>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<c10::optional<int64_t>,std::allocator<c10::optional<int64_t>>>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<int64_t,std::allocator<int64_t>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::vector<int64_t,std::allocator<int64_t>>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::vector<int64_t,std::allocator<int64_t>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::vector<int64_t,std::allocator<int64_t>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::vector<int64_t,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=int64_t
+          ]
+  d:\envsetting\libtorch\include\aten\core\jit_type.h(704): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::vector<int64_t,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=int64_t
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<int64_t,std::allocator<int64_t>>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::impl::InlineStreamGuard<c10::impl::VirtualGuardImpl>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=c10::impl::InlineStreamGuard<c10::impl::VirtualGuardImpl>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=c10::impl::InlineStreamGuard<c10::impl::VirtualGuardImpl>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=c10::impl::InlineStreamGuard<c10::impl::VirtualGuardImpl>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<c10::impl::InlineStreamGuard<c10::impl::VirtualGuardImpl>>" 的引用
+  d:\envsetting\libtorch\include\c10\core\impl\inlinestreamguard.h(197): note: 参见对正在编译的 类 模板 实例化 "c10::optional<c10::impl::InlineStreamGuard<c10::impl::VirtualGuardImpl>>" 的引用
+  d:\envsetting\libtorch\include\c10\core\streamguard.h(139): note: 参见对正在编译的 类 模板 实例化 "c10::impl::InlineOptionalStreamGuard<c10::impl::VirtualGuardImpl>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::impl::InlineStreamGuard<c10::impl::VirtualGuardImpl>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::impl::VirtualGuardImpl
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=c10::impl::VirtualGuardImpl
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=c10::impl::VirtualGuardImpl
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=c10::impl::VirtualGuardImpl
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<c10::impl::VirtualGuardImpl>" 的引用
+  d:\envsetting\libtorch\include\c10\core\impl\inlinestreamguard.h(232): note: 参见对正在编译的 类 模板 实例化 "c10::optional<T>" 的引用
+          with
+          [
+              T=c10::impl::VirtualGuardImpl
+          ]
+  d:\envsetting\libtorch\include\c10\core\streamguard.h(162): note: 参见对正在编译的 类 模板 实例化 "c10::impl::InlineMultiStreamGuard<c10::impl::VirtualGuardImpl>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::impl::VirtualGuardImpl
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<c10::ivalue::Future::WeakStorage,std::allocator<c10::ivalue::Future::WeakStorage>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::vector<c10::ivalue::Future::WeakStorage,std::allocator<c10::ivalue::Future::WeakStorage>>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::vector<c10::ivalue::Future::WeakStorage,std::allocator<c10::ivalue::Future::WeakStorage>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::vector<c10::ivalue::Future::WeakStorage,std::allocator<c10::ivalue::Future::WeakStorage>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::vector<c10::ivalue::Future::WeakStorage,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=c10::ivalue::Future::WeakStorage
+          ]
+  d:\envsetting\libtorch\include\aten\core\ivalue_inl.h(834): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::vector<c10::ivalue::Future::WeakStorage,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=c10::ivalue::Future::WeakStorage
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<c10::ivalue::Future::WeakStorage,std::allocator<c10::ivalue::Future::WeakStorage>>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::autograd::ViewInfo
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=torch::autograd::ViewInfo
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=torch::autograd::ViewInfo
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=torch::autograd::ViewInfo
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<torch::autograd::ViewInfo>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\autograd\variable.h(525): note: 参见对正在编译的 类 模板 实例化 "c10::optional<torch::autograd::ViewInfo>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::autograd::ViewInfo
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::IValue
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=c10::IValue
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=c10::IValue
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=c10::IValue
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<c10::IValue>" 的引用
+  d:\envsetting\libtorch\include\aten\core\function_schema.h(162): note: 参见对正在编译的 类 模板 实例化 "c10::optional<c10::IValue>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::IValue
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::AliasInfo
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=c10::AliasInfo
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=c10::AliasInfo
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=c10::AliasInfo
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<c10::AliasInfo>" 的引用
+  d:\envsetting\libtorch\include\aten\core\function_schema.h(26): note: 参见对正在编译的 类 模板 实例化 "c10::optional<c10::AliasInfo>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::AliasInfo
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::either<c10::OperatorName,c10::FunctionSchema>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=c10::either<c10::OperatorName,c10::FunctionSchema>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=c10::either<c10::OperatorName,c10::FunctionSchema>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=c10::either<c10::OperatorName,c10::FunctionSchema>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<c10::either<c10::OperatorName,c10::FunctionSchema>>" 的引用
+  d:\envsetting\libtorch\include\aten\core\op_registration\op_registration.h(434): note: 参见对正在编译的 类 模板 实例化 "c10::optional<c10::either<c10::OperatorName,c10::FunctionSchema>>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::either<c10::OperatorName,c10::FunctionSchema>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::impl::AnnotatedSchema
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=c10::impl::AnnotatedSchema
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=c10::impl::AnnotatedSchema
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=c10::impl::AnnotatedSchema
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<c10::impl::AnnotatedSchema>" 的引用
+  d:\envsetting\libtorch\include\aten\core\dispatch\operatorentry.h(212): note: 参见对正在编译的 类 模板 实例化 "c10::optional<c10::impl::AnnotatedSchema>" 的引用
+  d:\envsetting\libtorch\include\c10\util\stringutil.h(143): note: 参见对正在编译的 类 模板 实例化 "c10::basic_string_view<char>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::impl::AnnotatedSchema
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::impl::OperatorEntry::CppSignatureWithDebug
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=c10::impl::OperatorEntry::CppSignatureWithDebug
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=c10::impl::OperatorEntry::CppSignatureWithDebug
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=c10::impl::OperatorEntry::CppSignatureWithDebug
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<c10::impl::OperatorEntry::CppSignatureWithDebug>" 的引用
+  d:\envsetting\libtorch\include\aten\core\dispatch\operatorentry.h(271): note: 参见对正在编译的 类 模板 实例化 "c10::optional<c10::impl::OperatorEntry::CppSignatureWithDebug>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::impl::OperatorEntry::CppSignatureWithDebug
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::OperatorName
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=c10::OperatorName
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=c10::OperatorName
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=c10::OperatorName
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<c10::OperatorName>" 的引用
+  d:\envsetting\libtorch\include\aten\record_function.h(327): note: 参见对正在编译的 类 模板 实例化 "c10::optional<c10::OperatorName>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=c10::OperatorName
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::RecordFunction::State
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=at::RecordFunction::State
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=at::RecordFunction::State
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=at::RecordFunction::State
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<at::RecordFunction::State>" 的引用
+  d:\envsetting\libtorch\include\aten\record_function.h(356): note: 参见对正在编译的 类 模板 实例化 "c10::optional<at::RecordFunction::State>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::RecordFunction::State
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::tuple<std::string,size_t,size_t>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::tuple<std::string,size_t,size_t>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::tuple<std::string,size_t,size_t>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::tuple<std::string,size_t,size_t>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::tuple<std::string,size_t,size_t>>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\jit\frontend\source_range.h(201): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::tuple<std::string,size_t,size_t>>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::tuple<std::string,size_t,size_t>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::SourceRange
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=torch::jit::SourceRange
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=torch::jit::SourceRange
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=torch::jit::SourceRange
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<torch::jit::SourceRange>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\jit\frontend\source_range.h(224): note: 参见对正在编译的 类 模板 实例化 "c10::optional<torch::jit::SourceRange>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::SourceRange
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::InlinedCallStackPtr
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=torch::jit::InlinedCallStackPtr
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=torch::jit::InlinedCallStackPtr
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=torch::jit::InlinedCallStackPtr
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<torch::jit::InlinedCallStackPtr>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\jit\ir\scope.h(127): note: 参见对正在编译的 类 模板 实例化 "c10::optional<torch::jit::InlinedCallStackPtr>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::InlinedCallStackPtr
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::ModuleInstanceInfo
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=torch::jit::ModuleInstanceInfo
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=torch::jit::ModuleInstanceInfo
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=torch::jit::ModuleInstanceInfo
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<torch::jit::ModuleInstanceInfo>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\jit\ir\scope.h(140): note: 参见对正在编译的 类 模板 实例化 "c10::optional<torch::jit::ModuleInstanceInfo>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::ModuleInstanceInfo
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::ScopePtr
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=torch::jit::ScopePtr
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=torch::jit::ScopePtr
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=torch::jit::ScopePtr
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<torch::jit::ScopePtr>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\jit\ir\constants.h(29): note: 参见对正在编译的 类 模板 实例化 "c10::optional<torch::jit::ScopePtr>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::ScopePtr
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::ThreadLocalState
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=at::ThreadLocalState
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=at::ThreadLocalState
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=at::ThreadLocalState
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<at::ThreadLocalState>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\jit\runtime\interpreter.h(149): note: 参见对正在编译的 类 模板 实例化 "c10::optional<at::ThreadLocalState>" 的引用
+  d:\envsetting\libtorch\include\aten\core\ivalue_inl.h(291): note: 参见对正在编译的 类 模板 实例化 "c10::ArrayRef<T>" 的引用
+          with
+          [
+              T=c10::IValue
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=at::ThreadLocalState
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::shared_ptr<torch::jit::Graph>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::shared_ptr<torch::jit::Graph>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::shared_ptr<torch::jit::Graph>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::shared_ptr<torch::jit::Graph>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::shared_ptr<torch::jit::Graph>>" 的引用
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\array(225): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::shared_ptr<torch::jit::Graph>>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\jit\api\function_impl.h(135): note: 参见对正在编译的 类 模板 实例化 "std::array<c10::optional<std::shared_ptr<torch::jit::Graph>>,4>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::shared_ptr<torch::jit::Graph>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::GraphExecutor
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=torch::jit::GraphExecutor
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=torch::jit::GraphExecutor
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=torch::jit::GraphExecutor
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<torch::jit::GraphExecutor>" 的引用
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\array(225): note: 参见对正在编译的 类 模板 实例化 "c10::optional<torch::jit::GraphExecutor>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\jit\api\function_impl.h(149): note: 参见对正在编译的 类 模板 实例化 "std::array<c10::optional<torch::jit::GraphExecutor>,4>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::GraphExecutor
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::Method
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=torch::jit::Method
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=torch::jit::Method
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=torch::jit::Method
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<torch::jit::Method>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\jit\api\object.h(46): note: 参见对正在编译的 类 模板 实例化 "c10::optional<torch::jit::Method>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::Method
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<cv::String,std::allocator<cv::String>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::vector<cv::String,std::allocator<cv::String>>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::vector<cv::String,std::allocator<cv::String>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::vector<cv::String,std::allocator<cv::String>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::vector<cv::String,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=cv::String
+          ]
+  d:\envsetting\libtorch\include\torch\csrc\jit\api\module.h(295): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::vector<cv::String,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=cv::String
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<cv::String,std::allocator<cv::String>>
+          ]
+d:\envsetting\libtorch\include\c10\util\variant.h(1799): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::function<void (const torch::autograd::profiler::thread_event_lists &)>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::function<void (const torch::autograd::profiler::thread_event_lists &)>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::function<void (const torch::autograd::profiler::thread_event_lists &)>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::function<void (const torch::autograd::profiler::thread_event_lists &)>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::function<void (const torch::autograd::profiler::thread_event_lists &)>>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\autograd\profiler_legacy.h(400): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::function<void (const torch::autograd::profiler::thread_event_lists &)>>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::function<void (const torch::autograd::profiler::thread_event_lists &)>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<std::vector<int64_t,std::allocator<int64_t>>,std::allocator<std::vector<int64_t,std::allocator<int64_t>>>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::vector<std::vector<int64_t,std::allocator<int64_t>>,std::allocator<std::vector<int64_t,std::allocator<int64_t>>>>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::vector<std::vector<int64_t,std::allocator<int64_t>>,std::allocator<std::vector<int64_t,std::allocator<int64_t>>>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::vector<std::vector<int64_t,std::allocator<int64_t>>,std::allocator<std::vector<int64_t,std::allocator<int64_t>>>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::vector<std::vector<int64_t,std::allocator<_Ty>>,std::allocator<std::vector<_Ty,std::allocator<_Ty>>>>>" 的引用
+          with
+          [
+              _Ty=int64_t
+          ]
+  d:\envsetting\libtorch\include\torch\csrc\autograd\profiler_kineto.h(247): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::vector<std::vector<int64_t,std::allocator<_Ty>>,std::allocator<std::vector<_Ty,std::allocator<_Ty>>>>>" 的引用
+          with
+          [
+              _Ty=int64_t
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<std::vector<int64_t,std::allocator<int64_t>>,std::allocator<std::vector<int64_t,std::allocator<int64_t>>>>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::nn::TripletMarginWithDistanceLossOptions::distance_function_t
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=torch::nn::TripletMarginWithDistanceLossOptions::distance_function_t
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=torch::nn::TripletMarginWithDistanceLossOptions::distance_function_t
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=torch::nn::TripletMarginWithDistanceLossOptions::distance_function_t
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<torch::nn::TripletMarginWithDistanceLossOptions::distance_function_t>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\api\include\torch\nn\options\loss.h(404): note: 参见对正在编译的 类 模板 实例化 "c10::optional<torch::nn::TripletMarginWithDistanceLossOptions::distance_function_t>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::nn::TripletMarginWithDistanceLossOptions::distance_function_t
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<double,std::allocator<double>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::vector<double,std::allocator<double>>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::vector<double,std::allocator<double>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::vector<double,std::allocator<double>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::vector<_Tp,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Tp=double,
+              _Ty=double
+          ]
+  d:\envsetting\libtorch\include\torch\csrc\api\include\torch\nn\options\upsampling.h(26): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::vector<_Tp,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Tp=double,
+              _Ty=double
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<double,std::allocator<double>>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::tuple<at::Tensor,at::Tensor>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::tuple<at::Tensor,at::Tensor>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::tuple<at::Tensor,at::Tensor>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::tuple<at::Tensor,at::Tensor>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::tuple<at::Tensor,at::Tensor>>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\api\include\torch\nn\modules\rnn.h(155): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::tuple<at::Tensor,at::Tensor>>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::tuple<at::Tensor,at::Tensor>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<at::Tensor,std::allocator<at::Tensor>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=std::vector<at::Tensor,std::allocator<at::Tensor>>
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=std::vector<at::Tensor,std::allocator<at::Tensor>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=std::vector<at::Tensor,std::allocator<at::Tensor>>
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<std::vector<at::Tensor,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=at::Tensor
+          ]
+  d:\envsetting\libtorch\include\torch\csrc\api\include\torch\optim\lbfgs.h(46): note: 参见对正在编译的 类 模板 实例化 "c10::optional<std::vector<at::Tensor,std::allocator<_Ty>>>" 的引用
+          with
+          [
+              _Ty=at::Tensor
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=std::vector<at::Tensor,std::allocator<at::Tensor>>
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::Operator
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=torch::jit::Operator
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=torch::jit::Operator
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=torch::jit::Operator
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<torch::jit::Operator>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\jit\runtime\custom_operator.h(23): note: 参见对正在编译的 类 模板 实例化 "c10::optional<torch::jit::Operator>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::Operator
+          ]
+d:\envsetting\libtorch\include\c10\util\optional.h(198): warning C4624: “c10::constexpr_storage_t<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::NamedValue
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(397): note: 参见对正在编译的 类 模板 实例化 "c10::constexpr_storage_t<T>" 的引用
+          with
+          [
+              T=torch::jit::NamedValue
+          ]
+  d:\installpackage\microsoft visual studio\2017 community\vc\tools\msvc\14.16.27023\include\type_traits(842): note: 参见对正在编译的 类 模板 实例化 "c10::trivially_copyable_optimization_optional_base<T>" 的引用
+          with
+          [
+              T=torch::jit::NamedValue
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(528): note: 参见对正在编译的 类 模板 实例化 "std::is_copy_constructible<c10::trivially_copyable_optimization_optional_base<T>>" 的引用
+          with
+          [
+              T=torch::jit::NamedValue
+          ]
+  d:\envsetting\libtorch\include\c10\util\optional.h(540): note: 参见对正在编译的 别名 模板 实例化 "c10::OptionalBase<torch::jit::NamedValue>" 的引用
+  d:\envsetting\libtorch\include\torch\csrc\jit\frontend\schema_matching.h(29): note: 参见对正在编译的 类 模板 实例化 "c10::optional<torch::jit::NamedValue>" 的引用
+d:\envsetting\libtorch\include\c10\util\optional.h(432): warning C4624: “c10::trivially_copyable_optimization_optional_base<T>”: 已将析构函数隐式定义为“已删除”
+          with
+          [
+              T=torch::jit::NamedValue
+          ]
     正在创建库 D:\OneDrive@sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\x64\Release\CashmereClassifier.lib 和对象 D:\OneDrive@sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\x64\Release\CashmereClassifier.exp
   正在生成代码
-  0 of 2966 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+d:\onedrive@sjtu.edu.cn\algo\wool cashmere\cashmeredetector\cashmereclassifier\autodetector.cpp(1000): warning C4715: “AutoDetector::SkeletonDetect”: 不是所有的控件路径都返回值
+  19 of 2972 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    31 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
   CashmereClassifier.vcxproj -> D:\OneDrive@sjtu.edu.cn\ALGO\wool cashmere\CashmereDetector\x64\Release\CashmereClassifier.exe

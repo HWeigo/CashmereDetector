@@ -51,7 +51,6 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 	ui.spin_selectorSize->setValue(30);
 #endif // AREA_SELECTOR
 
-	system("clear.bat");
 	// Clear result txt
 	ofstream file_txt_writer("./log/result.txt", ios_base::out);
 	ofstream file_csv_writer("./log/result.csv", ios_base::out);

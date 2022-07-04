@@ -252,9 +252,8 @@ bool AutoDetector::AutoDetect(bool isTargetMode) {
 	}
 
 	cout << "regions nums: " <<  regionImgs.size() << endl;
-	if (regionImgs.empty()) {
+	if (regionImgs.empty())
 		return false;
-	}
 #else
 	//regionImg_ = Mat::zeros(GetCurrImg().size(), CV_8UC1);
 	RegionDetectOpenCV(GetCurrImg(), regionImg_);
@@ -265,7 +264,7 @@ bool AutoDetector::AutoDetect(bool isTargetMode) {
 #endif // INPUT_ORI
 
 	int failCnt = 0;
-	//cout << "detect num: " << regionImgs.size() << endl;
+	cout << "detect num: " << regionImgs.size() << endl;
 	for (int i = 0; i < regionImgs.size(); ++i) {
 		skeletonPoints_.clear();
 		skeletonPointsSort_.clear();
@@ -289,12 +288,8 @@ bool AutoDetector::AutoDetect(bool isTargetMode) {
 
 		ResNetClassify("./resnet164.pt");
 	}
-	if (failCnt == regionImgs.size()) {
-		ErrorHandler();
-		return false;
-	}
-	cout << "exit success" << endl;
-	return true;
+
+	return failCnt != regionImgs.size();
 }
 
 void AutoDetector::RegionDetect() {
@@ -1523,12 +1518,6 @@ void AutoDetector::TargetSelect(const Mat &oriImg, vector<Mat>& regionImgs, Poin
 		}
 	}
 	regionImgs.swap(tmpRegionImgs);
-}
-
-void AutoDetector::ErrorHandler()
-{
-	string filename = "./unknown/u_" + imgID_ + ".jpg";
-	imwrite(filename, GetCurrImg());
 }
 
 double AutoDetector::GetLength() {
