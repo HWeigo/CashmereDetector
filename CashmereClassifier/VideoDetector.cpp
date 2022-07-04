@@ -74,7 +74,6 @@ Mat RegionDetect(Mat srcImg) {
 	Connection(ho_Region, &ho_ConnectedRegions);
 	FillUp(ho_ConnectedRegions, &ho_RegionFillUp);
 
-	//形状选择
 	SelectShape(ho_RegionFillUp, &ho_SelectedRegions2, "circularity", "and", 0, 0.1676);
 	AreaCenter(ho_SelectedRegions2, &hv_Area, &hv_Row, &hv_Column);
 	SelectShape(ho_SelectedRegions2, &ho_SelectedRegions1, "area", "and", hv_Area.TupleMax(),
@@ -87,7 +86,6 @@ Mat RegionDetect(Mat srcImg) {
 
 	CountObj(ho_SelectedRegions1, &hv_Number);
 
-	//显示结果
 	HObject ho_BinImage;
 	RegionToBin(ho_RegionClosing, &ho_BinImage, 255, 0, hv_Width, hv_Height);
 	//WriteImage(ho_BinImage, "bmp", 0, 

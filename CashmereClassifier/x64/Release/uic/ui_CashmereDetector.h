@@ -89,6 +89,7 @@ public:
     QPushButton *pushButton_next;
     QLabel *label_filename;
     QLabel *label_filename_2;
+    QLabel *label_filename_3;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QToolBar *mainToolBar;
@@ -384,6 +385,10 @@ public:
         label_filename_2->setObjectName(QStringLiteral("label_filename_2"));
         label_filename_2->setGeometry(QRect(740, 780, 111, 28));
         label_filename_2->setAlignment(Qt::AlignCenter);
+        label_filename_3 = new QLabel(centralWidget);
+        label_filename_3->setObjectName(QStringLiteral("label_filename_3"));
+        label_filename_3->setGeometry(QRect(1240, 780, 111, 28));
+        label_filename_3->setAlignment(Qt::AlignCenter);
         CashmereDetectorClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CashmereDetectorClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -448,6 +453,7 @@ public:
         pushButton_next->setText(QApplication::translate("CashmereDetectorClass", "\344\270\213\344\270\200\345\274\240", Q_NULLPTR));
         label_filename->setText(QApplication::translate("CashmereDetectorClass", "-", Q_NULLPTR));
         label_filename_2->setText(QApplication::translate("CashmereDetectorClass", "\345\275\223\345\211\215\346\226\207\344\273\266\357\274\232", Q_NULLPTR));
+        label_filename_3->setText(QApplication::translate("CashmereDetectorClass", "v1.0.1", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("CashmereDetectorClass", "\346\226\207\344\273\266", Q_NULLPTR));
     } // retranslateUi
 

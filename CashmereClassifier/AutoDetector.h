@@ -103,5 +103,7 @@ public:
 	Mat BullseyeDetectAndPadding(Mat oriImg, Point &center);
 
 	void TargetSelect(const Mat &oriImg, vector<Mat> &regionImgs, Point center);
+
+	void ErrorHandler();
 };
 
