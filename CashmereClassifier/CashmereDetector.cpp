@@ -186,15 +186,19 @@ void CashmereDetector::on_openFileAction_image_triggered(bool checked)
 	QTextCodec *code = QTextCodec::codecForName("GB2312");//解决中文路径问题
 	string filePath = code->fromUnicode(fileName).data();
 
-
 	cout << filePath << endl;
 
 	manuDetector_->LoadImg(filePath);
 	autoDetector_->LoadImg(filePath);
 	areaDetector_->LoadImg(filePath);
+	if (!areaDetector_->GetCurrImg().empty()) {
+		PushMessage("load crop images");
+	} else {
+		PushMessage("failed to load image");
+		return;
+	}
 	areaDetector_->ShowCurrImg();
 
-	PushMessage("load crop images");
 	fTimer->start();
 	ui.resetAction->setEnabled(true);
 	ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
@@ -208,12 +212,6 @@ void CashmereDetector::on_openFileAction_image_triggered(bool checked)
 	// Natural order sort 
 	sort(filepaths_.begin(), filepaths_.end(), compareNat);
 
-	//for (const auto &name : m_filepaths) {
-	//	cout << name << endl;
-	//	if (name == filePath) {
-	//		cout << "HERE!!!!" << endl;
-	//	}
-	//}
 	for (int i = 0; i < filepaths_.size(); ++i) {
 		if (filePath == filepaths_[i]) {
 			currIdx_ = i;

@@ -1195,6 +1195,8 @@ int AutoDetector::ResNetClassify(string &&filename) {
 
 	}
 
+	cout << "[DEBUG] Crop image cnt: " << cropImgs.size() << endl;
+	cout << "[DEBUG] Vote result: [Cashmere]:" << vote[CASHMERE] << " [WOOL]:" << vote[WOOL] << endl;
 	if (vote[CASHMERE] == vote[WOOL]) {
 		result_ = UNKNOWN;
 		results_.push_back(UNKNOWN);
