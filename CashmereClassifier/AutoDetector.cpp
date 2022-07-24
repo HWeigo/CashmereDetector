@@ -231,7 +231,7 @@ vector<Mat> MultiRegionDetect(Mat &srcImg) {
 	return ret;
 }
 
-bool AutoDetector::AutoDetect(bool isTargetMode) {
+bool AutoDetector::AutoDetect(bool isTargetMode, bool isOutputOriImg, bool isOutputRegionImg,  bool isOutputCropImg) {
 	Clear();
 	double timer_start = double(clock() / 1000.0);
 #ifdef INPUT_ORI
@@ -240,12 +240,24 @@ bool AutoDetector::AutoDetect(bool isTargetMode) {
 
 	Mat inputImg = GetCurrImg();
 
+	if (isOutputOriImg) {
+		string filename = "./log/oriImage/ori_" + GetImgID() + ".jpg";
+		imwrite(filename, GetCurrImg());
+	}
+
 	Point center;
 	if (isTargetMode) {
 		BullseyeDetectAndPadding(inputImg, center);
 	}
 
 	vector<Mat> regionImgs = MultiRegionDetect(inputImg);
+	if (isOutputRegionImg) {
+		cout << "saving region image" << endl;
+		for (int i = 0; i < regionImgs.size(); ++i) {
+			string filename = "./log/regionImage/region_" + GetImgID() + "_" + to_string(i) + ".jpg";
+			imwrite(filename, regionImgs[i]);
+		}
+	}
 
 	if (isTargetMode) {
 		TargetSelect(inputImg, regionImgs, center);
@@ -282,6 +294,14 @@ bool AutoDetector::AutoDetect(bool isTargetMode) {
 			++failCnt;
 			continue;
 		}
+		if (isOutputCropImg) {
+			cout << "saving crop image, cnt: " << cropImgs.size() << endl;
+			for (int j = 0; j < cropImgs.size(); ++j) {
+				string filename = "./log/cropImage/crop_" + GetImgID() + "_" + to_string(i) + "_" + to_string(j) + ".jpg";
+				imwrite(filename, cropImgs[j]);
+			}
+		}
+
 		double timer_end = double(clock() / 1000.0);
 		cout << "auto detect time use: " << timer_end - timer_mid << " s" << endl;
 		//DiameterStdCompute();

@@ -73,7 +73,7 @@ public:
 	~AutoDetector();
 
 	// Run auto-detect function
-	bool AutoDetect(bool isTargetMode = false);
+	bool AutoDetect(bool isTargetMode = false, bool isOutputOriImg = false, bool isOutputRegionImg = false, bool isOutputCropImg = false);
 
 	void RegionDetect();
 

@@ -82,6 +82,9 @@ public slots:
 	void on_pushButton_areaSelect_clicked();
 	void on_spin_rotate_valueChanged(int val);
 	void on_spin_selectorSize_valueChanged(int val);
+	void on_outputAction_oriImages_triggered(bool checked);
+	void on_outputAction_cropImages_triggered(bool checked);
+	void on_outputAction_regionImages_triggered(bool checked);
 	void on_timer_timeout();
 	void wheelEvent(QWheelEvent *event);
 	void keyPressEvent(QKeyEvent *event);
@@ -99,7 +102,13 @@ private:
 	bool isSelectModeOn_ = false;
 	bool isAutoDetecting_ = false;
 
+	bool isOutputOriImagesOn_ = false;
+	bool isOutputCropImagesOn_ = false;
+	bool isOutputRegionImagesOn_ = false;
+
+
 	vector<string> filepaths_;
 	int currIdx_ = -1;
 
 };
+

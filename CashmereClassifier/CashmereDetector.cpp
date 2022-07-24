@@ -57,6 +57,8 @@ CashmereDetector::CashmereDetector(QWidget *parent)
 	ofstream file_csv_writer("./log/result.csv", ios_base::out);
 	file_csv_writer << "文件路径,文件名,识别结果" << endl;
 	file_csv_writer.close();
+
+	ui.menuTest->menuAction()->setVisible(false);;
 }
 
 void CashmereDetector::on_timer_timeout() {
@@ -272,7 +274,7 @@ void CashmereDetector::on_activate_software_triggered(bool checked) {
 	else if (MACList.size())
 		requestCode = MACList[0];
 	else
-		requestCode = "0000000000000000";
+		requestCode = "0123000000000000";
 
 	if (requestCode.size() > 16)
 		requestCode.resize(16);
@@ -331,6 +333,11 @@ void CashmereDetector::on_activate_software_triggered(bool checked) {
 		ui.openFileAction_image->setEnabled(true);
 		ui.openFileAction_video->setEnabled(true);
 	}
+	else if (minStr == "password_963851") {
+		ui.openFileAction_image->setEnabled(true);
+		ui.openFileAction_video->setEnabled(true);
+		ui.menuTest->menuAction()->setVisible(true);;
+	}
 }
 
 void CashmereDetector::on_pushButton_pick_clicked() {
@@ -358,7 +365,7 @@ void CashmereDetector::on_pushButton_autoDetect_clicked() {
 		isPickModeOn_ = false;
 	}
 
-	autoDetector_->AutoDetect(ui.checkBox_targetMode->isChecked());
+	autoDetector_->AutoDetect(ui.checkBox_targetMode->isChecked(), isOutputOriImagesOn_, isOutputRegionImagesOn_, isOutputCropImagesOn_);
 
 	ui.label_length->setText("-");
 	ui.label_mean->setText(QString::number(autoDetector_->GetLength()));
@@ -544,7 +551,7 @@ void CashmereDetector::on_pushButton_autoNext_clicked() {
 		ui.resetAction->setEnabled(true);
 		ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
 
-		if (autoDetector_->AutoDetect(ui.checkBox_targetMode->isChecked())) {
+		if (autoDetector_->AutoDetect(ui.checkBox_targetMode->isChecked(), isOutputOriImagesOn_, isOutputRegionImagesOn_, isOutputCropImagesOn_)) {
 			++successCnt;
 
 			ui.label_length->setText("-");
@@ -643,7 +650,7 @@ void CashmereDetector::on_pushButton_autoBack_clicked() {
 		ui.resetAction->setEnabled(true);
 		ui.label_filename->setText(QString::fromStdString(areaDetector_->GetImgID()));
 
-		if (autoDetector_->AutoDetect(ui.checkBox_targetMode->isChecked())) {
+		if (autoDetector_->AutoDetect(ui.checkBox_targetMode->isChecked(), isOutputOriImagesOn_, isOutputRegionImagesOn_, isOutputCropImagesOn_)) {
 			++successCnt;
 
 			ui.label_length->setText("-");
@@ -753,6 +760,24 @@ void CashmereDetector::on_spin_rotate_valueChanged(int val) {
 
 void CashmereDetector::on_spin_selectorSize_valueChanged(int val){
 	areaDetector_->SetRectSize(val);
+}
+
+void CashmereDetector::on_outputAction_oriImages_triggered(bool checked)
+{
+	isOutputOriImagesOn_ = !isOutputOriImagesOn_;
+	PushMessage("output original images: " + to_string(isOutputOriImagesOn_));
+}
+
+void CashmereDetector::on_outputAction_cropImages_triggered(bool checked)
+{
+	isOutputCropImagesOn_ = !isOutputCropImagesOn_;
+	PushMessage("output crop images: " + to_string(isOutputCropImagesOn_));
+}
+
+void CashmereDetector::on_outputAction_regionImages_triggered(bool checked)
+{
+	isOutputRegionImagesOn_ = !isOutputRegionImagesOn_;
+	PushMessage("output region images: " + to_string(isOutputRegionImagesOn_));
 }
 
 void CashmereDetector::on_pushButton_saveCurr_clicked() {

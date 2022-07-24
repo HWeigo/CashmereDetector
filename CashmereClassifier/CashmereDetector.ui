@@ -528,7 +528,22 @@ p, li { white-space: pre-wrap; }
     <addaction name="resetAction"/>
     <addaction name="activate_software"/>
    </widget>
+   <widget class="QMenu" name="menuTest">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>测试</string>
+    </property>
+    <property name="toolTipsVisible">
+     <bool>true</bool>
+    </property>
+    <addaction name="outputAction_oriImages"/>
+    <addaction name="outputAction_cropImages"/>
+    <addaction name="outputAction_regionImages"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuTest"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -569,6 +584,21 @@ p, li { white-space: pre-wrap; }
   <action name="activate_software">
    <property name="text">
     <string>软件激活</string>
+   </property>
+  </action>
+  <action name="outputAction_cropImages">
+   <property name="text">
+    <string>切片导出开/关</string>
+   </property>
+  </action>
+  <action name="outputAction_oriImages">
+   <property name="text">
+    <string>原图导出开/关</string>
+   </property>
+  </action>
+  <action name="outputAction_regionImages">
+   <property name="text">
+    <string>轮廓导出开/关</string>
    </property>
   </action>
  </widget>
