@@ -780,6 +780,45 @@ void CashmereDetector::on_outputAction_regionImages_triggered(bool checked)
 	PushMessage("output region images: " + to_string(isOutputRegionImagesOn_));
 }
 
+void CashmereDetector::on_loadAction_config_triggered(bool checked)
+{
+	FileStorage fs("./config.xml", cv::FileStorage::READ);
+    if(fs.isOpened())
+    {
+		cout << "opened" << endl;
+		int ori_w, ori_h;
+		fs["ori"]["w"] >> ori_w;
+		fs["ori"]["h"] >> ori_h;
+		cout << ori_w  << endl;
+		cout << ori_h  << endl;
+		float circularity_min, circularity_max;
+		int closingCircle;
+		fs["halcon"]["circularity"]["max"] >> circularity_max;
+		fs["halcon"]["circularity"]["min"] >> circularity_min;
+		fs["halcon"]["closingCircle"] >> closingCircle;
+		cout << circularity_max << endl;
+		cout << circularity_min << endl;
+		cout << closingCircle << endl;
+		autoDetector_->SetHalconParams(circularity_min, circularity_max);
+		int crop_w, crop_h, crop_step;
+		fs["crop"]["w"] >> crop_w;
+		fs["crop"]["h"] >> crop_h;
+		fs["crop"]["step"] >> crop_step;
+		cout << crop_w << endl;
+		cout << crop_h << endl;
+		cout << crop_step << endl;
+		autoDetector_->SetCropImageParams(crop_w, crop_h, crop_step);
+		int pixelDiffTresh, frameCntTresh;
+		fs["frame"]["pixelDiffTresh"] >> pixelDiffTresh;
+		fs["frame"]["frameCntTresh"] >> frameCntTresh;
+		cout << pixelDiffTresh << endl;
+		cout << frameCntTresh << endl;
+		videoDetector_->SetVideoParams(pixelDiffTresh, frameCntTresh);
+
+        fs.release();//release after used
+    }
+}
+
 void CashmereDetector::on_pushButton_saveCurr_clicked() {
 	if (manuDetector_->GetCurrImgRef().empty())
 		return;

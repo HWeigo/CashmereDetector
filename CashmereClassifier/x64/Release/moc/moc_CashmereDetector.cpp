@@ -87,8 +87,8 @@ int WorkerThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 struct qt_meta_stringdata_CashmereDetector_t {
-    QByteArrayData data[31];
-    char stringdata0[779];
+    QByteArrayData data[32];
+    char stringdata0[810];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -122,12 +122,13 @@ QT_MOC_LITERAL(21, 561, 33), // "on_spin_selectorSize_valueCha..."
 QT_MOC_LITERAL(22, 595, 35), // "on_outputAction_oriImages_tri..."
 QT_MOC_LITERAL(23, 631, 36), // "on_outputAction_cropImages_tr..."
 QT_MOC_LITERAL(24, 668, 38), // "on_outputAction_regionImages_..."
-QT_MOC_LITERAL(25, 707, 16), // "on_timer_timeout"
-QT_MOC_LITERAL(26, 724, 10), // "wheelEvent"
-QT_MOC_LITERAL(27, 735, 12), // "QWheelEvent*"
-QT_MOC_LITERAL(28, 748, 5), // "event"
-QT_MOC_LITERAL(29, 754, 13), // "keyPressEvent"
-QT_MOC_LITERAL(30, 768, 10) // "QKeyEvent*"
+QT_MOC_LITERAL(25, 707, 30), // "on_loadAction_config_triggered"
+QT_MOC_LITERAL(26, 738, 16), // "on_timer_timeout"
+QT_MOC_LITERAL(27, 755, 10), // "wheelEvent"
+QT_MOC_LITERAL(28, 766, 12), // "QWheelEvent*"
+QT_MOC_LITERAL(29, 779, 5), // "event"
+QT_MOC_LITERAL(30, 785, 13), // "keyPressEvent"
+QT_MOC_LITERAL(31, 799, 10) // "QKeyEvent*"
 
     },
     "CashmereDetector\0on_openFileAction_image_triggered\0"
@@ -151,6 +152,7 @@ QT_MOC_LITERAL(30, 768, 10) // "QKeyEvent*"
     "on_outputAction_oriImages_triggered\0"
     "on_outputAction_cropImages_triggered\0"
     "on_outputAction_regionImages_triggered\0"
+    "on_loadAction_config_triggered\0"
     "on_timer_timeout\0wheelEvent\0QWheelEvent*\0"
     "event\0keyPressEvent\0QKeyEvent*"
 };
@@ -162,7 +164,7 @@ static const uint qt_meta_data_CashmereDetector[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      24,   14, // methods
+      25,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -170,30 +172,31 @@ static const uint qt_meta_data_CashmereDetector[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  134,    2, 0x0a /* Public */,
-       4,    1,  137,    2, 0x0a /* Public */,
-       5,    1,  140,    2, 0x0a /* Public */,
-       6,    0,  143,    2, 0x0a /* Public */,
-       7,    0,  144,    2, 0x0a /* Public */,
-       8,    0,  145,    2, 0x0a /* Public */,
-       9,    0,  146,    2, 0x0a /* Public */,
-      10,    0,  147,    2, 0x0a /* Public */,
-      11,    0,  148,    2, 0x0a /* Public */,
-      12,    0,  149,    2, 0x0a /* Public */,
-      13,    0,  150,    2, 0x0a /* Public */,
-      14,    0,  151,    2, 0x0a /* Public */,
-      15,    0,  152,    2, 0x0a /* Public */,
-      16,    0,  153,    2, 0x0a /* Public */,
-      17,    0,  154,    2, 0x0a /* Public */,
-      18,    0,  155,    2, 0x0a /* Public */,
-      19,    1,  156,    2, 0x0a /* Public */,
-      21,    1,  159,    2, 0x0a /* Public */,
-      22,    1,  162,    2, 0x0a /* Public */,
-      23,    1,  165,    2, 0x0a /* Public */,
-      24,    1,  168,    2, 0x0a /* Public */,
-      25,    0,  171,    2, 0x0a /* Public */,
-      26,    1,  172,    2, 0x0a /* Public */,
-      29,    1,  175,    2, 0x0a /* Public */,
+       1,    1,  139,    2, 0x0a /* Public */,
+       4,    1,  142,    2, 0x0a /* Public */,
+       5,    1,  145,    2, 0x0a /* Public */,
+       6,    0,  148,    2, 0x0a /* Public */,
+       7,    0,  149,    2, 0x0a /* Public */,
+       8,    0,  150,    2, 0x0a /* Public */,
+       9,    0,  151,    2, 0x0a /* Public */,
+      10,    0,  152,    2, 0x0a /* Public */,
+      11,    0,  153,    2, 0x0a /* Public */,
+      12,    0,  154,    2, 0x0a /* Public */,
+      13,    0,  155,    2, 0x0a /* Public */,
+      14,    0,  156,    2, 0x0a /* Public */,
+      15,    0,  157,    2, 0x0a /* Public */,
+      16,    0,  158,    2, 0x0a /* Public */,
+      17,    0,  159,    2, 0x0a /* Public */,
+      18,    0,  160,    2, 0x0a /* Public */,
+      19,    1,  161,    2, 0x0a /* Public */,
+      21,    1,  164,    2, 0x0a /* Public */,
+      22,    1,  167,    2, 0x0a /* Public */,
+      23,    1,  170,    2, 0x0a /* Public */,
+      24,    1,  173,    2, 0x0a /* Public */,
+      25,    1,  176,    2, 0x0a /* Public */,
+      26,    0,  179,    2, 0x0a /* Public */,
+      27,    1,  180,    2, 0x0a /* Public */,
+      30,    1,  183,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Bool,    3,
@@ -217,9 +220,10 @@ static const uint qt_meta_data_CashmereDetector[] = {
     QMetaType::Void, QMetaType::Bool,    3,
     QMetaType::Void, QMetaType::Bool,    3,
     QMetaType::Void, QMetaType::Bool,    3,
+    QMetaType::Void, QMetaType::Bool,    3,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 27,   28,
-    QMetaType::Void, 0x80000000 | 30,   28,
+    QMetaType::Void, 0x80000000 | 28,   29,
+    QMetaType::Void, 0x80000000 | 31,   29,
 
        0        // eod
 };
@@ -251,9 +255,10 @@ void CashmereDetector::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 18: _t->on_outputAction_oriImages_triggered((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 19: _t->on_outputAction_cropImages_triggered((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 20: _t->on_outputAction_regionImages_triggered((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 21: _t->on_timer_timeout(); break;
-        case 22: _t->wheelEvent((*reinterpret_cast< QWheelEvent*(*)>(_a[1]))); break;
-        case 23: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
+        case 21: _t->on_loadAction_config_triggered((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 22: _t->on_timer_timeout(); break;
+        case 23: _t->wheelEvent((*reinterpret_cast< QWheelEvent*(*)>(_a[1]))); break;
+        case 24: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -284,13 +289,13 @@ int CashmereDetector::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 24)
+        if (_id < 25)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 25;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 24)
+        if (_id < 25)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 24;
+        _id -= 25;
     }
     return _id;
 }

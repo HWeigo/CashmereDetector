@@ -541,6 +541,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="outputAction_oriImages"/>
     <addaction name="outputAction_cropImages"/>
     <addaction name="outputAction_regionImages"/>
+    <addaction name="loadAction_config"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTest"/>
@@ -599,6 +600,11 @@ p, li { white-space: pre-wrap; }
   <action name="outputAction_regionImages">
    <property name="text">
     <string>轮廓导出开/关</string>
+   </property>
+  </action>
+  <action name="loadAction_config">
+   <property name="text">
+    <string>载入配置文件</string>
    </property>
   </action>
  </widget>

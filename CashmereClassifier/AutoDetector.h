@@ -35,8 +35,12 @@ private:
 	Mat strightImg_;
 
 	float rectScale_ = 3.5; // rectWidth_ / rectHeight_
-	int rectHeight_ = 32;
-	int rectWidth_ = rectHeight_ * rectScale_; // 112
+	int rectHeight_ = 50;
+	int rectWidth_ = rectHeight_ * rectScale_; // 175
+	int cropStep_ = 30;
+
+	// Halcon params
+	int circularityMin_, circularityMax_;
 
 
 	vector<Point> skeletonPoints_;
@@ -103,5 +107,9 @@ public:
 	Mat BullseyeDetectAndPadding(Mat oriImg, Point &center);
 
 	void TargetSelect(const Mat &oriImg, vector<Mat> &regionImgs, Point center);
+
+	void SetCropImageParams(int w, int h, int step);
+
+	void SetHalconParams(int circularityMin, int circularityMax);
 };
 

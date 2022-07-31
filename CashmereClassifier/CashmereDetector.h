@@ -85,6 +85,7 @@ public slots:
 	void on_outputAction_oriImages_triggered(bool checked);
 	void on_outputAction_cropImages_triggered(bool checked);
 	void on_outputAction_regionImages_triggered(bool checked);
+	void on_loadAction_config_triggered(bool checked);
 	void on_timer_timeout();
 	void wheelEvent(QWheelEvent *event);
 	void keyPressEvent(QKeyEvent *event);

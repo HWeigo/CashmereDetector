@@ -159,9 +159,9 @@ int VideoDetector::VideoAutoCrop(CashmereDetector *ui) {
 	//fstream file;	
 	//file.open("result.txt", ios_base::out);
 
-	int contFrameThresh = 30;
+	int contFrameThresh = frameCntTresh_;
 	double updateThresh = 0.5;
-	int numThresh = 2.5e6;
+	int numThresh = pixelDiffTresh_;
 	//int numThresh = 3e6;
 
 	Mat tmpStore;
@@ -231,6 +231,12 @@ int VideoDetector::VideoAutoCrop(CashmereDetector *ui) {
 	//file.close();
 	//capture_.release();
 	return cropCnt;
+}
+
+void VideoDetector::SetVideoParams(int pixelDiffTresh, int frameCntTresh)
+{
+	pixelDiffTresh_ = pixelDiffTresh;
+	frameCntTresh_ = frameCntTresh;
 }
 
 //int VideoDetector::update(CashmereDetector * ui) {

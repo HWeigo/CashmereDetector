@@ -1121,7 +1121,7 @@ void AutoDetector::CropImage() {
 		return;
 
 	int x = 0;
-	int step = 30;
+	int step = cropStep_;
 	int cropCnt = 0;
 	while (x + rectWidth_ < straightenWidth) {
 		Point topleft(x, 0);
@@ -1138,8 +1138,8 @@ void AutoDetector::CropImage() {
 		//	continue;
 		//}
 
-		if (cropImg.rows != 50) {
-			resize(cropImg, cropImg, Size(50 * rectScale_, 50));
+		if (cropImg.rows != rectHeight_) {
+			resize(cropImg, cropImg, Size(rectWidth_, rectHeight_));
 		}
 
 		cropImgs.push_back(cropImg);
@@ -1165,8 +1165,8 @@ void AutoDetector::CropImage() {
 
 		bool isSuccess = DefectDetection(cropImg);
 
-		if (cropImg.rows != 50) {
-			resize(cropImg, cropImg, Size(50 * rectScale_, 50));
+		if (cropImg.rows != rectHeight_) {
+			resize(cropImg, cropImg, Size(rectWidth_, rectHeight_));
 		}
 
 		cropImgs.push_back(cropImg);
@@ -1540,6 +1540,20 @@ void AutoDetector::TargetSelect(const Mat &oriImg, vector<Mat>& regionImgs, Poin
 		}
 	}
 	regionImgs.swap(tmpRegionImgs);
+}
+
+void AutoDetector::SetCropImageParams(int w, int h, int step)
+{
+	rectHeight_ = h;
+	rectWidth_ = w;
+	scale_ = w / h;
+	cropStep_ = step;
+}
+
+void AutoDetector::SetHalconParams(int circularityMin, int circularityMax)
+{
+	circularityMax_ = circularityMax;
+	circularityMin_ = circularityMin;
 }
 
 double AutoDetector::GetLength() {
